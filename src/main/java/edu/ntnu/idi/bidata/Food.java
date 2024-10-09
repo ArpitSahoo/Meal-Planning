@@ -1,4 +1,5 @@
-package edu.ntnu.iir.bidata;
+package edu.ntnu.idi.bidata;
+
 import java.time.LocalDate;
 
 /**
