@@ -7,7 +7,7 @@ public class Amount {
     private Float gram;
     private Float liters;
     private Integer pieces;
-
+    private float foodPrive;
     public Amount(Float amount, String units){
         setAmount(amount);
         setUnits(units);
