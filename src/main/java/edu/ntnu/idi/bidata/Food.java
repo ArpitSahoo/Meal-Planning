@@ -7,15 +7,17 @@ import java.time.LocalDate;
  */
 public class Food {
     private String nameOfFood;
-    private Amount amount;
+    private Float amount;
+    private String units;
     private LocalDate expirationDate;
-    private float price;
+    private Float price;
 
-    public Food(String nameOfFood, Amount amount, LocalDate expirationDate, float price) {
-        this.nameOfFood = nameOfFood;
-        this.amount = amount;
-        this.expirationDate = expirationDate;
-        this.price = price;
+    public Food(String nameOfFood, Float amount, String units, Float price, LocalDate expirationDate){
+        setNameOfFood(nameOfFood);
+        setAmount(amount);
+        setUnits(units);
+        setPrice(price);
+        setExpirationDate(expirationDate);
     }
 
     public String getNameOfFood() {
@@ -23,15 +25,32 @@ public class Food {
     }
 
     public void setNameOfFood(String nameOfFood) {
+        if(nameOfFood == null || nameOfFood.isEmpty() || nameOfFood.isBlank()){
+            throw new IllegalArgumentException("No input in name of food");
+        }
         this.nameOfFood = nameOfFood;
     }
 
-    public Amount getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(Amount amount) {
+    public void setAmount(Float amount) {
+        if(amount < 0){
+            throw new IllegalArgumentException("Amount can not be under 0" + units);
+        }
         this.amount = amount;
+    }
+
+    public String getUnits() {
+        return units;
+    }
+
+    public void setUnits(String units) {
+        if(units == null || units.isEmpty() || units.isBlank()){
+            throw new IllegalArgumentException("No input of units");
+        }
+        this.units = units;
     }
 
     public LocalDate getExpirationDate() {
@@ -39,6 +58,9 @@ public class Food {
     }
 
     public void setExpirationDate(LocalDate expirationDate) {
+        if (expirationDate.isBefore(LocalDate.now())) {
+            throw new IllegalArgumentException("Expiration date cannot be in the past.");
+        }
         this.expirationDate = expirationDate;
     }
 
@@ -47,6 +69,9 @@ public class Food {
     }
 
     public void setPrice(float price) {
+        if(price < 0){
+            throw new IllegalArgumentException("Price can not be a negative input.");
+        }
         this.price = price;
     }
 }

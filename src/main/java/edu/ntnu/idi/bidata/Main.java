@@ -7,6 +7,8 @@ package edu.ntnu.idi.bidata;
  * @author Arpit Sahoo
  * @version 0.0.1
  */
+
+
 public class Main {
 
 }
