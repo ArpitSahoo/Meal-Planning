@@ -11,7 +11,7 @@ public class FoodItem {
     private Float amount;
     private String units;
     private LocalDate expirationDate;
-    private Float price;
+    private Double price;
 
     /**
      * A constructor for the class FoodItem.
@@ -21,7 +21,7 @@ public class FoodItem {
      * @param price of FoodItem.
      * @param expirationDate of FoodItem.
      */
-    public FoodItem(String nameOfFood, Float amount, String units, Float price, LocalDate expirationDate){
+    public FoodItem(String nameOfFood, Float amount, String units, Double price, LocalDate expirationDate){
         setNameOfFood(nameOfFood);
         setAmount(amount);
         setUnits(units);
@@ -117,7 +117,7 @@ public class FoodItem {
      *Returns the price.
      * @return the price of the FoodItem.
      */
-    public float getPrice() {
+    public Double getPrice() {
         return price;
     }
 
@@ -127,7 +127,7 @@ public class FoodItem {
      * Throws an IllegalArgumentException if the price is a negative number.
      * @param price the FoodItem's price.
      */
-    public void setPrice(float price) {
+    public void setPrice(Double price) {
         if(price < 0){
             throw new IllegalArgumentException("Price can not be a negative input.");
         }
