@@ -1,5 +1,8 @@
 package edu.ntnu.idi.bidata;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 /**
  * The main starting point of your application. Let this class create the
  * instance of your main-class that starts your application.
@@ -9,6 +12,12 @@ package edu.ntnu.idi.bidata;
  */
 
 
-public class Main {
+public class FridgeApp {
+    public ArrayList<FoodItem> fridge = new ArrayList<>();
+    public Scanner scanner;
 
+
+    public static void main(String[] args){
+
+    }
 }
