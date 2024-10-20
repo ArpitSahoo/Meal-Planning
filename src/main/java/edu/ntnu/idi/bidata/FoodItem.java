@@ -133,4 +133,8 @@ public class FoodItem {
         }
         this.price = price;
     }
+
+    public String displayFoodItem(){
+        return nameOfFood + " : " + amount + ": " + units + ", " + "expires on: " + expirationDate + "price" + price + "kr";
+    }
 }

@@ -46,6 +46,16 @@ public class FridgeApp {
                 case 2:
                     removeFoodItem();
                     break;
+                case 3:
+                    displayFridge();
+                    break;
+                case 4:
+                    CheckExpiredFood();
+                case 5:
+                    running = false;
+                    System.out.println("Goodbye....");
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
 
@@ -98,6 +108,7 @@ public class FridgeApp {
 
             FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
             fridge.add(food);
+            System.out.print("Food added:" + food.displayFoodItem());
         }
         catch(IllegalArgumentException illegalArgument){
             System.out.println(illegalArgument.getMessage());
@@ -115,6 +126,25 @@ public class FridgeApp {
                 System.out.println("Removed food: " + nameOfFood);
             }
         }
+
+    }
+
+    public void displayFridge(){
+        System.out.println("\n--- Fridge Contents ---");
+        if(fridge.isEmpty()){
+            System.out.println("The fridge is empty.");
+        }
+        else{
+            double totalPrice = 0;
+            for(FoodItem food : fridge){
+                System.out.println(food.displayFoodItem());
+                totalPrice += food.getPrice();
+            }
+            System.out.println("Total price of all items in the fridge: " + totalPrice);
+        }
+    }
+
+    public void CheckExpiredFood(){
 
     }
 
