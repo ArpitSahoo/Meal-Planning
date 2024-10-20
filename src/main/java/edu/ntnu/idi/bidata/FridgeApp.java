@@ -18,6 +18,11 @@ public class FridgeApp {
     public ArrayList<FoodItem> fridge = new ArrayList<>();
     public Scanner scanner;
 
+    public FridgeApp(){
+        fridge = new ArrayList<>();
+        scanner = new Scanner(System.in);
+    }
+
     public void run(){
         boolean running = true;
 
@@ -38,6 +43,9 @@ public class FridgeApp {
                 case 1:
                     addFoodItem();
                     break;
+                case 2:
+                    removeFoodItem();
+                    break;
             }
         }
 
@@ -45,7 +53,7 @@ public class FridgeApp {
 
     }
 
-    private void addFoodItem(){
+    public void addFoodItem(){
         try{
             System.out.print("Hva is the name of the food: ");
             String nameOfFood = scanner.nextLine();
@@ -96,4 +104,23 @@ public class FridgeApp {
         }
 
     }
+
+    public void removeFoodItem(){
+        System.out.println("What do you want to remove?: ");
+        String nameOfFood = scanner.nextLine();
+
+        for(int i = 0; i < fridge.size(); i++){
+            if(fridge.get(i).getNameOfFood().equalsIgnoreCase(nameOfFood)){
+                fridge.remove(i);
+                System.out.println("Removed food: " + nameOfFood);
+            }
+        }
+
+    }
+
+    public static void main(String[] args) {
+        FridgeApp app = new FridgeApp();
+        app.run();
+    }
+
 }
