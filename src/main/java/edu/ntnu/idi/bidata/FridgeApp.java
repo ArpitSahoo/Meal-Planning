@@ -16,8 +16,8 @@ import static java.lang.System.*;
 
 
 public class FridgeApp {
-    public ArrayList<FoodItem> fridge = new ArrayList<>();
-    public Scanner scanner;
+    private ArrayList<FoodItem> fridge;
+    private Scanner scanner;
 
     /**
      * A constructor that creat a new fridge arraylist.
@@ -40,14 +40,14 @@ public class FridgeApp {
             out.println("\n--- Fridge Management ---");
             out.println("1. Add food");
             out.println("2. Remove food");
-            out.println("3. Display fridge contents");
-            out.println("4. Check for expired food");
-            out.println("5. Exit");
+            out.println("3. Take out an item");
+            out.println("4. Display fridge contents");
+            out.println("5. Check for expired food");
+            out.println("6. Exit");
             out.println("Choose a following number: ");
 
 
             int chosen = scanner.nextInt();
-            scanner.nextLine();
 
             switch(chosen){
                 case 1:
@@ -57,12 +57,15 @@ public class FridgeApp {
                     removeFoodItem();
                     break;
                 case 3:
-                    displayFridge();
+                    takeOutItem();
                     break;
                 case 4:
-                    checkExpiredFood();
+                    displayFridge();
                     break;
                 case 5:
+                    checkExpiredFood();
+                    break;
+                case 6:
                     running = false;
                     out.println("System ending...");
                     out.println("Goodbye....");
@@ -83,8 +86,9 @@ public class FridgeApp {
      */
     public void addFoodItem(){
         try{
-            out.print("Hva is the name of the food: ");
+            out.print("What is the name of the food: ");
             String nameOfFood = scanner.nextLine();
+            scanner.nextLine();
 
             out.println("What is the quantity: ");
             Float amount = scanner.nextFloat();
@@ -142,13 +146,42 @@ public class FridgeApp {
     public void removeFoodItem(){
         out.println("What do you want to remove?: ");
         String nameOfFood = scanner.nextLine();
-
+        boolean found = false;
         for(int i = 0; i < fridge.size(); i++){
             if(fridge.get(i).getNameOfFood().equalsIgnoreCase(nameOfFood)){
                 fridge.remove(i);
                 out.println("Removed food: " + nameOfFood);
+                found = true;
+            }
+            if(!found){
+                out.println("The item was not found");
             }
         }
+    }
+
+    public void takeOutItem(){
+        out.println("What do you want to take out" );
+        String nameOfFood = scanner.nextLine();
+
+        FoodItem foodFound = null;
+        for(FoodItem food : fridge){
+            if(food.getNameOfFood().equalsIgnoreCase(nameOfFood)){
+                foodFound = food;
+            }
+
+            if(foodFound == null){
+                out.println("There is no" + nameOfFood + "in the fridge.");
+            }
+
+            out.println("How much do you want to remove");
+            Float amountToTake = scanner.nextFloat();
+
+            foodFound.setAmount(foodFound.getAmount() - amountToTake );
+
+            out.println("You have taken out " + foodFound + "and you have left"  + foodFound.getAmount());
+
+        }
+
 
     }
 
