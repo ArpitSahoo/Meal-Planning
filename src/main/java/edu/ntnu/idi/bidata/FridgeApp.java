@@ -1,8 +1,10 @@
 package edu.ntnu.idi.bidata;
-
+import edu.ntnu.idi.bidata.food.FoodItem;
+import edu.ntnu.idi.bidata.userinterfaces.UserinterFase;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 import static java.lang.System.*;
 
@@ -35,17 +37,9 @@ public class FridgeApp {
      */
     public void run(){
         boolean running = true;
-
         while (running){
-            out.println("\n--- Fridge Management ---");
-            out.println("1. Add food");
-            out.println("2. Remove food");
-            out.println("3. Take out an item");
-            out.println("4. Display fridge contents");
-            out.println("5. Check for expired food");
-            out.println("6. Exit");
-            out.println("Choose a following number: ");
-
+            UserinterFase uiFridgeApp  = new UserinterFase();
+            uiFridgeApp.choiseScreen();
 
             int chosen = scanner.nextInt();
 
@@ -145,17 +139,20 @@ public class FridgeApp {
      */
     public void removeFoodItem(){
         out.println("What do you want to remove?: ");
-        String nameOfFood = scanner.nextLine();
+        String foodToRemove = scanner.nextLine();
         boolean found = false;
-        for(int i = 0; i < fridge.size(); i++){
-            if(fridge.get(i).getNameOfFood().equalsIgnoreCase(nameOfFood)){
-                fridge.remove(i);
-                out.println("Removed food: " + nameOfFood);
+        Iterator<FoodItem> iteratorObject = fridge.iterator();
+        while(iteratorObject.hasNext()){
+            FoodItem e = iteratorObject.next();
+            if(e.getNameOfFood().equalsIgnoreCase(foodToRemove)){
+                iteratorObject.remove();
+                out.println("Removed food: " + foodToRemove);
                 found = true;
             }
-            if(!found){
-                out.println("The item was not found");
-            }
+
+        }
+        if(!found){
+            out.println("The item was not found");
         }
     }
 
