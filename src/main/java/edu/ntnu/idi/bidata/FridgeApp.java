@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import static java.lang.System.*;
 
 /**
@@ -20,11 +19,20 @@ public class FridgeApp {
     public ArrayList<FoodItem> fridge = new ArrayList<>();
     public Scanner scanner;
 
+    /**
+     * A constructor that creat a new fridge arraylist.
+     * Creates Scanner
+     */
     public FridgeApp(){
         fridge = new ArrayList<>();
         scanner = new Scanner(in);
     }
 
+    /**
+     * A function that keeps the program running
+     * Print's out different commands
+     * Switch case to choose
+     */
     public void run(){
         boolean running = true;
 
@@ -68,6 +76,11 @@ public class FridgeApp {
 
     }
 
+    /**
+     * Function to add food
+     * Switch case to choose units
+     * IllegalArgumentException argument to catch illegalArgument
+     */
     public void addFoodItem(){
         try{
             out.print("Hva is the name of the food: ");
@@ -122,6 +135,10 @@ public class FridgeApp {
 
     }
 
+    /**
+     * Function to remove food Item.
+     * For-each-loop to find the food in the fridge arraylist.
+     */
     public void removeFoodItem(){
         out.println("What do you want to remove?: ");
         String nameOfFood = scanner.nextLine();
@@ -135,6 +152,12 @@ public class FridgeApp {
 
     }
 
+    /**
+     * Function to display food.
+     * If-statement to see if fridge is empty.
+     * Else-statement to go through the whole list.
+     * Calculate the total food price.
+     */
     public void displayFridge(){
         out.println("\n--- Fridge Contents ---");
         if(fridge.isEmpty()){
@@ -150,6 +173,11 @@ public class FridgeApp {
         }
     }
 
+    /**
+     * Function that checks for expired food.
+     * For-each-loop checks trough whole fridge arraylist.
+     * Calculates and print the name and total price.
+     */
     public void checkExpiredFood(){
         out.println("\n--- Expired Food ---");
         LocalDate currentDate = LocalDate.now();
@@ -166,6 +194,10 @@ public class FridgeApp {
         out.println("Total price of expired food is: " + totalPrice + "kr");
     }
 
+    /**
+     * Main function that runs the FridgeApp.
+     * @param args FridgeAPP
+     */
     public static void main(String[] args) {
         FridgeApp app = new FridgeApp();
         app.run();
