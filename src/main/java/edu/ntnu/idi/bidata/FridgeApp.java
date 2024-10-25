@@ -18,8 +18,8 @@ import static java.lang.System.*;
 
 
 public class FridgeApp {
-    private ArrayList<FoodItem> fridge;
-    private Scanner scanner;
+    private final ArrayList<FoodItem> fridge;
+    private final Scanner scanner;
 
     /**
      * A constructor that creat a new fridge arraylist.
@@ -37,11 +37,12 @@ public class FridgeApp {
      */
     public void run(){
         boolean running = true;
+
         while (running){
             UserinterFase uiFridgeApp  = new UserinterFase();
             uiFridgeApp.choiseScreen();
-
             int chosen = scanner.nextInt();
+            scanner.nextLine();
 
             switch(chosen){
                 case 1:
@@ -68,9 +69,6 @@ public class FridgeApp {
                     out.println("Invalid choice. Please try again.");
             }
         }
-
-
-
     }
 
     /**
@@ -78,23 +76,21 @@ public class FridgeApp {
      * Switch case to choose units
      * IllegalArgumentException argument to catch illegalArgument
      */
-    public void addFoodItem(){
+    private void addFoodItem(){
         try{
             out.print("What is the name of the food: ");
             String nameOfFood = scanner.nextLine();
-            scanner.nextLine();
 
             out.println("What is the quantity: ");
             Float amount = scanner.nextFloat();
 
-            out.println("Choose an unit (1, 2, 3 or 4):");
-            out.println("1. kg");
-            out.println("2. liter");
-            out.println("3. gram");
-            out.println("4. pieces");
+            UserinterFase uiFridgeApp  = new UserinterFase();
+            uiFridgeApp.choiseOfUnits();
 
             out.println("Which unit is the food?: ");
             int unitChosen = scanner.nextInt();
+            scanner.nextLine();
+
 
             String units;
             switch (unitChosen){
@@ -143,8 +139,8 @@ public class FridgeApp {
         boolean found = false;
         Iterator<FoodItem> iteratorObject = fridge.iterator();
         while(iteratorObject.hasNext()){
-            FoodItem e = iteratorObject.next();
-            if(e.getNameOfFood().equalsIgnoreCase(foodToRemove)){
+            FoodItem food = iteratorObject.next();
+            if(food.getNameOfFood().equalsIgnoreCase(foodToRemove)){
                 iteratorObject.remove();
                 out.println("Removed food: " + foodToRemove);
                 found = true;
@@ -157,29 +153,20 @@ public class FridgeApp {
     }
 
     public void takeOutItem(){
-        out.println("What do you want to take out" );
-        String nameOfFood = scanner.nextLine();
+        out.println("What do you want to take out?: ");
+        String foodToTake = scanner.nextLine();
 
-        FoodItem foodFound = null;
-        for(FoodItem food : fridge){
-            if(food.getNameOfFood().equalsIgnoreCase(nameOfFood)){
-                foodFound = food;
+        out.println("What is the quantity you want to take out? ");
+        Float amountToTake = scanner.nextFloat();
+        scanner.nextLine();
+
+        for(FoodItem food: fridge){
+            if(food.getNameOfFood().equalsIgnoreCase(foodToTake)){
+                food.setAmount(food.getAmount() - amountToTake);
+                out.println("The food you want to take out is " +  foodToTake + " " + food.getAmount() + food.getUnits());
             }
-
-            if(foodFound == null){
-                out.println("There is no" + nameOfFood + "in the fridge.");
-            }
-
-            out.println("How much do you want to remove");
-            Float amountToTake = scanner.nextFloat();
-
-            foodFound.setAmount(foodFound.getAmount() - amountToTake );
-
-            out.println("You have taken out " + foodFound + "and you have left"  + foodFound.getAmount());
 
         }
-
-
     }
 
     /**
@@ -199,8 +186,9 @@ public class FridgeApp {
                 out.println(food.displayFoodItem());
                 totalPrice += food.getPrice();
             }
-            out.println("Total price of all items in the fridge: " + totalPrice);
+            out.println("Total price of all items in the fridge: " + totalPrice + " kr.");
         }
+
     }
 
     /**

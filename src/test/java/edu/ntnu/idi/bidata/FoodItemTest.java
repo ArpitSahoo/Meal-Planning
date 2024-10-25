@@ -9,20 +9,30 @@ class FoodItemTest {
 
     static FoodItem foodItemTest;
 
-    @BeforeAll
-    static void BeforeAll()
-    {
-        System.out.println("Before all run");
-        // Arrange
-        LocalDate expiryDate = LocalDate.of(2024, 10, 20);
+    /**
+     * Arrange
+     * act
+     * assert
+     *
+     *
+     * assertEquals
+     * assertThrows
+     */
 
-        foodItemTest = new FoodItem("milk", 7f, "liters", 20.0, expiryDate);
+    @BeforeEach
+    void BeforeEach()
+    {
+        System.out.println("Before all each");
+        // Arrange
+        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
+
+        foodItemTest = new FoodItem("milk", 7f, "liters", 20.0, expirationDate);
         // Other arrange
     }
 
     @Test
     void testConstructorAndGetters() {
-        LocalDate expirationDate = LocalDate.of(2025, 12, 31);
+        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
         FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
 
         assertEquals("Milk", food.getNameOfFood());
@@ -31,55 +41,13 @@ class FoodItemTest {
         assertEquals(1.50, food.getPrice());
         assertEquals(expirationDate, food.getExpirationDate());
     }
-    /*
-    @org.junit.jupiter.api.Test
-    void getNameOfFood() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void setNameOfFood() {
-    }
-        @org.junit.jupiter.api.Test
-    void getAmount() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void setAmount() {
-    }
-
-        @org.junit.jupiter.api.Test
-    void getUnits() {
-    }
-
-
-    @org.junit.jupiter.api.Test
-    void setUnits() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void getExpirationDate() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void setExpirationDate() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void getPrice() {
-    }
-
-    @org.junit.jupiter.api.Test
-    void setPrice() {
-    }
-
-    NEED TO FIND OUT IF I NEED THESE
-
-     */
 
     @Test
     void setNameOfFoodTestForEmptyString() {
-        foodItemTest.setNameOfFood("");
+        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
+        FoodItem food = new FoodItem("milk", 1.0f, "liter", 1.50, expirationDate);
     }
+
 
     @Test
     void setNameOfFoodTestForNull() {
@@ -94,47 +62,57 @@ class FoodItemTest {
     }
 
     @Test
-    void setAmountTestForNegativeValuesTwo(){
-        LocalDate expiryDate = LocalDate.of(2024, 10, 20);
-
-        foodItemTest = new FoodItem("milk", -7f, "liters", 20.0, expiryDate);
+    void setAmountTestForNegativeValues() {
+        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new FoodItem("Milk", -1.0f, "liter", 1.50, expirationDate);
+        });
     }
+
     @Test
-    void setAmountTestForPositiveValues(){
-        LocalDate expiryDate = LocalDate.of(2024, 10, 20);
-
-        foodItemTest = new FoodItem("milk", 20f, "liters", 20.0, expiryDate);
+    void setAmountTestForPositiveValues() {
+        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
+        FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
+        assertEquals(1.0f, food.getAmount());
     }
+
 
 
     @Test
     void setPriceTestForNegativeValuesTwo(){
-        LocalDate expiryDate = LocalDate.of(2024, 10, 20);
-
-        foodItemTest = new FoodItem("milk", 7f, "liters", -20.0, expiryDate);
-    }
-    @Test
-    void setPriceTestForPositiveValues(){
-        LocalDate expiryDate = LocalDate.of(2024, 10, 20);
-
-        foodItemTest = new FoodItem("milk", 7f, "liters", 20.0, expiryDate);
+        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new FoodItem("Milk", 1.0f, "liter", -1.50, expirationDate);
+        });
     }
 
     @Test
-    void setExpirationDateTestBeforeExpiration(){
-        LocalDate NewExpiryDate = LocalDate.of(2024, 10, 20);
-
-
-        foodItemTest = new FoodItem("milk", 7f, "liters", 10.0, NewExpiryDate);
-
+    void setPriceTestForPositiveValues() {
+        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
+        FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
+        assertEquals(1.50, food.getPrice());
     }
+
     @Test
-    void setExpirationDateTestIsCorrect(){
-        LocalDate NewExpiryDate = LocalDate.of(2024, 10, 20);
+    void setExpirationDateTestBeforeExpiration() {
+        LocalDate newExpiryDate = LocalDate.of(2025, 10, 20);
 
+        // Create FoodItem with a valid future expiration date
+        FoodItem foodDate = new FoodItem("milk", 7f, "liters", 10.0, newExpiryDate);
 
-        foodItemTest = new FoodItem("milk", 7f, "liters", 20.0, NewExpiryDate);
-
+        // Assert that the expiration date is set correctly
+        assertEquals(newExpiryDate, foodDate.getExpirationDate(), "The expiration date should be set to 2025-10-20");
     }
+
+    @Test
+    void setExpirationDateTestInPastThrowsException() {
+        LocalDate pastDate = LocalDate.of(2020, 1, 1);
+
+        // Verify that creating a FoodItem with a past date throws an exception
+        assertThrows(IllegalArgumentException.class, () ->
+                new FoodItem("milk", 7f, "liters", 10.0, pastDate)
+        );
+    }
+
 }
 

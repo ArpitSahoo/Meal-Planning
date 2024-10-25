@@ -13,4 +13,12 @@ public class UserinterFase {
         out.println("6. Exit");
         out.println("Choose a following number: ");
     }
+
+    public void choiseOfUnits(){
+        out.println("Choose an unit (1, 2, 3 or 4):");
+        out.println("1. kg");
+        out.println("2. liter");
+        out.println("3. gram");
+        out.println("4. pieces");
+    }
 }
