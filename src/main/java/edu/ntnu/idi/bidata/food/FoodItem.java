@@ -146,6 +146,7 @@ public class FoodItem {
     }
 
     public String displayFoodItem() {
-        return nameOfFood + " : " + amount + ": " + units + ", " + "expires on: " + expirationDate + " price: " + price + "kr";
+        return String.format("%s - %.1f %s, Price: %.2f, Expiration Date: %s",
+                nameOfFood, amount, units, price*amount, expirationDate);
     }
 }

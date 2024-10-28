@@ -25,7 +25,7 @@ public class FridgeApp {
      * A constructor that creat a new fridge arraylist.
      * Creates Scanner
      */
-    public FridgeApp(){
+    private FridgeApp(){
         fridge = new ArrayList<>();
         scanner = new Scanner(in);
     }
@@ -37,36 +37,35 @@ public class FridgeApp {
      */
     public void run(){
         boolean running = true;
-
+        UserinterFase uiFridgeApp  = new UserinterFase();
+        uiFridgeApp.start();
         while (running){
-            UserinterFase uiFridgeApp  = new UserinterFase();
             uiFridgeApp.choiseScreen();
-            int chosen = scanner.nextInt();
-            scanner.nextLine();
+            String chosen = scanner.nextLine();
 
             switch(chosen){
-                case 1:
+                case "1":
                     addFoodItem();
                     break;
-                case 2:
+                case "2":
                     removeFoodItem();
                     break;
-                case 3:
+                case "3":
                     takeOutItem();
                     break;
-                case 4:
+                case "4":
                     displayFridge();
                     break;
-                case 5:
+                case "5":
                     checkExpiredFood();
                     break;
-                case 6:
+                case "6":
                     running = false;
-                    out.println("System ending...");
-                    out.println("Goodbye....");
+                    System.out.println("System ending...");
+                    System.out.println("Goodbye....");
                     break;
                 default:
-                    out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
@@ -83,6 +82,7 @@ public class FridgeApp {
 
             out.println("What is the quantity: ");
             Float amount = scanner.nextFloat();
+            scanner.nextLine();
 
             UserinterFase uiFridgeApp  = new UserinterFase();
             uiFridgeApp.choiseOfUnits();
@@ -111,12 +111,12 @@ public class FridgeApp {
                     return;
             }
 
-            out.println("What is the price of the food");
+            out.println("What is the price per unit of the food (Kilo/KR):");
             Double price = scanner.nextDouble();
-
+            scanner.nextLine();
 
             out.print("Enter expiration date (yyyy-MM-dd): ");
-            String expiration = scanner.next();
+            String expiration = scanner.nextLine();
             LocalDate expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
             FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
@@ -133,7 +133,7 @@ public class FridgeApp {
      * Function to remove food Item.
      * For-each-loop to find the food in the fridge arraylist.
      */
-    public void removeFoodItem(){
+    private void removeFoodItem(){
         out.println("What do you want to remove?: ");
         String foodToRemove = scanner.nextLine();
         boolean found = false;
@@ -152,7 +152,7 @@ public class FridgeApp {
         }
     }
 
-    public void takeOutItem(){
+    private void takeOutItem(){
         out.println("What do you want to take out?: ");
         String foodToTake = scanner.nextLine();
 
@@ -175,7 +175,7 @@ public class FridgeApp {
      * Else-statement to go through the whole list.
      * Calculate the total food price.
      */
-    public void displayFridge(){
+    private void displayFridge(){
         out.println("\n--- Fridge Contents ---");
         if(fridge.isEmpty()){
             out.println("The fridge is empty.");
@@ -184,7 +184,7 @@ public class FridgeApp {
             double totalPrice = 0;
             for(FoodItem food : fridge){
                 out.println(food.displayFoodItem());
-                totalPrice += food.getPrice();
+                totalPrice = totalPrice + food.getAmount() * food.getPrice();
             }
             out.println("Total price of all items in the fridge: " + totalPrice + " kr.");
         }
@@ -196,7 +196,7 @@ public class FridgeApp {
      * For-each-loop checks trough whole fridge arraylist.
      * Calculates and print the name and total price.
      */
-    public void checkExpiredFood(){
+    private void checkExpiredFood(){
         out.println("\n--- Expired Food ---");
         LocalDate currentDate = LocalDate.now();
         double totalPrice = 0;

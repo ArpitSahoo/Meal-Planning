@@ -1,5 +1,9 @@
 package edu.ntnu.idi.bidata.userinterfaces;
 
+import edu.ntnu.idi.bidata.food.FoodItem;
+
+import java.time.LocalDate;
+
 import static java.lang.System.out;
 
 public class UserinterFase {
@@ -20,5 +24,17 @@ public class UserinterFase {
         out.println("2. liter");
         out.println("3. gram");
         out.println("4. pieces");
+    }
+
+    public void start(){
+        LocalDate expirationDate1 = LocalDate.of(2025, 10, 20);
+        LocalDate expirationDate2 = LocalDate.of(2025, 11, 20);
+        LocalDate expirationDate3 = LocalDate.of(2025, 12, 20);
+        LocalDate expirationDate4 = LocalDate.of(2025, 9, 20);
+
+        FoodItem food1 = new FoodItem("egg", 3f, "pieces", 3.0, expirationDate1);
+        FoodItem food2 = new FoodItem("milk", 1f, "liter", 3.0, expirationDate2);
+        FoodItem food3 = new FoodItem("Chicken", 1f, "kg", 300.0, expirationDate3);
+        FoodItem food4 = new FoodItem("Soda", 2f, "liters", 40.0, expirationDate4);
     }
 }
