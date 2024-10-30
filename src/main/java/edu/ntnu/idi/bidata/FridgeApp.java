@@ -35,7 +35,7 @@ public class FridgeApp {
      * Print's out different commands
      * Switch case to choose
      */
-    public void run(){
+    private void run(){
         boolean running = true;
         UserinterFase uiFridgeApp  = new UserinterFase();
         uiFridgeApp.start();
@@ -111,6 +111,7 @@ public class FridgeApp {
                     return;
             }
 
+
             out.println("What is the price per unit of the food (Kilo/KR):");
             Double price = scanner.nextDouble();
             scanner.nextLine();
@@ -118,6 +119,12 @@ public class FridgeApp {
             out.print("Enter expiration date (yyyy-MM-dd): ");
             String expiration = scanner.nextLine();
             LocalDate expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            /**
+             * if(units.equals("gram")){
+             *                 FoodItem.setAmount(FoodItem.getAmount() * 1000);
+             *             }
+             */
+
 
             FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
             fridge.add(food);
