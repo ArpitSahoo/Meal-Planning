@@ -40,7 +40,7 @@ public class FridgeApp {
         UserinterFase uiFridgeApp  = new UserinterFase();
         uiFridgeApp.start();
         while (running){
-            uiFridgeApp.choiseScreen();
+            uiFridgeApp.choiceScreen();
             String chosen = scanner.nextLine();
 
             switch(chosen){
@@ -85,7 +85,7 @@ public class FridgeApp {
             scanner.nextLine();
 
             UserinterFase uiFridgeApp  = new UserinterFase();
-            uiFridgeApp.choiseOfUnits();
+            uiFridgeApp.choiceOfUnits();
 
             out.println("Which unit is the food?: ");
             int unitChosen = scanner.nextInt();

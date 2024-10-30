@@ -30,9 +30,8 @@ public class FoodItem {
     }
 
     /**
-     * Return the nameOfFood.
-     *
-     * @return nameOfFood of FoodItem.
+     * <code>nameOfFood</code>
+     * @return nameOfFood
      */
     public String getNameOfFood() {
         return nameOfFood;
@@ -40,11 +39,8 @@ public class FoodItem {
 
     /**
      * Mutate the <code>nameOfFood</code>
-     * Exception to check that nameOfFood is not blank or empty.
-     * Throws an IllegalArgumentException if empty or blank.
-     *
      * @param nameOfFood the FoodItem's name.
-     * @throws IllegalArgumentException if null....
+     * @throws IllegalArgumentException if nameOfFood null, empty or blank.
      */
     public void setNameOfFood(String nameOfFood) throws IllegalArgumentException {
         if (nameOfFood == null || nameOfFood.isEmpty() || nameOfFood.isBlank()) {
@@ -63,13 +59,15 @@ public class FoodItem {
     }
 
     /**
-     * Mutates the amount.
+     *
+     * Mutates the <code>amount</code>.
      * Exception to check that amount is not a negative number.
      * Throws an IllegalArgumentException if Amount is a negative number.
      *
      * @param amount the FoodItem's amount.
+     * @throws IllegalArgumentException if amount is less than 0.1
      */
-    public void setAmount(Float amount) {
+    public void setAmount(Float amount) throws IllegalArgumentException {
         if (amount < 0.1) {
             throw new IllegalArgumentException("Amount can not be under 0");
         }
@@ -78,7 +76,6 @@ public class FoodItem {
 
     /**
      * Returns the units.
-     *
      * @return units of the FoodItem.
      */
     public String getUnits() {
@@ -86,13 +83,11 @@ public class FoodItem {
     }
 
     /**
-     * Mutates the units.
-     * Exception to check that units is not blank or empty.
-     * Throws an IllegalArgumentException if empty or blank.
-     *
+     * Mutates the <code>units</code>.
      * @param units the FoodItem's unit.
+     * @throws IllegalArgumentException if units is null, empty or blank.
      */
-    public void setUnits(String units) {
+    public void setUnits(String units) throws IllegalArgumentException {
         if (units == null || units.isEmpty() || units.isBlank()) {
             throw new IllegalArgumentException("No input of units");
         }
@@ -109,13 +104,12 @@ public class FoodItem {
     }
 
     /**
-     * Mutates the expirationDate.
-     * Exception to check that expirationDate is the present date.
-     * Throws an IllegalArgumentException if the expiration date is before the present date.
+     * Mutates the <code>expirationDate</code>.
      *
      * @param expirationDate the FoodItem's expiration date.
+     * @throws IllegalArgumentException if expirationDate is in the past.
      */
-    public void setExpirationDate(LocalDate expirationDate) {
+    public void setExpirationDate(LocalDate expirationDate)throws IllegalArgumentException  {
         if (expirationDate.isBefore(LocalDate.now())) {
             throw new IllegalArgumentException("Expiration date cannot be in the past.");
         }
@@ -132,13 +126,11 @@ public class FoodItem {
     }
 
     /**
-     * Mutates the price.
-     * Exception to check that price is not a negative number.
-     * Throws an IllegalArgumentException if the price is a negative number.
-     *
+     * Mutates the <code>price</code>.
      * @param price the FoodItem's price.
+     * @throws IllegalArgumentException if price is a negative number.
      */
-    public void setPrice(Double price) {
+    public void setPrice(Double price)throws IllegalArgumentException  {
         if (price < 0) {
             throw new IllegalArgumentException("Price can not be a negative input.");
         }

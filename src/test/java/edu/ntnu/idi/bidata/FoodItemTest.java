@@ -13,8 +13,6 @@ class FoodItemTest {
      * Arrange
      * act
      * assert
-     *
-     *
      * assertEquals
      * assertThrows
      */
@@ -44,15 +42,19 @@ class FoodItemTest {
 
     @Test
     void setNameOfFoodTestForEmptyString() {
-        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
-        FoodItem food = new FoodItem("milk", 1.0f, "liter", 1.50, expirationDate);
+        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new FoodItem("", -1.0f, "liter", 1.50, expirationDate);
+        });
     }
 
 
     @Test
     void setNameOfFoodTestForNull() {
-        foodItemTest.setNameOfFood(null);
-
+        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
+        assertThrows(IllegalArgumentException.class, () -> {
+            new FoodItem(null, -1.0f, "liter", 1.50, expirationDate);
+        });
     }
 
     @Test

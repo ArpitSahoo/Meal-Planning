@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import static java.lang.System.out;
 
 public class UserinterFase {
-    public void choiseScreen(){
+    public void choiceScreen(){
         out.println("\n--- Fridge Management ---");
         out.println("1. Add food");
         out.println("2. Remove food");
@@ -18,7 +18,7 @@ public class UserinterFase {
         out.println("Choose a following number: ");
     }
 
-    public void choiseOfUnits(){
+    public void choiceOfUnits(){
         out.println("Choose an unit (1, 2, 3 or 4):");
         out.println("1. kg");
         out.println("2. liter");
