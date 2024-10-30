@@ -20,7 +20,7 @@ class FoodItemTest {
     @BeforeEach
     void BeforeEach()
     {
-        System.out.println("Before all each");
+        System.out.println("Before each");
         // Arrange
         LocalDate expirationDate = LocalDate.of(2025, 10, 20);
 

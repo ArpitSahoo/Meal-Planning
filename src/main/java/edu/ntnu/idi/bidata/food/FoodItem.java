@@ -62,9 +62,6 @@ public class FoodItem {
 
   /**
    * Mutates the <code>amount</code>.
-   * Exception to check that amount is not a negative number.
-   * Throws an IllegalArgumentException if Amount is a negative number.
-   *
    * @param amount the FoodItem's amount.
    * @throws IllegalArgumentException if amount is less than 0.1
    */

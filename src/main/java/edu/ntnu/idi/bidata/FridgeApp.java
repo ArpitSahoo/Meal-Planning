@@ -1,6 +1,6 @@
 package edu.ntnu.idi.bidata;
 import edu.ntnu.idi.bidata.food.FoodItem;
-import edu.ntnu.idi.bidata.userinterfaces.UserinterFase;
+import edu.ntnu.idi.bidata.userinterfaces.UserInterface;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class FridgeApp {
    */
   private void run() {
     boolean running = true;
-    UserinterFase uiFridgeApp = new UserinterFase();
+    UserInterface uiFridgeApp = new UserInterface();
     uiFridgeApp.start();
     while (running) {
       uiFridgeApp.choiceScreen();
@@ -86,7 +86,7 @@ public class FridgeApp {
       Float amount = scanner.nextFloat();
       scanner.nextLine();
 
-      UserinterFase uiFridgeApp = new UserinterFase();
+      UserInterface uiFridgeApp = new UserInterface();
       uiFridgeApp.choiceOfUnits();
 
       out.println("Which unit is the food?: ");
@@ -109,8 +109,8 @@ public class FridgeApp {
           units = "stk";
           break;
         default:
+          units = "";
           out.println("Invalid unit choice. Food item not added.");
-          return;
       }
 
 
