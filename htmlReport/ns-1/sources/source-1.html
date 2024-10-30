@@ -1,0 +1,346 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > FridgeApp</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">edu.ntnu.idi.bidata</a>
+</div>
+
+<h1>Coverage Summary for Class: FridgeApp (edu.ntnu.idi.bidata)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FridgeApp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (4/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16,7%
+  </span>
+  <span class="absValue">
+    (5/30)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    21,6%
+  </span>
+  <span class="absValue">
+    (19/88)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package edu.ntnu.idi.bidata;
+&nbsp;import edu.ntnu.idi.bidata.food.FoodItem;
+&nbsp;import edu.ntnu.idi.bidata.userinterfaces.UserInterface;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.format.DateTimeFormatter;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Scanner;
+&nbsp;
+&nbsp;import static java.lang.System.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * The main starting point of your application. Let this class create the
+&nbsp; * instance of your main-class that starts your application.
+&nbsp; *
+&nbsp; * @author Arpit Sahoo
+&nbsp; * @version 0.0.1
+&nbsp; */
+&nbsp;
+&nbsp;
+&nbsp;public class FridgeApp {
+&nbsp;  private final List&lt;FoodItem&gt; fridge;
+&nbsp;  private final Scanner scanner;
+&nbsp;
+&nbsp;  /**
+&nbsp;   * A constructor that creat a new fridge arraylist.
+&nbsp;   * Creates Scanner.
+&nbsp;   */
+<b class="fc">&nbsp;  private FridgeApp() {</b>
+<b class="fc">&nbsp;    fridge = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;    scanner = new Scanner(in);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * A function that keeps the program running.
+&nbsp;   * Print&#39;s out different commands.
+&nbsp;   * Switch case to choose.
+&nbsp;   */
+&nbsp;  private void run() {
+<b class="fc">&nbsp;    boolean running = true;</b>
+<b class="fc">&nbsp;    UserInterface uiFridgeApp = new UserInterface();</b>
+<b class="fc">&nbsp;    uiFridgeApp.start();</b>
+<b class="fc">&nbsp;    while (running) {</b>
+<b class="fc">&nbsp;      uiFridgeApp.choiceScreen();</b>
+<b class="fc">&nbsp;      String chosen = scanner.nextLine();</b>
+&nbsp;
+<b class="pc">&nbsp;      switch (chosen) {</b>
+&nbsp;        case &quot;1&quot;:
+<b class="nc">&nbsp;          addFoodItem();</b>
+&nbsp;          break;
+&nbsp;        case &quot;2&quot;:
+<b class="nc">&nbsp;          removeFoodItem();</b>
+&nbsp;          break;
+&nbsp;        case &quot;3&quot;:
+<b class="nc">&nbsp;          takeOutItem();</b>
+&nbsp;          break;
+&nbsp;        case &quot;4&quot;:
+<b class="fc">&nbsp;          displayFridge();</b>
+&nbsp;          break;
+&nbsp;        case &quot;5&quot;:
+<b class="nc">&nbsp;          checkExpiredFood();</b>
+&nbsp;          break;
+&nbsp;        case &quot;6&quot;:
+<b class="fc">&nbsp;          running = false;</b>
+<b class="fc">&nbsp;          out.println(&quot;System ending...&quot;);</b>
+<b class="fc">&nbsp;          out.println(&quot;Goodbye....&quot;);</b>
+&nbsp;          break;
+&nbsp;        default:
+<b class="nc">&nbsp;          out.println(&quot;Invalid choice. Please try again.&quot;);</b>
+&nbsp;      }
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Function to add food.
+&nbsp;   * Switch case to choose units.
+&nbsp;   * IllegalArgumentException argument to catch illegalArgument.
+&nbsp;   */
+&nbsp;  private void addFoodItem() {
+&nbsp;    try {
+<b class="nc">&nbsp;      out.print(&quot;What is the name of the food: &quot;);</b>
+<b class="nc">&nbsp;      String nameOfFood = scanner.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;      out.println(&quot;What is the quantity: &quot;);</b>
+<b class="nc">&nbsp;      Float amount = scanner.nextFloat();</b>
+<b class="nc">&nbsp;      scanner.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;      UserInterface uiFridgeApp = new UserInterface();</b>
+<b class="nc">&nbsp;      uiFridgeApp.choiceOfUnits();</b>
+&nbsp;
+<b class="nc">&nbsp;      out.println(&quot;Which unit is the food?: &quot;);</b>
+<b class="nc">&nbsp;      int unitChosen = scanner.nextInt();</b>
+<b class="nc">&nbsp;      scanner.nextLine();</b>
+&nbsp;
+&nbsp;
+&nbsp;      String units;
+<b class="nc">&nbsp;      switch (unitChosen) {</b>
+&nbsp;        case 1:
+<b class="nc">&nbsp;          units = &quot;kg&quot;;</b>
+&nbsp;          break;
+&nbsp;        case 2:
+<b class="nc">&nbsp;          units = &quot;liter&quot;;</b>
+&nbsp;          break;
+&nbsp;        case 3:
+<b class="nc">&nbsp;          units = &quot;gram&quot;;</b>
+&nbsp;          break;
+&nbsp;        case 4:
+<b class="nc">&nbsp;          units = &quot;stk&quot;;</b>
+&nbsp;          break;
+&nbsp;        default:
+<b class="nc">&nbsp;          out.println(&quot;Invalid unit choice. Food item not added.&quot;);</b>
+&nbsp;          return;
+&nbsp;      }
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;      out.println(&quot;What is the price per unit of the food (Kilo/KR):&quot;);</b>
+<b class="nc">&nbsp;      Double price = scanner.nextDouble();</b>
+<b class="nc">&nbsp;      scanner.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;      out.print(&quot;Enter expiration date (yyyy-MM-dd): &quot;);</b>
+<b class="nc">&nbsp;      String expiration = scanner.nextLine();</b>
+<b class="nc">&nbsp;      LocalDate expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern(&quot;yyyy-MM-dd&quot;));</b>
+&nbsp;
+&nbsp;
+<b class="nc">&nbsp;      FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);</b>
+<b class="nc">&nbsp;      fridge.add(food);</b>
+<b class="nc">&nbsp;      out.print(&quot;Food added:&quot; + food.displayFoodItem());</b>
+<b class="nc">&nbsp;    } catch (IllegalArgumentException illegalArgument) {</b>
+<b class="nc">&nbsp;      out.println(illegalArgument.getMessage());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Function to remove food Item.
+&nbsp;   * For-each-loop to find the food in the fridge arraylist.
+&nbsp;   */
+&nbsp;  private void removeFoodItem() {
+<b class="nc">&nbsp;    out.println(&quot;What do you want to remove?: &quot;);</b>
+<b class="nc">&nbsp;    String foodToRemove = scanner.nextLine();</b>
+<b class="nc">&nbsp;    boolean found = false;</b>
+<b class="nc">&nbsp;    Iterator&lt;FoodItem&gt; iteratorObject = fridge.iterator();</b>
+<b class="nc">&nbsp;    while (iteratorObject.hasNext()) {</b>
+<b class="nc">&nbsp;      FoodItem food = iteratorObject.next();</b>
+<b class="nc">&nbsp;      if (food.getNameOfFood().equalsIgnoreCase(foodToRemove)) {</b>
+<b class="nc">&nbsp;        iteratorObject.remove();</b>
+<b class="nc">&nbsp;        out.println(&quot;Removed food: &quot; + foodToRemove);</b>
+<b class="nc">&nbsp;        found = true;</b>
+&nbsp;      }
+&nbsp;
+&nbsp;    }
+<b class="nc">&nbsp;    if (!found) {</b>
+<b class="nc">&nbsp;      out.println(&quot;The item was not found&quot;);</b>
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  private void takeOutItem() {
+<b class="nc">&nbsp;    out.println(&quot;What do you want to take out?: &quot;);</b>
+<b class="nc">&nbsp;    String foodToTake = scanner.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;    out.println(&quot;What is the quantity you want to take out? &quot;);</b>
+<b class="nc">&nbsp;    Float amountToTake = scanner.nextFloat();</b>
+<b class="nc">&nbsp;    scanner.nextLine();</b>
+&nbsp;
+<b class="nc">&nbsp;    for (FoodItem food : fridge) {</b>
+<b class="nc">&nbsp;      if (food.getNameOfFood().equalsIgnoreCase(foodToTake)) {</b>
+<b class="nc">&nbsp;        food.setAmount(food.getAmount() - amountToTake);</b>
+<b class="nc">&nbsp;        out.println(&quot;The food you want to take out is &quot;</b>
+&nbsp;            + foodToTake
+&nbsp;            + &quot; &quot;
+<b class="nc">&nbsp;            + food.getAmount()</b>
+<b class="nc">&nbsp;            + food.getUnits());</b>
+&nbsp;      }
+&nbsp;
+&nbsp;    }
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Function to display food.
+&nbsp;   * If-statement to see if fridge is empty.
+&nbsp;   * Else-statement to go through the whole list.
+&nbsp;   * Calculate the total food price.
+&nbsp;   */
+&nbsp;  private void displayFridge() {
+<b class="fc">&nbsp;    out.println(&quot;\n--- Fridge Contents ---&quot;);</b>
+<b class="pc">&nbsp;    if (fridge.isEmpty()) {</b>
+<b class="fc">&nbsp;      out.println(&quot;The fridge is empty.&quot;);</b>
+&nbsp;    } else {
+<b class="nc">&nbsp;      double totalPrice = 0;</b>
+<b class="nc">&nbsp;      for (FoodItem food : fridge) {</b>
+<b class="nc">&nbsp;        out.println(food.displayFoodItem());</b>
+<b class="nc">&nbsp;        totalPrice = totalPrice + food.getAmount() * food.getPrice();</b>
+&nbsp;      }
+<b class="nc">&nbsp;      out.println(&quot;Total price of all items in the fridge: &quot; + totalPrice + &quot; kr.&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Function that checks for expired food.
+&nbsp;   * For-each-loop checks trough whole fridge arraylist.
+&nbsp;   * Calculates and print the name and total price.
+&nbsp;   */
+&nbsp;  private void checkExpiredFood() {
+<b class="nc">&nbsp;    out.println(&quot;\n--- Expired Food ---&quot;);</b>
+<b class="nc">&nbsp;    LocalDate currentDate = LocalDate.now();</b>
+<b class="nc">&nbsp;    double totalPrice = 0;</b>
+<b class="nc">&nbsp;    for (FoodItem food : fridge) {</b>
+<b class="nc">&nbsp;      if (food.getExpirationDate().isBefore(currentDate)) {</b>
+<b class="nc">&nbsp;        out.print(food.getNameOfFood() + &quot; has expired.&quot;);</b>
+<b class="nc">&nbsp;        totalPrice += food.getPrice();</b>
+&nbsp;      } else {
+<b class="nc">&nbsp;        out.println(&quot;There are no expired food&quot;);</b>
+&nbsp;      }
+&nbsp;    }
+<b class="nc">&nbsp;    out.println(&quot;Total price of expired food is: &quot; + totalPrice + &quot;kr&quot;);</b>
+&nbsp;  }
+&nbsp;
+&nbsp;  /**
+&nbsp;   * Main function that runs the FridgeApp.
+&nbsp;   *
+&nbsp;   * @param args FridgeAPP
+&nbsp;   */
+&nbsp;  public static void main(String[] args) {
+<b class="fc">&nbsp;    FridgeApp app = new FridgeApp();</b>
+<b class="fc">&nbsp;    app.run();</b>
+&nbsp;  }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-10-30 15:42</div>
+</div>
+</body>
+</html>
