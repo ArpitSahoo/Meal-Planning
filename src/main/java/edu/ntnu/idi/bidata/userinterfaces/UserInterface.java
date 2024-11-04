@@ -36,5 +36,15 @@ public class UserInterface {
     FoodItem food2 = new FoodItem("milk", 1f, "liter", 3.0, expirationDate2);
     FoodItem food3 = new FoodItem("Chicken", 1f, "kg", 300.0, expirationDate3);
     FoodItem food4 = new FoodItem("Soda", 2f, "liters", 40.0, expirationDate4);
+
+    /*
+     *  public void init(){
+     *     LocalDate expirationDate1 = LocalDate.of(2025, 10, 20);
+     *     fridge.add(new FoodItem("egg", 3f, "pieces", 3.0, expirationDate1));
+     *     fridge.add(new FoodItem("milk", 1f, "liter", 3.0, expirationDate1));
+     *     fridge.add(new FoodItem("Chicken", 1f, "kg", 300.0, expirationDate1));
+     *     fridge.add(new FoodItem("Soda", 2f, "liters", 40.0, expirationDate1));
+     *   }
+     */
   }
 }

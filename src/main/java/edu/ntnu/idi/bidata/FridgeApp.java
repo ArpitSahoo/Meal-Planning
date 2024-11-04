@@ -32,6 +32,13 @@ public class FridgeApp {
     scanner = new Scanner(in);
   }
 
+  public void init(){
+    LocalDate expirationDate1 = LocalDate.of(2025, 10, 20);
+    fridge.add(new FoodItem("egg", 3f, "pieces", 3.0, expirationDate1));
+    fridge.add(new FoodItem("milk", 1f, "liter", 3.0, expirationDate1));
+    fridge.add(new FoodItem("Chicken", 1f, "kg", 300.0, expirationDate1));
+    fridge.add(new FoodItem("Soda", 2f, "liters", 40.0, expirationDate1));
+  }
   /**
    * A function that keeps the program running.
    * Print's out different commands.
@@ -40,7 +47,6 @@ public class FridgeApp {
   private void run() {
     boolean running = true;
     UserInterface uiFridgeApp = new UserInterface();
-    uiFridgeApp.start();
     while (running) {
       uiFridgeApp.choiceScreen();
       String chosen = scanner.nextLine();
@@ -225,6 +231,7 @@ public class FridgeApp {
   public static void main(String[] args) {
     FridgeApp app = new FridgeApp();
     app.run();
+    app.init();
   }
 
 }

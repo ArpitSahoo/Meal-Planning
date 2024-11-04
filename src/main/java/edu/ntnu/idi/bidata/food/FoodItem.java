@@ -16,7 +16,7 @@ public class FoodItem {
    * A constructor for the class FoodItem.
    *
    * @param nameOfFood     the name of FoodItem.
-   * @param amount         of Grocery FoodItem.
+   * @param amount         of FoodItem.
    * @param units          of the FoodItem.
    * @param price          of FoodItem.
    * @param expirationDate of FoodItem.
