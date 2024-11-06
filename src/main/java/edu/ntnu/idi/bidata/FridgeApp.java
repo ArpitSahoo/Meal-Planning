@@ -96,23 +96,20 @@ public class FridgeApp {
       uiFridgeApp.choiceOfUnits();
 
       out.println("Which unit is the food?: ");
-      int unitChosen = scanner.nextInt();
+      String unitChosen = scanner.nextLine();
       scanner.nextLine();
 
 
       String units;
       switch (unitChosen) {
-        case 1:
+        case "1":
           units = "kg";
           break;
-        case 2:
+        case "2":
           units = "liter";
           break;
-        case 3:
-          units = "gram";
-          break;
-        case 4:
-          units = "stk";
+        case "3":
+          units = "pieces";
           break;
         default:
           units = "";

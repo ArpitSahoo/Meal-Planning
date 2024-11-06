@@ -12,7 +12,7 @@ public class Fridge {
    * A constructor that creat a new fridge arraylist.
    * Creates Scanner.
    */
-  private Fridge() {
+  public Fridge() {
     fridgeRegister = new HashMap<>();
   }
 
@@ -33,37 +33,36 @@ public class Fridge {
 
   }
 
-  public boolean removeFood(FoodItem foodToRemove){
-    boolean foodFound = false;
+  public boolean removeFoodItem(FoodItem foodToRemove){
+    boolean wasFoodRemoved = false;
     String nameOfFood = foodToRemove.getNameOfFood();
-    if(fridgeRegister.containsKey(nameOfFood)){
-      FoodItem foodStored = fridgeRegister.get(nameOfFood);
-      if(foodStored.equals(foodToRemove)){
-        fridgeRegister.remove(foodToRemove);
-        foodFound = true;
-      }
+    if(!fridgeRegister.containsKey(nameOfFood)){
+      System.out.println("Food does not exist in the fridge.");
     }
-    return foodFound;
+    else{
+      fridgeRegister.remove(nameOfFood);
+      System.out.println("Removed " + nameOfFood + " from the fridge.");
+      wasFoodRemoved = true;
+    }
+    return wasFoodRemoved;
   }
 
   public boolean takeOutItem(FoodItem foodToTake){
-    boolean foodFound = false;
+    boolean wasFoodExtracted = false;
     String nameOfFood = foodToTake.getNameOfFood();
+    FoodItem found = fridgeRegister.get(nameOfFood);
     if(fridgeRegister.containsKey(nameOfFood)){
-      FoodItem foodStored = fridgeRegister.get(nameOfFood);
-      if(foodStored.equals(foodToTake)){
-
+      if (found.validToTake(foodToTake)) {
+        wasFoodExtracted = true;
+        System.out.println("Successfully removed " + foodToTake.getAmount() + " of " + nameOfFood);
+      } else {
+        System.out.println("Not enough quantity to remove.");
       }
-
     }
-
-
-    return foodFound;
+    else{
+      System.out.println("Food does not exist in the fridge.");
+    }
+    return wasFoodExtracted;
   }
-
-
-
-
-
 
 }

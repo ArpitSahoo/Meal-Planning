@@ -22,8 +22,7 @@ public class UserInterface {
     out.println("Choose an unit (1, 2, 3 or 4):");
     out.println("1. kg");
     out.println("2. liter");
-    out.println("3. gram");
-    out.println("4. pieces");
+    out.println("2. pieces");
   }
 
   public void start() {

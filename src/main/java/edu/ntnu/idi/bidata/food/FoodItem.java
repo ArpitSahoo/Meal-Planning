@@ -152,15 +152,24 @@ public class FoodItem {
     return validMerge;
   }
 
-  public boolean mergeFood(FoodItem foodToBeMerged){
+  public void mergeFood(FoodItem foodToBeMerged){
     Float newAmount = this.amount + foodToBeMerged.amount;
     this.setAmount(newAmount);
-    return true;
   }
-  
-  public boolean changeAmount(FoodItem amountToReduce){
-    Float newAmount = this.amount - amountToReduce.amount;
-    this.setAmount(newAmount);
-    return true;
+
+  public boolean validToTake(FoodItem foodToBeValidated) {
+    boolean validTake = false;
+    if (this.getNameOfFood().equalsIgnoreCase(foodToBeValidated.getNameOfFood())
+        && this.amount >= foodToBeValidated.amount) {
+      this.amountToTake(foodToBeValidated);
+      validTake = true;
+    }
+    return validTake;
   }
+
+  public void amountToTake(FoodItem foodToBeMerged) {
+    this.amount -= foodToBeMerged.amount;
+  }
+
+
 }
