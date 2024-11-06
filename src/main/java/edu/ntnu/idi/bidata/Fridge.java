@@ -1,39 +1,68 @@
 package edu.ntnu.idi.bidata;
 
 import edu.ntnu.idi.bidata.food.FoodItem;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
+import java.util.*;
 
 
 public class Fridge {
-  private final List<FoodItem> items;
+  private final Map<String, FoodItem> fridgeRegister;
 
   /**
    * A constructor that creat a new fridge arraylist.
    * Creates Scanner.
    */
   private Fridge() {
-    items = new ArrayList<>();
+    fridgeRegister = new HashMap<>();
   }
 
-  public void addFood(FoodItem item){
-    items.add(item);
-  }
-
-  public boolean removeFood(String foodName) {
-    Iterator<FoodItem> iterator = items.iterator();
-    while (iterator.hasNext()) {
-      FoodItem food = iterator.next();
-      if (food.getNameOfFood().equalsIgnoreCase(foodName)) {
-        iterator.remove();
-        return true;
+  public boolean addFoodItem(FoodItem foodToBeAdded){
+    boolean wasFoodAdded = false;
+    String nameOfFood = foodToBeAdded.getNameOfFood();
+    if(fridgeRegister.containsKey(nameOfFood)){
+      FoodItem found = fridgeRegister.get(nameOfFood);
+      if(found.validToMerge(foodToBeAdded)){
+        found.mergeFood(foodToBeAdded);
       }
     }
-    return false;
+    else {
+      fridgeRegister.put(nameOfFood, foodToBeAdded); // Add new food to the register
+      wasFoodAdded = true; // Food was added as new
+    }
+    return wasFoodAdded;
+
   }
+
+  public boolean removeFood(FoodItem foodToRemove){
+    boolean foodFound = false;
+    String nameOfFood = foodToRemove.getNameOfFood();
+    if(fridgeRegister.containsKey(nameOfFood)){
+      FoodItem foodStored = fridgeRegister.get(nameOfFood);
+      if(foodStored.equals(foodToRemove)){
+        fridgeRegister.remove(foodToRemove);
+        foodFound = true;
+      }
+    }
+    return foodFound;
+  }
+
+  public boolean takeOutItem(FoodItem foodToTake){
+    boolean foodFound = false;
+    String nameOfFood = foodToTake.getNameOfFood();
+    if(fridgeRegister.containsKey(nameOfFood)){
+      FoodItem foodStored = fridgeRegister.get(nameOfFood);
+      if(foodStored.equals(foodToTake)){
+
+      }
+
+    }
+
+
+    return foodFound;
+  }
+
+
+
 
 
 

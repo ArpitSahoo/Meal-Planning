@@ -142,4 +142,25 @@ public class FoodItem {
     return String.format("%s - %.1f %s, Price: %.2f, Expiration Date: %s",
         nameOfFood, amount, units, price * amount, expirationDate);
   }
+
+  public boolean validToMerge(FoodItem foodToBeValidated){
+    boolean validMerge = false;
+    if(this.getNameOfFood().equalsIgnoreCase(foodToBeValidated.getNameOfFood())){
+      foodToBeValidated.mergeFood(foodToBeValidated);
+      validMerge = true;
+    }
+    return validMerge;
+  }
+
+  public boolean mergeFood(FoodItem foodToBeMerged){
+    Float newAmount = this.amount + foodToBeMerged.amount;
+    this.setAmount(newAmount);
+    return true;
+  }
+  
+  public boolean changeAmount(FoodItem amountToReduce){
+    Float newAmount = this.amount - amountToReduce.amount;
+    this.setAmount(newAmount);
+    return true;
+  }
 }
