@@ -1,0 +1,35 @@
+package edu.ntnu.idi.bidata;
+
+import java.util.Iterator;
+
+public class UIPrintHandler {
+  public void choiceScreen() {
+    System.out.println("\n--- Fridge Management ---");
+    System.out.println("1. Add food");
+    System.out.println("2. Remove food");
+    System.out.println("3. Take out an item");
+    System.out.println("4. Display fridge contents");
+    System.out.println("5. Check for expired food");
+    System.out.println("6. Exit");
+    System.out.println("Choose a following number: ");
+  }
+
+  public void choiceOfUnits() {
+    System.out.println("Choose an unit (1, 2, 3 or 4):");
+    System.out.println("1. kg");
+    System.out.println("2. liter");
+    System.out.println("2. pieces");
+  }
+
+  public void PrintFridge(Iterator<FoodItem> carIterator) {
+    while (carIterator.hasNext()) {
+      FoodItem food = carIterator.next();
+      System.out.println("Name: " + food.getNameOfFood() +
+          " | Amount: " + food.getAmount() + " " + food.getUnits() +
+          " | Total Price: " + (food.getPricePerUnit() * food.getAmount()) +
+          " | Expiry: " + food.getExpirationDate());
+    }
+  }
+
+
+}

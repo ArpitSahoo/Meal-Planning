@@ -1,8 +1,6 @@
 package edu.ntnu.idi.bidata;
 
 import static org.junit.jupiter.api.Assertions.*;
-
-import edu.ntnu.idi.bidata.food.FoodItem;
 import org.junit.jupiter.api.*;
 import java.time.LocalDate; // Import LocalDate
 class FoodItemTest {
@@ -36,7 +34,7 @@ class FoodItemTest {
         assertEquals("Milk", food.getNameOfFood());
         assertEquals(1.0f, food.getAmount());
         assertEquals("liter", food.getUnits());
-        assertEquals(1.50, food.getPrice());
+        assertEquals(1.50, food.getPricePerUnit());
         assertEquals(expirationDate, food.getExpirationDate());
     }
 
@@ -92,7 +90,7 @@ class FoodItemTest {
     void setPriceTestForPositiveValues() {
         LocalDate expirationDate = LocalDate.of(2025, 10, 20);
         FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
-        assertEquals(1.50, food.getPrice());
+        assertEquals(1.50, food.getPricePerUnit());
     }
 
     @Test
@@ -116,6 +114,6 @@ class FoodItemTest {
         );
     }
 
-    //TODO NY tester for dato
+    //TODO NY tester for date
 }
 

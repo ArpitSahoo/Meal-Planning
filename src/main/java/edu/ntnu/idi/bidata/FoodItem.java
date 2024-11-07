@@ -1,4 +1,4 @@
-package edu.ntnu.idi.bidata.food;
+package edu.ntnu.idi.bidata;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ public class FoodItem {
   private Float amount;
   private String units;
   private LocalDate expirationDate;
-  private Double price;
+  private Double pricePerUnit;
 
   /**
    * A constructor for the class FoodItem.
@@ -18,15 +18,15 @@ public class FoodItem {
    * @param nameOfFood     the name of FoodItem.
    * @param amount         of FoodItem.
    * @param units          of the FoodItem.
-   * @param price          of FoodItem.
+   * @param pricePerUnit          of FoodItem.
    * @param expirationDate of FoodItem.
    */
   public FoodItem(String nameOfFood, Float amount, String units,
-                  Double price, LocalDate expirationDate) {
+                  Double pricePerUnit, LocalDate expirationDate) {
     setNameOfFood(nameOfFood);
     setAmount(amount);
     setUnits(units);
-    setPrice(price);
+    setPricePerUnit(pricePerUnit);
     setExpirationDate(expirationDate);
   }
 
@@ -117,58 +117,25 @@ public class FoodItem {
   }
 
   /**
-   * Returns the price.
+   * Returns the pricePerUnit.
    *
-   * @return the price of the FoodItem.
+   * @return the pricePerUnit of the FoodItem.
    */
-  public Double getPrice() {
-    return price;
+  public Double getPricePerUnit() {
+    return pricePerUnit;
   }
 
   /**
    * Mutates the <code>price</code>.
    *
-   * @param price the FoodItem's price.
+   * @param pricePerUnit the FoodItem's price.
    * @throws IllegalArgumentException if price is a negative number.
    */
-  public void setPrice(Double price) throws IllegalArgumentException {
-    if (price < 0) {
+  public void setPricePerUnit(Double pricePerUnit) throws IllegalArgumentException {
+    if (pricePerUnit < 0) {
       throw new IllegalArgumentException("Price can not be a negative input.");
     }
-    this.price = price;
-  }
-
-  public String displayFoodItem() {
-    return String.format("%s - %.1f %s, Price: %.2f, Expiration Date: %s",
-        nameOfFood, amount, units, price * amount, expirationDate);
-  }
-
-  public boolean validToMerge(FoodItem foodToBeValidated){
-    boolean validMerge = false;
-    if(this.getNameOfFood().equalsIgnoreCase(foodToBeValidated.getNameOfFood())){
-      foodToBeValidated.mergeFood(foodToBeValidated);
-      validMerge = true;
-    }
-    return validMerge;
-  }
-
-  public void mergeFood(FoodItem foodToBeMerged){
-    Float newAmount = this.amount + foodToBeMerged.amount;
-    this.setAmount(newAmount);
-  }
-
-  public boolean validToTake(FoodItem foodToBeValidated) {
-    boolean validTake = false;
-    if (this.getNameOfFood().equalsIgnoreCase(foodToBeValidated.getNameOfFood())
-        && this.amount >= foodToBeValidated.amount) {
-      this.amountToTake(foodToBeValidated);
-      validTake = true;
-    }
-    return validTake;
-  }
-
-  public void amountToTake(FoodItem foodToBeMerged) {
-    this.amount -= foodToBeMerged.amount;
+    this.pricePerUnit = pricePerUnit;
   }
 
 
