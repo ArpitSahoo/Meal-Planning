@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 public class UIPrintHandler {
   public void choiceScreen() {
-    System.out.println("\n--- Fridge Management ---");
+    System.out.println("\n--- Fridge ---");
     System.out.println("1. Add food");
     System.out.println("2. Remove food");
     System.out.println("3. Take out an item");
@@ -21,15 +21,18 @@ public class UIPrintHandler {
     System.out.println("2. pieces");
   }
 
-  public void PrintFridge(Iterator<FoodItem> carIterator) {
-    while (carIterator.hasNext()) {
-      FoodItem food = carIterator.next();
+  public void printDisplay(Iterator<FoodItem> foodItemIterator) {
+    while (foodItemIterator.hasNext()) {
+      FoodItem food = foodItemIterator.next();
       System.out.println("Name: " + food.getNameOfFood() +
           " | Amount: " + food.getAmount() + " " + food.getUnits() +
-          " | Total Price: " + (food.getPricePerUnit() * food.getAmount()) +
+          " | Price: " + (food.getPricePerUnit() * food.getAmount()) +
           " | Expiry: " + food.getExpirationDate());
     }
   }
 
+  public void exit(){
+    System.out.println("Goodbye...");
+  }
 
 }

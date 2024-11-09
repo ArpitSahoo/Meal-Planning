@@ -30,6 +30,10 @@ public class FoodItem {
     setExpirationDate(expirationDate);
   }
 
+  public FoodItem(String name) {
+    this.nameOfFood = name;
+  }
+
   /** Mutates the <code>nameOfFood</code>.
    *
    * @return nameOfFood
@@ -39,7 +43,7 @@ public class FoodItem {
   }
 
   /**
-   * Mutate the <code>nameOfFood</code>.
+   * Mutates the <code>nameOfFood</code>.
    *
    * @param nameOfFood the FoodItem's name.
    * @throws IllegalArgumentException if nameOfFood null, empty or blank.
@@ -52,7 +56,7 @@ public class FoodItem {
   }
 
   /**
-   * Return the amount.
+   * Mutates the amount.
    *
    * @return the amount of FoodItem.
    */
@@ -137,6 +141,7 @@ public class FoodItem {
     }
     this.pricePerUnit = pricePerUnit;
   }
+
 
 
 }

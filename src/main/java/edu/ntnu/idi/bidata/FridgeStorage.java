@@ -11,35 +11,40 @@ public class FridgeStorage {
 
   public FridgeStorage() {
     fridgeRegister = new HashMap<>();
-  }
-
-  public Map<String, FoodItem> getItems() {
-    return fridgeRegister;
+    init();
   }
 
 
-  public boolean addFoodItem(FoodItem foodToBeAdded){
+  public boolean addFoodItem(FoodItem foodToBeAdded) {
     boolean wasFoodFound = false;
-    if(fridgeRegister.containsKey(foodToBeAdded.getNameOfFood())){
+    if (fridgeRegister.containsKey(foodToBeAdded.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeAdded.getNameOfFood()).getAmount();
       float newAmount = oldAmount + foodToBeAdded.getAmount();
       fridgeRegister.get(foodToBeAdded.getNameOfFood()).setAmount(newAmount);
       wasFoodFound = true;
-    }
-    else{
+    } else {
       fridgeRegister.put(foodToBeAdded.getNameOfFood(), foodToBeAdded);
     }
     return wasFoodFound;
   }
 
-  public boolean FoodToTake(FoodItem foodToBeTaken){
+  public boolean removeFoodItem(FoodItem foodToBeRemoved) {
     boolean wasFoodFound = false;
-    if(fridgeRegister.containsKey(foodToBeTaken.getNameOfFood())){
+    if (fridgeRegister.containsKey(foodToBeRemoved.getNameOfFood())) {
+      fridgeRegister.remove(foodToBeRemoved.getNameOfFood());
+      wasFoodFound = true;
+    }
+    return wasFoodFound;
+  }
+
+  public boolean FoodToTake(FoodItem foodToBeTaken) {
+    boolean wasFoodFound = false;
+    if (fridgeRegister.containsKey(foodToBeTaken.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount();
       float newAmount = oldAmount - foodToBeTaken.getAmount();
       fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
       wasFoodFound = true;
-      if(fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount() >= 0){
+      if (fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount() >= 0) {
         fridgeRegister.remove(foodToBeTaken.getNameOfFood());
       }
     }
@@ -47,16 +52,7 @@ public class FridgeStorage {
     return wasFoodFound;
   }
 
-  public boolean removeFoodItem(FoodItem foodToBeRemoved){
-    boolean wasFoodFound = false;
-    if(fridgeRegister.containsKey(foodToBeRemoved.getNameOfFood())){
-      fridgeRegister.remove(foodToBeRemoved.getNameOfFood());
-      return true;
-    }
-    return wasFoodFound;
-  }
-
-  public Iterator<FoodItem> sortedList(){
+  public Iterator<FoodItem> sortedList() {
     return fridgeRegister.values().stream().sorted().toList().iterator();
   }
 
@@ -84,11 +80,18 @@ public class FridgeStorage {
         totalExpiredCost += item.getAmount() * item.getPricePerUnit();
       }
     }
-
     if (hasExpiredItems) {
       System.out.printf("Total cost of expired items: %.2f kr%n", totalExpiredCost);
     } else {
       System.out.println("No expired food items found.");
     }
+  }
+
+  private void init() {
+    LocalDate expirationDate = LocalDate.of(2025, 10, 20);
+    FoodItem apple = new FoodItem("Apple", 20f, "kg", 5.0, expirationDate);
+    FoodItem banana = new FoodItem("Banana", 10f, "kg", 5.0, expirationDate);
+    fridgeRegister.put(apple.getNameOfFood(), apple);
+    fridgeRegister.put(banana.getNameOfFood(), banana);
   }
 }
