@@ -44,7 +44,7 @@ public class FridgeStorage {
       float newAmount = oldAmount - foodToBeTaken.getAmount();
       fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
       wasFoodFound = true;
-      if (fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount() >= 0) {
+      if (fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount() <= 0) {
         fridgeRegister.remove(foodToBeTaken.getNameOfFood());
       }
     }

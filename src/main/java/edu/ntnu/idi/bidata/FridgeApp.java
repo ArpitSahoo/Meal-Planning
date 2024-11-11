@@ -11,6 +11,8 @@ package edu.ntnu.idi.bidata;
  */
 
 
-public class Main {
+public class FridgeApp {
+  public static void main(String[] args){
 
+  }
 }

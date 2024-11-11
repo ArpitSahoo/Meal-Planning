@@ -18,6 +18,7 @@ public class UserInterface {
     fridgeRegister = new FridgeStorage();
     scanner = new Scanner(in);
     print = new UIPrintHandler();
+    start();
   }
 
   public void start(){
