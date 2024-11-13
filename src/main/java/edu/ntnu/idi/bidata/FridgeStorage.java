@@ -7,7 +7,6 @@ import java.util.Map;
 
 public class FridgeStorage {
   private final Map<String, FoodItem> fridgeRegister;
-  private UIPrintHandler printHandler;
 
   public FridgeStorage() {
     fridgeRegister = new HashMap<>();
@@ -52,10 +51,6 @@ public class FridgeStorage {
     return wasFoodFound;
   }
 
-  public Iterator<FoodItem> sortedList() {
-    return fridgeRegister.values().stream().sorted().toList().iterator();
-  }
-
 
   public void displayExpiredItemsAndTotalCost() {
     LocalDate currentDate = LocalDate.now();
@@ -93,5 +88,13 @@ public class FridgeStorage {
     FoodItem banana = new FoodItem("Banana", 10f, "kg", 5.0, expirationDate);
     fridgeRegister.put(apple.getNameOfFood(), apple);
     fridgeRegister.put(banana.getNameOfFood(), banana);
+  }
+
+  /**
+   * Gets an iterator over the HashMap entries
+   * @return fridgeRegister.entrySet().iterator();
+   */
+  public Iterator<Map.Entry<String, FoodItem>> getIterator() {
+    return fridgeRegister.entrySet().iterator();
   }
 }

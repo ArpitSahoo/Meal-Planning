@@ -30,8 +30,13 @@ public class FoodItem {
     setExpirationDate(expirationDate);
   }
 
-  public FoodItem(String name) {
-    this.nameOfFood = name;
+  /**
+   * A constructor for the class FoodItem.
+   *
+   * @param nameOfFood     the name of FoodItem.
+   */
+  public FoodItem(String nameOfFood) {
+    setNameOfFood(nameOfFood);
   }
 
   /** Mutates the <code>nameOfFood</code>.

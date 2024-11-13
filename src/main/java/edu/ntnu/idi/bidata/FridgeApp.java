@@ -2,6 +2,7 @@ package edu.ntnu.idi.bidata;
 
 
 
+
 /**
  * The main starting point of your application. Let this class create the
  * instance of your main-class that starts your application.
@@ -12,7 +13,15 @@ package edu.ntnu.idi.bidata;
 
 
 public class FridgeApp {
-  public static void main(String[] args){
+  private static UserInterface ui;
 
+  public static void main(String[] args){
+    try{
+      ui = new UserInterface();
+      ui.printFridge();
+    }
+    catch(IllegalArgumentException illegalArgument) {
+      System.out.println(illegalArgument.getMessage());
+    }
   }
 }

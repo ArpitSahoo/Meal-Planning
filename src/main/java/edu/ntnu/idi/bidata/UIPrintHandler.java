@@ -1,6 +1,7 @@
 package edu.ntnu.idi.bidata;
 
 import java.util.Iterator;
+import java.util.Map;
 
 public class UIPrintHandler {
   public void choiceScreen() {
@@ -15,24 +16,37 @@ public class UIPrintHandler {
   }
 
   public void choiceOfUnits() {
-    System.out.println("Choose an unit (1, 2, 3 or 4):");
+    System.out.println("Choose an unit (1, 2 or 3):");
     System.out.println("1. kg");
     System.out.println("2. liter");
-    System.out.println("2. pieces");
+    System.out.println("3. pieces");
   }
 
-  public void printDisplay(Iterator<FoodItem> foodItemIterator) {
-    while (foodItemIterator.hasNext()) {
-      FoodItem food = foodItemIterator.next();
-      System.out.println("Name: " + food.getNameOfFood() +
-          " | Amount: " + food.getAmount() + " " + food.getUnits() +
-          " | Price: " + (food.getPricePerUnit() * food.getAmount()) +
-          " | Expiry: " + food.getExpirationDate());
+  public void displayFoodPrint(){
+    System.out.println("=====Fridge Content=====");
+  }
+
+  /**
+   * Prints all food items currently stored in the fridge.
+   *
+   * <p>Iterates over each food item in the fridge and prints its details,
+   * including name, amount, unit, total price, and expiration date.</p>
+   *
+   * @param foodIterator an iterator over the entries of food items stored in the fridge
+   */
+  public void printFridge(Iterator<Map.Entry<String, FoodItem>> foodIterator) { while (foodIterator.hasNext()) {
+    Map.Entry<String, FoodItem> entry = foodIterator.next();
+    FoodItem food = entry.getValue();
+    System.out.println("Name: " + food.getNameOfFood()
+        + " | Amount: " + food.getAmount() + " " + food.getUnits()
+        + " | Total Price: " + food.getPricePerUnit()
+        + " | Expiry: " + food.getExpirationDate());
     }
   }
 
   public void exit(){
     System.out.println("Goodbye...");
   }
+
 
 }
