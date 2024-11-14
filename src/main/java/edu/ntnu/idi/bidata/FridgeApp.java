@@ -9,15 +9,13 @@ package edu.ntnu.idi.bidata;
 public class FridgeApp {
 
   /**
-   * Main method to initialize and run the fridge management application.
+   * The main entry point for the fridge management application.
    *
-   * <p>This method creates an instance of {@link UserInterface} and
-   * calls its {@code printFridge} method to display all food items in the fridge.
-   * It handles potential {@link IllegalArgumentException} exceptions by
-   * displaying an error message if an argument is invalid.
-   * </p>
+   * <p>This method creates an instance of the {@link UserInterface} class and starts the user interface.
+   * After starting the UI, it prints the fridge contents. If any {@link IllegalArgumentException}
+   * is thrown, the error message is displayed.</p>
    *
-   * @param args command-line arguments (not used in this application)
+   * @param args command-line arguments (not used in this method)
    */
   public static void main(String[] args){
     try{
