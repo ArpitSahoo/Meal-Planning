@@ -1,8 +1,13 @@
+/**
+ * The {@code UserInterface} class handles user interactions for managing the fridge.
+ *
+ * <p>This class provides methods to add, remove, take out, and display food items, as well as manage
+ * expired food items. It presents a menu to the user, processes commands, and interfaces with {@code FridgeStorage}
+ * to update and retrieve fridge data. It also uses {@code UIPrintHandler} for displaying output to the user.</p>
+ */
 package edu.ntnu.idi.bidata;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
@@ -16,9 +21,14 @@ public class UserInterface {
   private final UIPrintHandler print;
 
   /**
-   * A constructor for the class FoodItem.
-   * Initializes the fridge register, scanner, and print handler, then starts the interface.
+   * Constructs a {@code UserInterface} instance and initializes the necessary components.
+   *
+   * <p>This constructor creates an instance of {@code FridgeStorage} to manage the fridge's contents,
+   * initializes a {@code Scanner} for user input, and sets up a {@code UIPrintHandler} for output.
+   * After the initialization, it starts the user interface by calling the {@code start} method.
+   * </p>
    */
+
   public UserInterface(){
     fridgeRegister = new FridgeStorage();
     scanner = new Scanner(in);
@@ -27,13 +37,24 @@ public class UserInterface {
   }
 
   /**
-   * Starts the user interface loop.
-   * <p>
-   *   This method continuously displays the choice screen till the user decides to exit the loop.
-   *   The user has several actions to choose; such as adding food, removing food, taking out the a fixed amount,
-   *   getting a full display of the fridge, display of all the expired food and exiting the application.
+   * Starts the main loop of the fridge management application.
+   *
+   * <p>This method presents a choice menu to the user and processes commands in a loop until
+   * the user chooses to exit. Based on the user's input, it can add a food item, remove a food item,
+   * take out a specified quantity of food, display expired food, print all fridge contents, or exit
+   * the application. If an invalid choice is entered, an error message is displayed.
    * </p>
-   * TODO needs to be corrected
+   *
+   * <p>Menu options:
+   * <ul>
+   *   <li><b>1:</b> Add a food item to the fridge</li>
+   *   <li><b>2:</b> Remove a food item by name</li>
+   *   <li><b>3:</b> Take out a specified amount of a food item</li>
+   *   <li><b>4:</b> Display all expired food items</li>
+   *   <li><b>5:</b> Print the contents of the fridge</li>
+   *   <li><b>6:</b> Exit the application</li>
+   * </ul>
+   * </p>
    */
   public void start(){
     boolean running = true;
@@ -53,10 +74,9 @@ public class UserInterface {
           takeOutFoodItem();
           break;
         case "4":
-          fridgeRegister.displayExpiredItemsAndTotalCost();
+          displayExpiredFood();
           break;
         case "5":
-          print.displayFoodPrint();
           printFridge();
           break;
         case "6":
@@ -64,68 +84,50 @@ public class UserInterface {
           print.exit();
           break;
         default:
-          System.out.println("Invalid unit choice. Food item not added.");
+         print.invalidChoice();
       }
     }
   }
 
-
   /**
    * Adds a new food item to the fridge with user-specified details.
    *
-   * <p>This method prompts the user to enter the name, price per unit, expiration date,
-   * amount, and unit of a food item through the console. It validates the expiration
-   * date format (yyyy-MM-dd) using a try-catch block and ensures a valid unit choice.
-   * If all inputs are valid, the food item is added to the {@link FridgeStorage}.
+   * <p>This method prompts the user to input details about a food item, including
+   * the name, price per unit, amount, expiration date, and unit. After collecting
+   * and validating each input, a {@link FoodItem} object is created and added to
+   * the {@code fridgeRegister}.
    * </p>
    *
-   * <p>Input Details:
+   * <p>User inputs:
    * <ul>
-   *   <li><b>Name:</b> The name of the food item</li>
-   *   <li><b>Price per Unit:</b> The total price of the food item</li>
+   *   <li><b>Name of Food:</b> The name of the food item</li>
+   *   <li><b>Price per Unit:</b> The cost per unit of the food item</li>
+   *   <li><b>Amount:</b> The quantity of the food item</li>
    *   <li><b>Expiration Date:</b> The expiration date in yyyy-MM-dd format</li>
-   *   <li><b>Amount:</b> The quantity of the food item (numeric)</li>
-   *   <li><b>Unit:</b> The unit type chosen from a list of predefined options</li>
+   *   <li><b>Unit:</b> The unit of measure, chosen from predefined options (kg, liter, stk)</li>
    * </ul>
    * </p>
    *
-   * <p>If an invalid date format is entered, the user is prompted to re-enter it.
-   * Additionally, if an invalid unit choice is entered, the item will not be added.
+   * <p>If the expiration date or unit selection is invalid, the user is prompted
+   * to re-enter the information. The food item is only added to the fridge if
+   * all input values are valid.
    * </p>
-   *
-   * @throws DateTimeParseException if the expiration date format is incorrect
    */
-
   public void addFood(){
-    System.out.print("Enter food name: ");
+    print.nameOfFoodOutput();
     String nameOfFood = scanner.nextLine();
 
-    System.out.print("Enter total price: ");
+    print.pricePerUnitOutput();
     double price = scanner.nextDouble();
     scanner.nextLine();
 
-    LocalDate expirationDate = null;
-    boolean validDate = false;
-
-    while (!validDate) {
-      System.out.print("Enter expiration date (yyyy-MM-dd): ");
-      String expiration = scanner.next();
-      scanner.nextLine();
-      try {
-        expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd")); // (OpenAI, 2024)
-        validDate = true;
-      } catch (Exception e) {
-        System.out.println("Invalid date format. Please enter in the format yyyy-MM-dd.");
-        validDate = false;
-      }
-    }
-
-    System.out.print("Enter quantity (numeric value): ");
+    print.foodAmountOutput();
     Float amount = scanner.nextFloat();
     scanner.nextLine();
 
-    print.choiceOfUnits();
+    LocalDate expirationDate = getValidExpirationDate();
 
+    print.choiceOfUnits();
     String unitChoice = scanner.nextLine();
 
     String units = "";
@@ -140,7 +142,7 @@ public class UserInterface {
         units = "stk";
         break;
       default:
-        System.out.println("Invalid unit choice. Food item not added.");
+        print.invalidUnitChoice();
     }
 
     FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
@@ -148,45 +150,92 @@ public class UserInterface {
   }
 
   /**
-   * Method that removes food from fridge
+   * Prompts the user to enter an expiration date and validates its format.
+   *
+   * <p>This method continually prompts the user to enter a date until a valid
+   * expiration date is provided in the format yyyy-MM-dd. If the date format is invalid,
+   * an error message is displayed, and the user is prompted to try again.
+   * </p>
+   *
+   * @return a valid {@link LocalDate} object representing the expiration date
+   */
+  private LocalDate getValidExpirationDate(){
+    LocalDate expirationDate = null; // (OpenAI, 2024)
+    boolean validDate = false;
+    while (!validDate) {
+      print.expirationDateOutput();
+      String expiration = scanner.next();
+      scanner.nextLine();
+      try {
+        expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd")); // (OpenAI, 2024)
+        validDate = true;
+      } catch (Exception e) {
+        print.invalidExpirationDateOutput();
+      }
+    }
+    return expirationDate;
+  }
+
+  /**
+   * Removes a food item from the fridge by name.
+   *
+   * <p>This method prompts the user to enter the name of a food item to remove. If the
+   * item exists in the fridge, it is removed, and a success message is displayed.
+   * Otherwise, an error message is shown to indicate that the item was not found.
+   * </p>
    */
   public void removeFoodItem() {
-    System.out.println("Enter the name of the food item to remove:");
+    print.removeFoodOutput();
     String name = scanner.nextLine();
     FoodItem item = new FoodItem(name);
     boolean removed = fridgeRegister.removeFoodItem(item);
     if (removed) {
-      System.out.println("Food item removed.");
+      print.foodRemovedOutput();
     } else {
-      System.out.println("Food item not found.");
+      print.foodNotRemovedOutput();
     }
   }
 
   /**
-   * Method that takes out food item
+   * Takes out a fixed amount from the fridge by name.
+   * <p>This method prompts the user to enter the name of a food item to take out. If the
+   * item exists in the fridge, the amount is taken out and a success message is displayed.
+   * Otherwise, an error message is shown to indicate that the item was not found.
+   * </p>
    */
   public void takeOutFoodItem(){
-    System.out.println("Enter the name of the food item to remove:");
+    print.foodToTakeOutput();
     String name = scanner.nextLine();
     FoodItem item = new FoodItem(name);
-    fridgeRegister.FoodToTake(item);
-    boolean takenOut = fridgeRegister.FoodToTake(item);
+    fridgeRegister.foodToTake(item);
+    boolean takenOut = fridgeRegister.foodToTake(item);
     if (takenOut) {
-      System.out.println("Food item taken out.");
+      print.foodTakenOutput();
     } else {
-      System.out.println("Food item not found.");
+      print.foodNotTakenOutput();
     }
   }
 
   /**
    * Iterates through the fridge and prints the fridge content.
-   * <p> * This method retrieves an iterator from the fridge register and passes it to the print handler
+   * <p> This method retrieves an iterator from {@link FridgeStorage} and passes it to the {@link UIPrintHandler}.
    * to print the details of each food item stored in the fridge.
    * </p>
    */
   public void printFridge() {
-    Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator(); print.printFridge(iterator);
+    Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
+    print.printFridge(iterator);
   }
 
+  /**
+   * Iterates through the fridge and prints the fridge content.
+   * <p> This method retrieves an iterator from the {@link FridgeStorage} and passes it to the {@link UIPrintHandler}.
+   * to print the details of each expired food item stored in the fridge.
+   * </p>
+   */
+  public void displayExpiredFood(){
+    Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
+    print.printExpiredFood(iterator);
+  }
 }
 
