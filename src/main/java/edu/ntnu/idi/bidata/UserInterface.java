@@ -77,7 +77,7 @@ public class UserInterface {
           displayExpiredFood();
           break;
         case "5":
-          printFridge();
+          printFridge2();
           break;
         case "6":
           running = false;
@@ -224,7 +224,7 @@ public class UserInterface {
    */
   public void printFridge() {
     Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
-    print.printFridge(iterator);
+    print.printItFridge(iterator);
   }
 
   /**
@@ -237,5 +237,11 @@ public class UserInterface {
     Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
     print.printExpiredFood(iterator);
   }
+
+  public void printFridge2(){
+    Iterator<String> sortedNames = fridgeRegister.getIteratorA();
+    print.printFood(sortedNames);
+  }
+
 }
 

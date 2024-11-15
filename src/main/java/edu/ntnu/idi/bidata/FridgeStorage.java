@@ -110,4 +110,11 @@ public class FridgeStorage {
   public Iterator<Map.Entry<String, FoodItem>> getIterator() {
     return fridgeRegister.entrySet().iterator();
   }
+
+  public Iterator<String> getIteratorA(){
+    return fridgeRegister.keySet().stream().sorted().iterator();
+  }
+
+
+
 }

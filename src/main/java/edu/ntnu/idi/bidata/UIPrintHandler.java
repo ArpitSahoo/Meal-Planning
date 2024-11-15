@@ -65,7 +65,7 @@ public class UIPrintHandler {
    *
    * @param foodIterator an iterator over the entries of food items stored in the fridge
    */
-  public void printFridge(Iterator<Map.Entry<String, FoodItem>> foodIterator) {
+  public void printItFridge(Iterator<Map.Entry<String, FoodItem>> foodIterator) {
     double totalPrice = 0;
     while (foodIterator.hasNext()) {
       Map.Entry<String, FoodItem> entry = foodIterator.next();
@@ -112,6 +112,12 @@ public class UIPrintHandler {
       System.out.printf("Total cost of expired items: %.2f kr%n", totalPrice);
     } else {
       System.out.println("No expired food items found.");
+    }
+  }
+
+  public void printFood(Iterator<String> foodIterator){
+    while (foodIterator.hasNext()) {
+      System.out.println(foodIterator.next());
     }
   }
 
