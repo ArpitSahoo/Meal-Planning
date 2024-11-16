@@ -1,20 +1,20 @@
-/**
- * The {@code UserInterface} class handles user interactions for managing the fridge.
- *
- * <p>This class provides methods to add, remove, take out, and display food items, as well as manage
- * expired food items. It presents a menu to the user, processes commands, and interfaces with {@code FridgeStorage}
- * to update and retrieve fridge data. It also uses {@code UIPrintHandler} for displaying output to the user.</p>
- */
 package edu.ntnu.idi.bidata;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Scanner;
-
 import static java.lang.System.in;
 
-
+/**
+ * The {@code UserInterface} class handles user interactions for managing the fridge.
+ *
+ * <p>This class provides methods to add, remove, take out
+ * and display food items, as well as manage expired food items.
+ * It presents a menu tothe user, processes commands, and interfaces with {@code FridgeStorage}
+ * to update and retrieve fridge data. It also uses {@code UIPrintHandler} for displaying output to the user.</p>
+ */
 public class UserInterface {
   private final FridgeStorage fridgeRegister;
   private final Scanner scanner;
@@ -29,10 +29,11 @@ public class UserInterface {
    * </p>
    */
 
-  public UserInterface(){
+  public UserInterface() {
     fridgeRegister = new FridgeStorage();
     scanner = new Scanner(in);
     print = new UIPrintHandler();
+    printFridge();
     start();
   }
 
@@ -55,15 +56,17 @@ public class UserInterface {
    *   <li><b>6:</b> Exit the application</li>
    * </ul>
    * </p>
+   * <p>
+   * TODO Needs to be updated
    */
-  public void start(){
+  public void start() {
     boolean running = true;
-    while(running){
+    while (running) {
       print.choiceScreen();
 
       String choice = scanner.nextLine();
 
-      switch(choice){
+      switch (choice) {
         case "1":
           addFood();
           break;
@@ -74,17 +77,26 @@ public class UserInterface {
           takeOutFoodItem();
           break;
         case "4":
-          displayExpiredFood();
+          findFoodByName();
           break;
         case "5":
-          printFridge2();
+          displayAllExpiredFood();
           break;
         case "6":
+          findFoodByExpiryDate();
+          break;
+        case "7":
+          printFridge();
+          break;
+        case "8":
+          printFridgeAlphabetical();
+          break;
+        case "9":
           running = false;
           print.exit();
           break;
         default:
-         print.invalidChoice();
+          print.invalidChoice();
       }
     }
   }
@@ -113,7 +125,7 @@ public class UserInterface {
    * all input values are valid.
    * </p>
    */
-  public void addFood(){
+  public void addFood() {
     print.nameOfFoodOutput();
     String nameOfFood = scanner.nextLine();
 
@@ -159,7 +171,7 @@ public class UserInterface {
    *
    * @return a valid {@link LocalDate} object representing the expiration date
    */
-  private LocalDate getValidExpirationDate(){
+  private LocalDate getValidExpirationDate() {
     LocalDate expirationDate = null; // (OpenAI, 2024)
     boolean validDate = false;
     while (!validDate) {
@@ -192,27 +204,30 @@ public class UserInterface {
     if (removed) {
       print.foodRemovedOutput();
     } else {
-      print.foodNotRemovedOutput();
+      print.foodNotFoundOutput();
     }
   }
 
   /**
    * Takes out a fixed amount from the fridge by name.
-   * <p>This method prompts the user to enter the name of a food item to take out. If the
+   * <p>This method prompts the user to enter the name and amount of a food item to take out. If the
    * item exists in the fridge, the amount is taken out and a success message is displayed.
    * Otherwise, an error message is shown to indicate that the item was not found.
    * </p>
    */
-  public void takeOutFoodItem(){
+  public void takeOutFoodItem() {
     print.foodToTakeOutput();
-    String name = scanner.nextLine();
-    FoodItem item = new FoodItem(name);
-    fridgeRegister.foodToTake(item);
-    boolean takenOut = fridgeRegister.foodToTake(item);
-    if (takenOut) {
+    String nameOfFood = scanner.nextLine();
+
+    print.amountToTakeOutput();
+    Float amount = scanner.nextFloat();
+    scanner.nextLine();
+    FoodItem item = new FoodItem(nameOfFood, amount);
+    boolean taken = fridgeRegister.foodToTake(item);
+    if (taken) {
       print.foodTakenOutput();
     } else {
-      print.foodNotTakenOutput();
+      print.foodNotFoundOutput();
     }
   }
 
@@ -233,14 +248,63 @@ public class UserInterface {
    * to print the details of each expired food item stored in the fridge.
    * </p>
    */
-  public void displayExpiredFood(){
+  public void displayAllExpiredFood() {
     Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
     print.printExpiredFood(iterator);
   }
 
-  public void printFridge2(){
-    Iterator<String> sortedNames = fridgeRegister.getIteratorA();
-    print.printFood(sortedNames);
+  /**
+   * Finds the food by its name.
+   * <p>
+   * Checks if the food is in the fridge. If not found in the fridge it prints out that it is not in the fridge else
+   * it prints out that it is in the fridge.
+   * UserInput:
+   *    <ul>
+   *      <li><b>Name of Food:</b> The name of the food item</li>
+   *    </ul>
+   * </p>
+   */
+  public void findFoodByName() {
+    print.nameOfFoodOutput();
+    String name = scanner.nextLine();
+    FoodItem item = fridgeRegister.searchFoodByName(name);
+    if (item != null) { //recommended by (OpenAI, 2024)
+      print.printLocatedFood(item);
+    } else {
+      print.foodNotFoundOutput();
+    }
+  }
+
+  /**
+   * Iterates through the fridge and prints the fridge content.
+   * <p> This method retrieves an iterator from the {@link FridgeStorage} and passes it to the {@link UIPrintHandler}.
+   * to print food in an alphabetical order.
+   * </p>
+   */
+  public void printFridgeAlphabetical() {
+    Iterator<String> sortedNames = fridgeRegister.getIteratorAlphabetical();
+    print.printFoodAlphabetical(sortedNames);
+  }
+
+  /**
+   * Finds the food by name
+   * <p> UserInput:
+   *    <ul>
+   *      <li><b>Expiration date  of Food:</b> The name of the food item</li>
+   *    </ul>
+   *    Checks if there are food that goes out in that expiration date in the fridge. If not found in the fridge it
+   *    prints out that it is not in the fridge else
+   *    it prints out that it is in the fridge.
+   * </p>
+   */
+  public void findFoodByExpiryDate() {
+    LocalDate expirationDate = getValidExpirationDate();
+    FoodItem item = fridgeRegister.searchFoodByDate(expirationDate);
+    if (item != null) {
+      print.printLocatedFood(item);
+    } else {
+      print.foodNotFoundOutput();
+    }
   }
 
 }
