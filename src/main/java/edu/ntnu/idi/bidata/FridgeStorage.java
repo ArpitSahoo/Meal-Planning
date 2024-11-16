@@ -73,13 +73,57 @@ public class FridgeStorage {
     if (fridgeRegister.containsKey(foodToBeTaken.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount();
       float newAmount = oldAmount - foodToBeTaken.getAmount();
-      fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
-      wasFoodFound = true;
-      if (fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount() <= 0) {
+      if (newAmount <= 0) {
         fridgeRegister.remove(foodToBeTaken.getNameOfFood());
       }
+      else{
+        fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
+      }
+      wasFoodFound = true;
     }
     return wasFoodFound;
+  }
+
+  /**
+   * searches a specific food by its name.
+   * @param foodName name of the food.
+   * @return fridgeRegister.get(foodName);
+   */
+  public FoodItem searchFoodByName(String foodName) {
+    return fridgeRegister.get(foodName);
+  }
+
+  /**
+   * Searches for a food item by its expiration date.
+   * @param expirationDate expiration date of the food.
+   * @return The FoodItem with the specified expiration date, or null if no such item is found.
+   */
+  public FoodItem searchFoodByDate(LocalDate expirationDate) {
+    for (Map.Entry<String, FoodItem> entry : fridgeRegister.entrySet()){
+      FoodItem food = entry.getValue();
+      if (food.getExpirationDate().equals(expirationDate)) {
+        return food;
+      }
+    }
+    return null;
+  }
+
+
+
+  /**
+   * Gets an iterator over the HashMap entries
+   * @return fridgeRegister.entrySet().iterator();
+   */
+  public Iterator<Map.Entry<String, FoodItem>> getIterator() {
+    return fridgeRegister.entrySet().iterator();
+  }
+
+  /**
+   * Gets an iterator over the HashMap entries.
+   * @return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
+   */
+  public Iterator<String> getIteratorAlphabetical(){
+    return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
   }
 
   /**
@@ -91,29 +135,18 @@ public class FridgeStorage {
    * </p>
    */
   private void init() {
-    LocalDate expirationDate = LocalDate.of(2025, 2, 20);
+    LocalDate expirationDate = LocalDate.of(2025, 12, 12);
     LocalDate expirationDate2 = LocalDate.of(2025, 1, 20);
-    FoodItem apple = new FoodItem("Apple", 20f, "kg", 5.0, expirationDate);
-    FoodItem banana = new FoodItem("Banana", 10f, "kg", 5.0, expirationDate);
-    FoodItem milk = new FoodItem("Milk", 2f, "kg", 20.0, expirationDate2);
-    FoodItem chicken = new FoodItem("Chicken", 1f, "kg", 140.0, expirationDate2);
+    FoodItem apple = new FoodItem("apple", 20f, "kg", 5.0, expirationDate);
+    FoodItem banana = new FoodItem("banana", 10f, "kg", 5.0, expirationDate);
+    FoodItem milk = new FoodItem("milk", 2f, "kg", 20.0, expirationDate2);
+    FoodItem chicken = new FoodItem("chicken", 1f, "kg", 140.0, expirationDate2);
     fridgeRegister.put(apple.getNameOfFood(), apple);
     fridgeRegister.put(banana.getNameOfFood(), banana);
     fridgeRegister.put(milk.getNameOfFood(), milk);
     fridgeRegister.put(chicken.getNameOfFood(), chicken);
   }
 
-  /**
-   * Gets an iterator over the HashMap entries
-   * @return fridgeRegister.entrySet().iterator();
-   */
-  public Iterator<Map.Entry<String, FoodItem>> getIterator() {
-    return fridgeRegister.entrySet().iterator();
-  }
-
-  public Iterator<String> getIteratorA(){
-    return fridgeRegister.keySet().stream().sorted().iterator();
-  }
 
 
 
