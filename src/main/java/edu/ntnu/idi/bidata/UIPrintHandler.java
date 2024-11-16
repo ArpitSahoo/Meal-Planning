@@ -11,12 +11,16 @@ public class UIPrintHandler {
     System.out.println("1. Add food");
     System.out.println("2. Remove food");
     System.out.println("3. Take out an item");
-    System.out.println("4. Check for expired food");
-    System.out.println("5. Display fridge contents");
-    System.out.println("6. Exit");
+    System.out.println("4. Find food by name");
+    System.out.println("5. Display all expired food");
+    System.out.println("6. Check food with a certain expiry date");
+    System.out.println("7. Display fridge contents");
+    System.out.println("8. Display fridge contents in an alphabetical order");
+    System.out.println("9. Exit");
     System.out.println("Choose a following number: ");
   }
 
+  //TODO organize this
   public void invalidChoice(){
     System.out.println("Invalid choice. Food item not added.");
   }
@@ -67,15 +71,12 @@ public class UIPrintHandler {
    */
   public void printItFridge(Iterator<Map.Entry<String, FoodItem>> foodIterator) {
     double totalPrice = 0;
+    System.out.println("\n--- Fridge Contents---");
     while (foodIterator.hasNext()) {
       Map.Entry<String, FoodItem> entry = foodIterator.next();
       FoodItem food = entry.getValue();
-      System.out.println("Name: " + food.getNameOfFood()
-          + " | Amount: " + food.getAmount() + " " + food.getUnits()
-          + " | Price per unit: " + food.getPricePerUnit()
-          + " | Expiry: " + food.getExpirationDate()
-      );
-      totalPrice = food.getAmount() * food.getPricePerUnit();
+      printLocatedFood(food);
+      totalPrice += food.getAmount() * food.getPricePerUnit();
     }
     System.out.println("The total price is: " + totalPrice +" kr");
 
@@ -94,17 +95,13 @@ public class UIPrintHandler {
   public void printExpiredFood(Iterator<Map.Entry<String, FoodItem>> foodIterator){
     boolean hasExpiredItems = false;
     double totalPrice = 0;
+    LocalDate currentDate = LocalDate.now();
     while (foodIterator.hasNext()){
-      LocalDate currentDate = LocalDate.now();
       Map.Entry<String, FoodItem> entry = foodIterator.next();
       FoodItem food = entry.getValue();
       if(food.getExpirationDate() != null && food.getExpirationDate().isBefore(currentDate)){
         hasExpiredItems = true;
-        System.out.println("Name: " + food.getNameOfFood()
-            + " | Amount: " + food.getAmount() + " " + food.getUnits()
-            + " | Price per unit: " + food.getPricePerUnit()
-            + " | Expiry: " + food.getExpirationDate()
-        );
+        printLocatedFood(food);
         totalPrice = food.getAmount() * food.getPricePerUnit();
       }
     }
@@ -115,7 +112,34 @@ public class UIPrintHandler {
     }
   }
 
-  public void printFood(Iterator<String> foodIterator){
+
+  /**
+   * Prints the details of a specific food item.
+   *
+   * <p>This method displays the details of a provided {@code FoodItem}, including its name, amount,
+   * unit, price per unit, and expiration date.</p>
+   *
+   * @param food the {@code FoodItem} whose details are to be printed
+   */
+  public void printLocatedFood(FoodItem food){
+      System.out.println("Name: " + food.getNameOfFood()
+          + " | Amount: " + food.getAmount() + " " + food.getUnits()
+          + " | Price per unit: " + food.getPricePerUnit()
+          + " | Expiry: " + food.getExpirationDate()
+      );
+  }
+
+
+
+  /**
+   * Prints the names of food items in alphabetical order.
+   *
+   * <p>This method iterates over a provided iterator of food names (assumed to be sorted alphabetically)
+   * and prints each name to the console.</p>
+   *
+   * @param foodIterator an iterator over the sorted names of food items
+   */
+  public void printFoodAlphabetical(Iterator<String> foodIterator){
     while (foodIterator.hasNext()) {
       System.out.println(foodIterator.next());
     }
@@ -125,11 +149,13 @@ public class UIPrintHandler {
     System.out.println("Enter the name of the food item to remove: ");
   }
 
+
+
   public void foodRemovedOutput(){
     System.out.println("Food item removed.");
   }
 
-  public void foodNotRemovedOutput(){
+  public void foodNotFoundOutput(){
     System.out.println("Food item not found.");
   }
 
@@ -137,13 +163,14 @@ public class UIPrintHandler {
     System.out.println("Enter the name of the food item to remove:");
   }
 
+  public void amountToTakeOutput(){
+    System.out.println("Enter the name of the food item to remove:");
+  }
+
   public void foodTakenOutput(){
     System.out.println("Food item taken out.");
   }
 
-  public void foodNotTakenOutput(){
-    System.out.println("Food item not found.");
-  }
   public void exit(){
     System.out.println("Goodbye...");
   }
