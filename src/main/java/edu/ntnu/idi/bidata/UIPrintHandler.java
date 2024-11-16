@@ -130,7 +130,6 @@ public class UIPrintHandler {
   }
 
 
-
   /**
    * Prints the names of food items in alphabetical order.
    *
