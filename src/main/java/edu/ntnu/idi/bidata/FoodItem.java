@@ -39,6 +39,17 @@ public class FoodItem {
     setNameOfFood(nameOfFood);
   }
 
+  public FoodItem(LocalDate expirationDate) {
+    setExpirationDate(expirationDate);
+  }
+
+  public FoodItem(String nameOfFood, Float amount) {
+    setNameOfFood(nameOfFood);
+    setAmount(amount);
+  }
+
+
+
   /** Mutates the <code>nameOfFood</code>.
    *
    * @return nameOfFood
@@ -71,6 +82,7 @@ public class FoodItem {
 
   /**
    * Mutates the <code>amount</code>.
+   *
    * @param amount the FoodItem's amount.
    * @throws IllegalArgumentException if amount is less than 0.1
    */
