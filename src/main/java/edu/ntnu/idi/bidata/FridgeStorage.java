@@ -147,6 +147,8 @@ public class FridgeStorage {
     fridgeRegister.put(chicken.getNameOfFood(), chicken);
   }
 
+  //TODO Remove init() and add it in UI class
+
 
 
 
