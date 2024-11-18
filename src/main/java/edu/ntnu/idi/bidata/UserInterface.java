@@ -256,8 +256,8 @@ public class UserInterface {
   /**
    * Finds the food by its name.
    * <p>
-   * Checks if the food is in the fridge. If not found in the fridge it prints out that it is not in the fridge else
-   * it prints out that it is in the fridge.
+   * Checks if the food is in the fridge. If found in the fridge it prints out that it is in the fridge else
+   * it prints out that it is not in the fridge.
    * UserInput:
    *    <ul>
    *      <li><b>Name of Food:</b> The name of the food item</li>
@@ -287,14 +287,14 @@ public class UserInterface {
   }
 
   /**
-   * Finds the food by name
+   * Finds the food by expiration date
    * <p> UserInput:
    *    <ul>
    *      <li><b>Expiration date  of Food:</b> The name of the food item</li>
    *    </ul>
-   *    Checks if there are food that goes out in that expiration date in the fridge. If not found in the fridge it
+   *    Checks if there are food that goes out in that expiration date in the fridge. If found in the fridge it
    *    prints out that it is not in the fridge else
-   *    it prints out that it is in the fridge.
+   *    it prints out that it is not in the fridge.
    * </p>
    */
   public void findFoodByExpiryDate() {
