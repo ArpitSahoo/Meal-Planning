@@ -12,7 +12,7 @@ import static java.lang.System.in;
  *
  * <p>This class provides methods to add, remove, take out
  * and display food items, as well as manage expired food items.
- * It presents a menu tothe user, processes commands, and interfaces with {@code FridgeStorage}
+ * It presents a menu to the user, processes commands, and interfaces with {@code FridgeStorage}
  * to update and retrieve fridge data. It also uses {@code UIPrintHandler} for displaying output to the user.</p>
  */
 public class UserInterface {
