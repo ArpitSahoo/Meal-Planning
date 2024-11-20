@@ -5,8 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
-import static java.lang.System.in;
 
 /**
  * The {@code UserInterface} class handles user interactions for managing the fridge.
@@ -18,8 +16,8 @@ import static java.lang.System.in;
  */
 public class UserInterface {
   private final FridgeStorage fridgeRegister;
-  private final Scanner scanner;
   private final UIPrintHandler print;
+  private final InputReader input;
 
   /**
    * Constructs a {@code UserInterface} instance and initializes the necessary components.
@@ -32,8 +30,8 @@ public class UserInterface {
    */
 
   public UserInterface() {
+    input = new InputReader();
     fridgeRegister = new FridgeStorage();
-    scanner = new Scanner(in);
     print = new UIPrintHandler();
     init();
     printFridge();
@@ -67,7 +65,7 @@ public class UserInterface {
     while (running) {
       print.choiceScreen();
 
-      String choice = scanner.nextLine();
+      String choice = input.scannerString();
 
       switch (choice) {
         case "1":
@@ -130,23 +128,22 @@ public class UserInterface {
    */
   public void addFood() {
     print.nameOfFoodOutput();
-    String nameOfFood = scanner.nextLine();
+    String nameOfFood = input.scannerString();
 
     print.pricePerUnitOutput();
-    double price = scanner.nextDouble();
-    scanner.nextLine();
+    Double price = input.scannerPriceOfFood();
+
 
     print.foodAmountOutput();
-    Float amount = scanner.nextFloat();
-    scanner.nextLine();
+    Float amount = input.scannerAmountOfFood();
 
     LocalDate expirationDate = getValidExpirationDate();
 
     print.choiceOfUnits();
-    String unitChoice = scanner.nextLine();
+    String units = input.scannerString();
 
-    String units = "";
-    switch (unitChoice) {
+
+    switch (units) {
       case "1":
         units = "kg";
         break;
@@ -179,8 +176,7 @@ public class UserInterface {
     boolean validDate = false;
     while (!validDate) {
       print.expirationDateOutput();
-      String expiration = scanner.next();
-      scanner.nextLine();
+      String expiration = input.scannerString();
       try {
         expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd")); // (OpenAI, 2024)
         validDate = true;
@@ -201,7 +197,7 @@ public class UserInterface {
    */
   public void removeFoodItem() {
     print.removeFoodOutput();
-    String name = scanner.nextLine();
+    String name = input.scannerString();
     FoodItem item = new FoodItem(name);
     boolean removed = fridgeRegister.removeFoodItem(item);
     if (removed) {
@@ -220,11 +216,10 @@ public class UserInterface {
    */
   public void takeOutFoodItem() {
     print.foodToTakeOutput();
-    String nameOfFood = scanner.nextLine();
+    String nameOfFood = input.scannerString();
 
     print.amountToTakeOutput();
-    Float amount = scanner.nextFloat();
-    scanner.nextLine();
+    Float amount = input.scannerAmountOfFood();
     FoodItem item = new FoodItem(nameOfFood, amount);
     boolean taken = fridgeRegister.foodToTake(item);
     if (taken) {
@@ -269,7 +264,7 @@ public class UserInterface {
    */
   public void findFoodByName() {
     print.nameOfFoodOutput();
-    String name = scanner.nextLine();
+    String name = input.scannerString();
     FoodItem item = fridgeRegister.searchFoodByName(name);
     if (item != null) { //recommended by (OpenAI, 2024)
       print.printLocatedFood(item);
