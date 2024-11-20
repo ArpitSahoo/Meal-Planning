@@ -26,11 +26,12 @@ public class InputReader {
     while (!validPrice) {
       print.pricePerUnitOutput();
       String priceInput = scannerString();
-      price = Double.parseDouble(priceInput);
-      if (price < 0) {
-        print.invalidPriceOutput();
-      } else {
+      try{ // tries the scanner method
+        price = Double.parseDouble(priceInput); // converts the string to a float
         validPrice = true;
+      }
+      catch (Exception e){ // catches an exception if the number is 0 or under or not an number.
+        print.invalidPriceOutput();
       }
     }
     return price;
@@ -52,10 +53,10 @@ public class InputReader {
     while (!validDate) {
       print.expirationDateOutput();
       String expiration = scannerString();
-      try {
+      try { // // tries the scanner method
         expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd")); // (OpenAI, 2024)
         validDate = true;
-      } catch (Exception e) {
+      } catch (Exception e) { //catches illegal argument if it is not correct format
         print.invalidExpirationDateOutput();
       }
     }
@@ -63,14 +64,15 @@ public class InputReader {
   }
 
   public Float getValidAmount(){
-    float amount = 0f;
+    float amount = 0f; // amount is 0
     boolean validAmount = false;
     while (!validAmount) {
+      print.foodAmountOutput();
       String priceInput = scannerString();
-      try {
-        amount = Float.parseFloat(priceInput);
+      try { // tries the scanner method
+        amount = Float.parseFloat(priceInput); // converts the string to a float
         validAmount = true;
-      } catch (Exception e){
+      } catch (Exception e){ // catches an exception if the number is 0 or under or not an number.
         print.invalidFoodAmountOutput();
       }
     }
