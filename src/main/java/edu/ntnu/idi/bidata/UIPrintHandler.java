@@ -31,7 +31,7 @@ public class UIPrintHandler {
   }
 
   public void pricePerUnitOutput(){
-    System.out.print("Enter total price per unit: ");
+    System.out.print("Enter the price per unit: ");
   }
 
   public void expirationDateOutput(){
@@ -51,7 +51,7 @@ public class UIPrintHandler {
   }
 
   public void invalidPriceOutput(){
-    System.out.println("Invalid date format. Please enter in the format yyyy-MM-dd.");
+    System.out.println("Invalid Price per unit. Please choose a positive number.");
   }
   public void choiceOfUnits() {
     System.out.println("Choose an unit (1, 2 or 3):");
