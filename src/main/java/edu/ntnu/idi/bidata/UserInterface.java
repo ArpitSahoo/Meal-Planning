@@ -3,6 +3,7 @@ package edu.ntnu.idi.bidata;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import static java.lang.System.in;
@@ -299,13 +300,11 @@ public class UserInterface {
    */
   public void findFoodByExpiryDate() {
     LocalDate expirationDate = getValidExpirationDate();
-    FoodItem item = fridgeRegister.searchFoodByDate(expirationDate);
-    if (item != null) {
-      print.printLocatedFood(item);
-    } else {
-      print.foodNotFoundOutput();
-    }
+    List<FoodItem> item = fridgeRegister.searchByDate(expirationDate);
+    print.printLocatedExpiredFood(item);
   }
+
+
 
 }
 
