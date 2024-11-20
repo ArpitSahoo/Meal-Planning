@@ -10,10 +10,25 @@ public class InputReader {
     scanner = new Scanner(in);
   }
 
-
-  public void scannerNameOfFood(){
+  public String scannerString(){
     String nameOfFood = scanner.nextLine();
+    return nameOfFood.toLowerCase();
   }
+
+  public Double scannerPriceOfFood(){
+    Double price = scanner.nextDouble();
+    scanner.nextLine();
+    return price;
+  }
+
+  public Float scannerAmountOfFood(){
+     Float amount = scanner.nextFloat();
+     scanner.nextLine();
+     return amount;
+  }
+
+
+
 
 
 
