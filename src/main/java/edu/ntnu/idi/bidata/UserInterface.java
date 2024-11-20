@@ -1,7 +1,6 @@
 package edu.ntnu.idi.bidata;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -130,13 +129,12 @@ public class UserInterface {
     print.nameOfFoodOutput();
     String nameOfFood = input.scannerString();
 
-    print.pricePerUnitOutput();
-    Double price = getValidPrice();
+    Double price = input.getValidPrice();
 
     print.foodAmountOutput();
-    Float amount = input.scannerAmountOfFood();
+    Float amount = input.getValidAmount();
 
-    LocalDate expirationDate = getValidExpirationDate();
+    LocalDate expirationDate = input.getValidExpirationDate();
 
     print.choiceOfUnits();
     String units = input.scannerString();
@@ -155,53 +153,18 @@ public class UserInterface {
       default:
         print.invalidUnitChoice();
     }
-
-    FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
-    fridgeRegister.addFoodItem(food);
-  }
-
-  /**
-   * Prompts the user to enter an expiration date and validates its format.
-   *
-   * <p>This method continually prompts the user to enter a date until a valid
-   * expiration date is provided in the format yyyy-MM-dd. If the date format is invalid,
-   * an error message is displayed, and the user is prompted to try again.
-   * </p>
-   *
-   * @return a valid {@link LocalDate} object representing the expiration date
-   */
-  private LocalDate getValidExpirationDate() {
-    LocalDate expirationDate = null; // (OpenAI, 2024)
-    boolean validDate = false;
-    while (!validDate) {
-      print.expirationDateOutput();
-      String expiration = input.scannerString();
-      try {
-        expirationDate = LocalDate.parse(expiration, DateTimeFormatter.ofPattern("yyyy-MM-dd")); // (OpenAI, 2024)
-        validDate = true;
-      } catch (Exception e) {
-        print.invalidExpirationDateOutput();
-      }
+    try{
+      FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
+      fridgeRegister.addFoodItem(food);
     }
-    return expirationDate;
-  }
-
-
-  private Double getValidPrice(){
-    double price = 0.0;
-    boolean validPrice = false;
-    while (!validPrice) {
-      print.pricePerUnitOutput();
-      String priceInput = input.scannerString();
-      price = Double.parseDouble(priceInput);
-      if (price < 0) {
-        print.invalidPriceOutput();
-      } else {
-          validPrice = true;
-      }
+    catch(Exception e){
+      System.out.println(e.getMessage());
     }
-    return price;
+
   }
+
+
+
   /**
    * Removes a food item from the fridge by name.
    *
@@ -232,8 +195,8 @@ public class UserInterface {
   public void takeOutFoodItem() {
     print.foodToTakeOutput();
     String nameOfFood = input.scannerString();
-    print.amountToTakeOutput();
-    Float amount = input.scannerAmountOfFood();
+    print.foodAmountOutput();
+    Float amount = input.getValidAmount();
     FoodItem item = new FoodItem(nameOfFood, amount);
     boolean taken = fridgeRegister.foodToTake(item);
     if (taken) {
@@ -310,7 +273,7 @@ public class UserInterface {
    * </p>
    */
   public void findFoodByExpiryDate() {
-    LocalDate expirationDate = getValidExpirationDate();
+    LocalDate expirationDate = input.getValidExpirationDate();
     List<FoodItem> item = fridgeRegister.searchByDate(expirationDate);
     print.printLocatedExpiredFood(item);
   }
