@@ -1,8 +1,6 @@
 package edu.ntnu.idi.bidata;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 public class FridgeStorage {
   private final Map<String, FoodItem> fridgeRegister;
@@ -86,6 +84,7 @@ public class FridgeStorage {
 
   /**
    * searches a specific food by its name.
+   *
    * @param foodName name of the food.
    * @return fridgeRegister.get(foodName);
    */
@@ -93,33 +92,34 @@ public class FridgeStorage {
     return fridgeRegister.get(foodName);
   }
 
-  /**
-   * Searches for a food item by its expiration date.
-   * @param expirationDate expiration date of the food.
-   * @return The FoodItem with the specified expiration date, or null if no such item is found.
-   */
-  public FoodItem searchFoodByDate(LocalDate expirationDate) {
-    for (Map.Entry<String, FoodItem> entry : fridgeRegister.entrySet()){
+
+
+  public List<FoodItem> searchByDate(LocalDate expirationDate) {
+    List<FoodItem> foodList = new ArrayList<>();
+    for (Map.Entry<String, FoodItem> entry : fridgeRegister.entrySet()) {
       FoodItem food = entry.getValue();
       if (food.getExpirationDate().equals(expirationDate)) {
-        return food;
+        foodList.add(food);
       }
     }
-    return null;
+    return foodList; // Always returns a list, possibly empty.
   }
 
 
-
   /**
-   * Gets an iterator over the HashMap entries
+   * Gets an iterator over the HashMap entries.
+   *
    * @return fridgeRegister.entrySet().iterator();
    */
   public Iterator<Map.Entry<String, FoodItem>> getIterator() {
-    return fridgeRegister.entrySet().iterator();
+    return fridgeRegister.
+            entrySet().
+            iterator();
   }
 
   /**
    * Gets an iterator over the HashMap entries.
+   *
    * @return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
    */
   public Iterator<String> getIteratorAlphabetical(){
