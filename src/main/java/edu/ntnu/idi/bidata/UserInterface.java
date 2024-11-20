@@ -26,6 +26,7 @@ public class UserInterface {
    *
    * <p>This constructor creates an instance of {@code FridgeStorage} to manage the fridge's contents,
    * initializes a {@code Scanner} for user input, and sets up a {@code UIPrintHandler} for output.
+   * It also initializes the {@code init} to add food to the fridge.
    * After the initialization, it starts the user interface by calling the {@code start} method.
    * </p>
    */
@@ -34,6 +35,7 @@ public class UserInterface {
     fridgeRegister = new FridgeStorage();
     scanner = new Scanner(in);
     print = new UIPrintHandler();
+    init();
     printFridge();
     start();
   }
@@ -302,6 +304,29 @@ public class UserInterface {
     LocalDate expirationDate = getValidExpirationDate();
     List<FoodItem> item = fridgeRegister.searchByDate(expirationDate);
     print.printLocatedExpiredFood(item);
+  }
+
+  /**
+   * Initializes the fridge with a set of predefined food items.
+   *
+   * <p>This method creates several {@link FoodItem} objects with predefined values
+   * for name, amount, unit, price, and expiration date. These items are then added
+   * to the {@code fridgeRegister} for use in the application.
+   * </p>
+   */
+  private void init() {
+    FoodItem apple = new FoodItem("apple", 20f, "kg",
+            5.0,LocalDate.of(2025, 12, 12));
+    FoodItem banana = new FoodItem("banana", 10f, "kg",
+            5.0, LocalDate.of(2025, 12, 12));
+    FoodItem milk = new FoodItem("milk", 2f, "kg",
+            20.0, LocalDate.of(2025, 1, 20));
+    FoodItem chicken = new FoodItem("chicken", 1f, "kg",
+            140.0, LocalDate.of(2025, 1, 20));
+    fridgeRegister.addFoodItem(apple);
+    fridgeRegister.addFoodItem(banana);
+    fridgeRegister.addFoodItem(milk);
+    fridgeRegister.addFoodItem(chicken);
   }
 
 
