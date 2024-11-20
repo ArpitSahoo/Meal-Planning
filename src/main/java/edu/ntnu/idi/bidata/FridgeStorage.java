@@ -8,13 +8,11 @@ public class FridgeStorage {
   /**
    * Constructs a {@code FridgeStorage} instance and initializes the fridge register.
    *
-   * <p>This constructor initializes the {@code fridgeRegister} as a new {@link HashMap} and
-   * calls the {@code init} method to add predefined food items to the fridge.
+   * <p>This constructor initializes the {@code fridgeRegister} as a new {@link HashMap}.
    * </p>
    */
   public FridgeStorage() {
     fridgeRegister = new HashMap<>();
-    init();
   }
 
   /**
@@ -126,26 +124,7 @@ public class FridgeStorage {
     return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
   }
 
-  /**
-   * Initializes the fridge with a set of predefined food items.
-   *
-   * <p>This method creates several {@link FoodItem} objects with predefined values
-   * for name, amount, unit, price, and expiration date. These items are then added
-   * to the {@code fridgeRegister} for use in the application.
-   * </p>
-   */
-  private void init() {
-    LocalDate expirationDate = LocalDate.of(2025, 12, 12);
-    LocalDate expirationDate2 = LocalDate.of(2025, 1, 20);
-    FoodItem apple = new FoodItem("apple", 20f, "kg", 5.0, expirationDate);
-    FoodItem banana = new FoodItem("banana", 10f, "kg", 5.0, expirationDate);
-    FoodItem milk = new FoodItem("milk", 2f, "kg", 20.0, expirationDate2);
-    FoodItem chicken = new FoodItem("chicken", 1f, "kg", 140.0, expirationDate2);
-    fridgeRegister.put(apple.getNameOfFood(), apple);
-    fridgeRegister.put(banana.getNameOfFood(), banana);
-    fridgeRegister.put(milk.getNameOfFood(), milk);
-    fridgeRegister.put(chicken.getNameOfFood(), chicken);
-  }
+
 
   //TODO Remove init() and add it in UI class
 
