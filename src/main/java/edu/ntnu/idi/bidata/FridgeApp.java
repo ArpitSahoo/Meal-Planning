@@ -17,10 +17,10 @@ public class FridgeApp {
    *
    * @param args command-line arguments (not used in this method)
    */
+  //TODO update this
   public static void main(String[] args){
     try{
-      UserInterface ui = new UserInterface();
-      ui.printFridge();
+      new UserInterface();
     }
     catch(IllegalArgumentException illegalArgument) {
       System.out.println(illegalArgument.getMessage());
