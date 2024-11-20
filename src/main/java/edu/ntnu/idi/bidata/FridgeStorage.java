@@ -124,8 +124,6 @@ public class FridgeStorage {
     return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
   }
 
-  
-
 
 
 
