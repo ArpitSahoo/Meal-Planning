@@ -46,6 +46,10 @@ public class UIPrintHandler {
     System.out.print("Enter quantity (numeric value): ");
   }
 
+  public void invalidFoodAmountOutput(){
+    System.out.println("Invalid quantity. Please enter in the numeric value.");
+  }
+
   public void invalidPriceOutput(){
     System.out.println("Invalid date format. Please enter in the format yyyy-MM-dd.");
   }
@@ -172,10 +176,6 @@ public class UIPrintHandler {
   }
 
   public void foodToTakeOutput(){
-    System.out.println("Enter the name of the food item to remove:");
-  }
-
-  public void amountToTakeOutput(){
     System.out.println("Enter the name of the food item to remove:");
   }
 
