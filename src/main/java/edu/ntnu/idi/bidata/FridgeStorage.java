@@ -124,9 +124,7 @@ public class FridgeStorage {
     return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
   }
 
-
-
-  //TODO Remove init() and add it in UI class
+  
 
 
 
