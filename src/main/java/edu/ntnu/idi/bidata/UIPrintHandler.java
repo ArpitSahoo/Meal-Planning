@@ -46,6 +46,9 @@ public class UIPrintHandler {
     System.out.print("Enter quantity (numeric value): ");
   }
 
+  public void invalidPriceOutput(){
+    System.out.println("Invalid date format. Please enter in the format yyyy-MM-dd.");
+  }
   public void choiceOfUnits() {
     System.out.println("Choose an unit (1, 2 or 3):");
     System.out.println("1. kg");
@@ -55,10 +58,6 @@ public class UIPrintHandler {
 
   public void invalidUnitChoice(){
     System.out.println("Invalid unit choice. Food item not added.");
-  }
-
-  public void displayFoodPrint(){
-    System.out.println("=====Fridge Content=====");
   }
 
   /**
@@ -129,6 +128,7 @@ public class UIPrintHandler {
           + " | Expiry: " + food.getExpirationDate()
       );
   }
+
 
   public void printLocatedExpiredFood(List<FoodItem> foodList) {
     if (foodList.isEmpty()) { // If statement recommended by ChatGPT.
