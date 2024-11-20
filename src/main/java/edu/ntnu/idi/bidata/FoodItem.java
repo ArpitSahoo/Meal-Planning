@@ -87,8 +87,8 @@ public class FoodItem {
    * @throws IllegalArgumentException if amount is less than 0.1
    */
   public void setAmount(Float amount) throws IllegalArgumentException {
-    if (amount < 0.1) {
-      throw new IllegalArgumentException("Amount can not be under 0");
+    if (amount <= 0) {
+      throw new IllegalArgumentException("Amount can not be 0 or under");
     }
     this.amount = amount;
   }
