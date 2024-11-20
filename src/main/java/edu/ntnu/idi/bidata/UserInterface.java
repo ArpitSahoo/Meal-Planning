@@ -131,7 +131,6 @@ public class UserInterface {
 
     Double price = input.getValidPrice();
 
-    print.foodAmountOutput();
     Float amount = input.getValidAmount();
 
     LocalDate expirationDate = input.getValidExpirationDate();
