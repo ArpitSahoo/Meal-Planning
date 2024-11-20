@@ -131,8 +131,7 @@ public class UserInterface {
     String nameOfFood = input.scannerString();
 
     print.pricePerUnitOutput();
-    Double price = input.scannerPriceOfFood();
-
+    Double price = getValidPrice();
 
     print.foodAmountOutput();
     Float amount = input.scannerAmountOfFood();
@@ -187,6 +186,22 @@ public class UserInterface {
     return expirationDate;
   }
 
+
+  private Double getValidPrice(){
+    double price = 0.0;
+    boolean validPrice = false;
+    while (!validPrice) {
+      print.pricePerUnitOutput();
+      String priceInput = input.scannerString();
+      price = Double.parseDouble(priceInput);
+      if (price < 0) {
+        print.invalidPriceOutput();
+      } else {
+          validPrice = true;
+      }
+    }
+    return price;
+  }
   /**
    * Removes a food item from the fridge by name.
    *
@@ -217,7 +232,6 @@ public class UserInterface {
   public void takeOutFoodItem() {
     print.foodToTakeOutput();
     String nameOfFood = input.scannerString();
-
     print.amountToTakeOutput();
     Float amount = input.scannerAmountOfFood();
     FoodItem item = new FoodItem(nameOfFood, amount);
