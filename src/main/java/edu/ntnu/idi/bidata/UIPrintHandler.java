@@ -1,6 +1,7 @@
 package edu.ntnu.idi.bidata;
 import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class UIPrintHandler {
@@ -128,6 +129,18 @@ public class UIPrintHandler {
           + " | Expiry: " + food.getExpirationDate()
       );
   }
+
+  public void printLocatedExpiredFood(List<FoodItem> foodList) {
+    if (foodList.isEmpty()) { // If statement recommended by ChatGPT.
+      System.out.println("No food items found with the specified expiration date.");
+      return;
+    }
+    System.out.println("Matching food items:");
+    for (FoodItem food : foodList) { //Partially recommended by ChatGPT.
+      printLocatedFood(food);
+    }
+  }
+
 
 
   /**
