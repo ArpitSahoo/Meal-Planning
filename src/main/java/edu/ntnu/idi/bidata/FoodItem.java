@@ -153,8 +153,8 @@ public class FoodItem {
    * @throws IllegalArgumentException if price is a negative number.
    */
   public void setPricePerUnit(Double pricePerUnit) throws IllegalArgumentException {
-    if (pricePerUnit < 0) {
-      throw new IllegalArgumentException("Price can not be a negative input.");
+    if (pricePerUnit <= 0) {
+      throw new IllegalArgumentException("Price can not be a 0 or lower.");
     }
     this.pricePerUnit = pricePerUnit;
   }
