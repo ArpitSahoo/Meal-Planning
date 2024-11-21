@@ -11,11 +11,12 @@ import java.util.Map;
  * The {@code UserInterface} class handles user interactions for managing the fridge.
  *
  * <p>This class provides methods to add, remove, take out
- * and display food items, as well as manage expired food items.
- * It presents a menu to the user, processes commands,
+ * and display food items and manage expired food items.
+ * It presents a menu to the user, processes different commands,
  * and interfaces with {@code FridgeStorage}
  * to update and retrieve fridge data. It also uses
- * {@code UIPrintHandler} for displaying output to the user.</p>
+ * {@code UIPrintHandler} for displaying output to the user.
+ * </p>
  */
 public class UserInterface {
   private final FridgeStorage fridgeRegister;
