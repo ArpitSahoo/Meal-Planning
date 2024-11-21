@@ -1,6 +1,8 @@
 package edu.ntnu.idi.bidata;
 
 import static org.junit.jupiter.api.Assertions.*;
+
+import edu.ntnu.idi.bidata.food.FoodItem;
 import org.junit.jupiter.api.*;
 import java.time.LocalDate; // Import LocalDate
 class FoodItemTest {
