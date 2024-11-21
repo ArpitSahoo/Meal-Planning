@@ -68,7 +68,7 @@ public class UserInterface {
    * </p>
    * TODO Needs to be updated
    */
-  public void start() {
+  private void start() {
     boolean running = true;
     while (running) {
       print.choiceScreen();
@@ -134,7 +134,7 @@ public class UserInterface {
    * all input values are valid.
    * </p>
    */
-  public void addFood() {
+  private void addFood() {
     print.nameOfFoodOutput();
     String nameOfFood = input.scannerString();
 
@@ -180,7 +180,7 @@ public class UserInterface {
    * Otherwise, an error message is shown to indicate that the item was not found.
    * </p>
    */
-  public void removeFoodItem() {
+  private void removeFoodItem() {
     print.removeFoodOutput();
     String name = input.scannerString();
     FoodItem item = new FoodItem(name);
@@ -200,7 +200,7 @@ public class UserInterface {
    * Otherwise, an error message is shown to indicate that the item was not found.
    * </p>
    */
-  public void takeOutFoodItem() {
+  private void takeOutFoodItem() {
     print.foodToTakeOutput();
     String nameOfFood = input.scannerString();
     print.foodAmountOutput();
@@ -222,7 +222,7 @@ public class UserInterface {
    * to print the details of each food item stored in the fridge.
    *</p>
    */
-  public void printFridge() {
+  private void printFridge() {
     Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
     print.printItFridge(iterator);
   }
@@ -235,7 +235,7 @@ public class UserInterface {
    * to print the details of each expired food item stored in the fridge.
    * </p>
    */
-  public void displayAllExpiredFood() {
+  private void displayAllExpiredFood() {
     Iterator<Map.Entry<String, FoodItem>> iterator = fridgeRegister.getIterator();
     print.printExpiredFood(iterator);
   }
@@ -252,7 +252,7 @@ public class UserInterface {
    *    </ul>
    * </p>
    */
-  public void findFoodByName() {
+  private void findFoodByName() {
     print.nameOfFoodOutput();
     String name = input.scannerString();
     FoodItem item = fridgeRegister.searchFoodByName(name);
@@ -271,7 +271,7 @@ public class UserInterface {
    * to print food in an alphabetical order.
    * </p>
    */
-  public void printFridgeAlphabetical() {
+  private void printFridgeAlphabetical() {
     Iterator<String> sortedNames = fridgeRegister.getIteratorAlphabetical();
     print.printFoodAlphabetical(sortedNames);
   }
@@ -289,7 +289,7 @@ public class UserInterface {
    *    it prints out that it is not in the fridge.
    * </p>
    */
-  public void findFoodByExpiryDate() {
+  private void findFoodByExpiryDate() {
     LocalDate expirationDate = input.getValidExpirationDate();
     List<FoodItem> item = fridgeRegister.searchByDate(expirationDate);
     print.printLocatedExpiredFood(item);
