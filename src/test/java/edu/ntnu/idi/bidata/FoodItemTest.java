@@ -7,8 +7,8 @@ import org.junit.jupiter.api.*;
 import java.time.LocalDate; // Import LocalDate
 class FoodItemTest {
 
-    static FoodItem foodItemTest;
-
+    static FoodItem foodItemTest; //Arrange
+    LocalDate expirationDate = LocalDate.of(2025, 10, 20); //Arrange
     /**
      * Arrange
      * act
@@ -18,92 +18,70 @@ class FoodItemTest {
      */
 
     @BeforeEach
-    void BeforeEach()
+    void setUp()
     {
-        System.out.println("Before each");
-        // Arrange
-        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
 
-        foodItemTest = new FoodItem("milk", 7f, "liters", 20.0, expirationDate);
+        foodItemTest = new FoodItem("milk", 7f, "liter", 20.0, expirationDate);
         // Other arrange
     }
 
     @Test
     void testConstructorAndGetters() {
-        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
-        FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
-
-        assertEquals("Milk", food.getNameOfFood());
-        assertEquals(1.0f, food.getAmount());
-        assertEquals("liter", food.getUnits());
-        assertEquals(1.50, food.getPricePerUnit());
-        assertEquals(expirationDate, food.getExpirationDate());
-    }
-
-    @Test
-    void setNameOfFoodTestForEmptyString() {
-        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
-        assertThrows(IllegalArgumentException.class, () -> {
-            new FoodItem("", -1.0f, "liter", 1.50, expirationDate);
-        });
-    }
-
-
-    @Test
-    void setNameOfFoodTestForNull() {
-        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
-        assertThrows(IllegalArgumentException.class, () -> {
-            new FoodItem(null, -1.0f, "liter", 1.50, expirationDate);
-        });
+        assertEquals("milk", foodItemTest.getNameOfFood());
+        assertEquals(7f, foodItemTest.getAmount());
+        assertEquals("liter", foodItemTest.getUnits());
+        assertEquals(20.0, foodItemTest.getPricePerUnit());
+        assertEquals(LocalDate.of(2025, 10, 20), foodItemTest.getExpirationDate());
     }
 
     @Test
     void setNameOfFoodTestForString() {
         foodItemTest.setNameOfFood("milk");
-
+        assertEquals("milk", foodItemTest.getNameOfFood());
     }
 
     @Test
+    void setNameOfFoodTestForEmptyString() {
+        assertThrows(IllegalArgumentException.class, () -> foodItemTest.setNameOfFood(""));
+    }
+
+
+    @Test
+    void setNameOfFoodTestForNull() {
+        assertThrows(IllegalArgumentException.class, () -> foodItemTest.setNameOfFood(null));
+    }
+
+
+    @Test
     void setAmountTestForNegativeValues() {
-        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
-        assertThrows(IllegalArgumentException.class, () -> {
-            new FoodItem("Milk", -1.0f, "liter", 1.50, expirationDate);
-        });
+        assertThrows(IllegalArgumentException.class, () -> foodItemTest.setAmount(-1.0f));
     }
 
     @Test
     void setAmountTestForPositiveValues() {
-        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
-        FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
-        assertEquals(1.0f, food.getAmount());
+        assertEquals(7.0f, foodItemTest.getAmount());
     }
 
 
 
     @Test
-    void setPriceTestForNegativeValuesTwo(){
-        LocalDate expirationDate = LocalDate.of(2025, 12, 20);
-        assertThrows(IllegalArgumentException.class, () -> {
-            new FoodItem("Milk", 1.0f, "liter", -1.50, expirationDate);
-        });
+    void setPriceTestForNegativeValues(){
+        assertThrows(IllegalArgumentException.class, () -> foodItemTest.setPricePerUnit(-1.0));
     }
 
     @Test
     void setPriceTestForPositiveValues() {
-        LocalDate expirationDate = LocalDate.of(2025, 10, 20);
-        FoodItem food = new FoodItem("Milk", 1.0f, "liter", 1.50, expirationDate);
-        assertEquals(1.50, food.getPricePerUnit());
+        assertEquals(20.0, foodItemTest.getPricePerUnit());
     }
 
     @Test
-    void setExpirationDateTestBeforeExpiration() {
-        LocalDate newExpiryDate = LocalDate.of(2025, 10, 20);
+    void setExpirationDateTest() {
 
         // Create FoodItem with a valid future expiration date
-        FoodItem foodDate = new FoodItem("milk", 7f, "liters", 10.0, newExpiryDate);
+        FoodItem foodDate = new FoodItem("milk", 7f, "liters", 10.0, expirationDate);
 
         // Assert that the expiration date is set correctly
-        assertEquals(newExpiryDate, foodDate.getExpirationDate(), "The expiration date should be set to 2025-10-20");
+        assertEquals(expirationDate, foodDate.getExpirationDate());
     }
 
     @Test
@@ -116,6 +94,5 @@ class FoodItemTest {
         );
     }
 
-    //TODO NY tester for date
 }
 
