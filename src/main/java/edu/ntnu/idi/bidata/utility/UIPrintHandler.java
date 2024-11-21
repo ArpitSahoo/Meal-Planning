@@ -1,4 +1,6 @@
-package edu.ntnu.idi.bidata;
+package edu.ntnu.idi.bidata.utility;
+import edu.ntnu.idi.bidata.food.FoodItem;
+
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;

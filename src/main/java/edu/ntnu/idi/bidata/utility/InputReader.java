@@ -1,4 +1,4 @@
-package edu.ntnu.idi.bidata;
+package edu.ntnu.idi.bidata.utility;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
@@ -30,7 +30,7 @@ public class InputReader {
         price = Double.parseDouble(priceInput); // converts the string to a float
         validPrice = true;
       }
-      catch (Exception e){ // catches an exception if the number is 0 or under or not an number.
+      catch (Exception e){ // catches an exception if the number is 0 or under or not a number.
         print.invalidPriceOutput();
       }
     }
@@ -72,7 +72,7 @@ public class InputReader {
       try { // tries the scanner method
         amount = Float.parseFloat(priceInput); // converts the string to a float
         validAmount = true;
-      } catch (Exception e){ // catches an exception if the number is 0 or under or not an number.
+      } catch (Exception e){ // catches an exception if the number is 0 or under or not a number.
         print.invalidFoodAmountOutput();
       }
     }
