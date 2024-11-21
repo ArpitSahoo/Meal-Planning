@@ -1,4 +1,6 @@
-package edu.ntnu.idi.bidata;
+package edu.ntnu.idi.bidata.fridge;
+import edu.ntnu.idi.bidata.food.FoodItem;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -68,6 +70,8 @@ public class FridgeStorage {
     boolean wasFoodFound = false;
     if (fridgeRegister.containsKey(foodToBeTaken.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount();
+      //TODO find a method that makes sure that if the old amount.
+      // to take out is to big, the user hase to choose another another amount
       float newAmount = oldAmount - foodToBeTaken.getAmount();
       if (newAmount <= 0) {
         fridgeRegister.remove(foodToBeTaken.getNameOfFood());
