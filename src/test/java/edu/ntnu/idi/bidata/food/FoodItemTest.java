@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import java.time.LocalDate; // Import LocalDate
 class FoodItemTest {
+    private FoodItem foodItemTest; //Arrange
+    private final LocalDate expirationDate = LocalDate.of(2025, 10, 20); //Arrange
 
-    static FoodItem foodItemTest; //Arrange
-    LocalDate expirationDate = LocalDate.of(2025, 10, 20); //Arrange
     /**
      * Arrange
      * act
