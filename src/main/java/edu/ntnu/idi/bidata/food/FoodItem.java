@@ -12,6 +12,27 @@ public class FoodItem {
   private LocalDate expirationDate;
   private Double pricePerUnit;
 
+
+  /**
+   * A constructor for the class FoodItem.
+   *
+   * @param nameOfFood     of FoodItem..
+   */
+  public FoodItem(String nameOfFood) {
+    setNameOfFood(nameOfFood);
+  }
+
+  /**
+   * A constructor for the class FoodItem.
+   *
+   * @param nameOfFood of FoodItem.
+   * @param amount of FoodItem.
+   */
+  public FoodItem(String nameOfFood, Float amount) {
+    setNameOfFood(nameOfFood);
+    setAmount(amount);
+  }
+
   /**
    * A constructor for the class FoodItem.
    *
@@ -29,26 +50,6 @@ public class FoodItem {
     setPricePerUnit(pricePerUnit);
     setExpirationDate(expirationDate);
   }
-
-  /**
-   * A constructor for the class FoodItem.
-   *
-   * @param nameOfFood     the name of FoodItem.
-   */
-  public FoodItem(String nameOfFood) {
-    setNameOfFood(nameOfFood);
-  }
-
-  public FoodItem(LocalDate expirationDate) {
-    setExpirationDate(expirationDate);
-  }
-
-  public FoodItem(String nameOfFood, Float amount) {
-    setNameOfFood(nameOfFood);
-    setAmount(amount);
-  }
-
-
 
   /** Mutates the <code>nameOfFood</code>.
    *
@@ -84,7 +85,7 @@ public class FoodItem {
    * Mutates the <code>amount</code>.
    *
    * @param amount the FoodItem's amount.
-   * @throws IllegalArgumentException if amount is less than 0.1
+   * @throws IllegalArgumentException if amount is 0 or a negative number.
    */
   public void setAmount(Float amount) throws IllegalArgumentException {
     if (amount <= 0) {
@@ -150,7 +151,7 @@ public class FoodItem {
    * Mutates the <code>price</code>.
    *
    * @param pricePerUnit the FoodItem's price.
-   * @throws IllegalArgumentException if price is a negative number.
+   * @throws IllegalArgumentException if price is 0 or a negative number.
    */
   public void setPricePerUnit(Double pricePerUnit) throws IllegalArgumentException {
     if (pricePerUnit <= 0) {
