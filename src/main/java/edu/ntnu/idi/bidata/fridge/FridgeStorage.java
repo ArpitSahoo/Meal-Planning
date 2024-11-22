@@ -52,9 +52,9 @@ public class FridgeStorage {
       fridgeRegister.get(foodToBeAdded.getNameOfFood()).setAmount(newAmount);
     } else {
       fridgeRegister.put(foodToBeAdded.getNameOfFood(), foodToBeAdded);
-    }
       wasFoodAdded = true;
-      return wasFoodAdded;
+    }
+    return wasFoodAdded;
   }
 
   /**
