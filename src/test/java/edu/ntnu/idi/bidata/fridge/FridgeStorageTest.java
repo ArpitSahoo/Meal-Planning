@@ -115,8 +115,6 @@ class FridgeStorageTest {
 
     }
 
-
-
     @Test
     void getIteratorAlphabetical() {
     }
