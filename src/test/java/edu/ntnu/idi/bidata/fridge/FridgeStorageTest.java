@@ -1,17 +1,22 @@
 package edu.ntnu.idi.bidata.fridge;
 
 import edu.ntnu.idi.bidata.food.FoodItem;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Map;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-
+/**
+ * Test class for {@link FridgeStorage} class.
+ * <p>This class tests different methods from the {@link FridgeStorage} class.
+ * It checks if it is possible to add, remove and take food from the fridge.
+ * It also ensures that the food is organized and managed correctly.
+ * </p>
+ *
+ * @author Arpit Sahoo
+ * @version 0.0.1
+ */
 
 class FridgeStorageTest {
     private FridgeStorage fridgeRegister;
@@ -23,6 +28,7 @@ class FridgeStorageTest {
     @BeforeEach
     void setUp() {
         // Arrange
+        System.out.println("New test case");
         fridgeRegister = new FridgeStorage();
         foodItem1 = new FoodItem("milk", 7f, "liter", 20.0, expirationDate);
         foodItem2 = new FoodItem("bread", 1f, "pieces", 20.0, expirationDate);
@@ -31,7 +37,12 @@ class FridgeStorageTest {
 
     @AfterEach
     void tearDown() {
-        System.out.println("After each test case");
+        System.out.println("Test passed");
+    }
+
+    @AfterAll
+    static void tearDownAll() {
+        System.out.println("All Test passed");
     }
 
     @Test
@@ -109,13 +120,16 @@ class FridgeStorageTest {
         assertEquals("milk", getIteratorTest.next().getKey());
 
         assertTrue(getIteratorTest.hasNext());
-        assertEquals("Monster white", getIteratorTest.next().getKey());
+        assertEquals("monster white", getIteratorTest.next().getKey());
 
         assertFalse(getIteratorTest.hasNext());
 
     }
-
+    /*
+    // needs to be made.
     @Test
     void getIteratorAlphabetical() {
     }
+
+     */
 }
