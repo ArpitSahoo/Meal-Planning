@@ -1,7 +1,6 @@
 package edu.ntnu.idi.bidata.recipe;
-
 /**
- *
+
  *
  * @version 0.0.1
  */
