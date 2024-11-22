@@ -148,9 +148,4 @@ public class FridgeStorage {
   public Iterator<String> getIteratorAlphabetical(){
     return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
   }
-
-
-
-
-
 }
