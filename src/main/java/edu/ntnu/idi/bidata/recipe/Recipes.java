@@ -1,5 +1,12 @@
 package edu.ntnu.idi.bidata.recipe;
 
+/**
+ *
+ *
+ * @version 0.0.1
+ */
+
+
 public class Recipes {
     private String nameOfRecipe;
     private String description;
