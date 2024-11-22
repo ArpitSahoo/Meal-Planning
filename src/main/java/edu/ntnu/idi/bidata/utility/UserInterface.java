@@ -13,10 +13,14 @@ import java.util.Map;
  * <p>This class provides methods to add, remove, take out
  * and display food items and manage expired food items.
  * It presents a menu to the user, processes different commands,
- * and interfaces with {@code FridgeStorage}
- * to update and retrieve fridge data. It also uses
- * {@code UIPrintHandler} for displaying output to the user.
+ * and interfaces with {@link FridgeStorage}
+ * to update and retrieve fridge data.
+ * The class understands the user commands by help from the {@link InputReader}.
+ * It also uses {@link UIPrintHandler} for displaying output to the user.
  * </p>
+ * @author Arpit Sahoo
+ * @version 0.0.1
+ *
  */
 public class UserInterface {
   private final FridgeStorage fridgeRegister;
