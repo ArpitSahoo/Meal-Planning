@@ -4,6 +4,22 @@ import edu.ntnu.idi.bidata.food.FoodItem;
 import java.time.LocalDate;
 import java.util.*;
 
+/**
+ * Represents the fridge.
+ *
+ * <p>{@code FridgeStorage} is a class used to store alle the food item.
+ * The class interacts with {@link FoodItem} objects and stores them.
+ * this class allows the user add, remove, take, find and display all the food items
+ * stored in the fridge.
+ * It also handles the validation and organization of food items, ensuring they are managed in an
+ * efficiently.</p>
+ * </p>
+ *
+ * @author Arpit Sahoo
+ * @version 0.0.2
+ *
+ */
+
 public class FridgeStorage {
   private final Map<String, FoodItem> fridgeRegister;
 
@@ -25,8 +41,11 @@ public class FridgeStorage {
    * is added as a new entry in the fridge.</p>
    *
    * @param foodToBeAdded the {@link FoodItem} to be added or updated in the fridge
+   * @return  {@code true} if the food item was added.
+   *          {@code false} if the food was not added.
    */
-  public void addFoodItem(FoodItem foodToBeAdded) {
+  public boolean addFoodItem(FoodItem foodToBeAdded) {
+    boolean wasFoodAdded = false;
     if (fridgeRegister.containsKey(foodToBeAdded.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeAdded.getNameOfFood()).getAmount();
       float newAmount = oldAmount + foodToBeAdded.getAmount();
@@ -34,6 +53,8 @@ public class FridgeStorage {
     } else {
       fridgeRegister.put(foodToBeAdded.getNameOfFood(), foodToBeAdded);
     }
+      wasFoodAdded = true;
+      return wasFoodAdded;
   }
 
   /**
