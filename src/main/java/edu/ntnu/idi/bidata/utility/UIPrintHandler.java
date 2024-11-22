@@ -6,6 +6,24 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents the output to the user.
+ *
+ * <p>The {@code UIPrintHandler} is responsible for managing all user-facing output.
+ * It handles the command screen that allows the user to select a command in the
+ * {@link UserInterface} class. Additionally, it displays food items in the correct
+ * format and provides the user with necessary information.
+ * </p>
+ *
+ * <p>This class ensures that the user interface remains clear and interactive by
+ * formatting the output and guiding the user through actions and options.
+ * </p>
+ *
+ * @author Arpit Sahoo
+ * @version 0.0.1
+ */
+
+
 public class UIPrintHandler {
 
   public void choiceScreen() {
