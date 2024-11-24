@@ -120,7 +120,7 @@ public class UIPrintHandler {
     boolean hasExpiredItems = false;
     double totalPrice = 0;
     LocalDate currentDate = LocalDate.now();
-    while (foodIterator.hasNext()){
+    while (foodIterator.hasNext()){ // while loop that iterates with entrySet (OpenAI 2024)
       Map.Entry<String, FoodItem> entry = foodIterator.next();
       FoodItem food = entry.getValue();
       if(food.getExpirationDate() != null && food.getExpirationDate().isBefore(currentDate)){
@@ -155,12 +155,12 @@ public class UIPrintHandler {
 
 
   public void printLocatedExpiredFood(List<FoodItem> foodList) {
-    if (foodList.isEmpty()) { // If statement recommended by ChatGPT.
+    if (foodList.isEmpty()) { // If statement recommended by OpenAI.
       System.out.println("No food items found with the specified expiration date.");
       return;
     }
     System.out.println("Matching food items:");
-    for (FoodItem food : foodList) { //Partially recommended by ChatGPT.
+    for (FoodItem food : foodList) { //Partially recommended by OpenAI.
       printLocatedFood(food);
     }
   }
