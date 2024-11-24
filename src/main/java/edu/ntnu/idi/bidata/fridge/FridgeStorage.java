@@ -136,7 +136,7 @@ public class FridgeStorage {
    */
   public Iterator<Map.Entry<String, FoodItem>> getIterator() {
     return fridgeRegister.
-            entrySet().
+            entrySet(). // Sends key and value (OpenAI 2024).
             iterator();
   }
 
@@ -146,6 +146,9 @@ public class FridgeStorage {
    * @return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
    */
   public Iterator<String> getIteratorAlphabetical(){
-    return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
+    return fridgeRegister.keySet()
+            .stream()
+            .sorted(String::compareToIgnoreCase)
+            .iterator();
   }
 }
