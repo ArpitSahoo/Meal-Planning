@@ -2,6 +2,8 @@ package edu.ntnu.idi.bidata.utility;
 
 import edu.ntnu.idi.bidata.food.FoodItem;
 import edu.ntnu.idi.bidata.fridge.FridgeStorage;
+import edu.ntnu.idi.bidata.recipe.Recipes;
+import edu.ntnu.idi.bidata.recipebook.RecipeStorage;
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
@@ -26,6 +28,7 @@ public class UserInterface {
   private final FridgeStorage fridgeRegister;
   private final UIPrintHandler print;
   private final InputReader input;
+  private final RecipeStorage recipeStorage;
 
   /**
    * Constructs a {@code UserInterface} instance and initializes the necessary components.
@@ -44,6 +47,7 @@ public class UserInterface {
     input = new InputReader();
     fridgeRegister = new FridgeStorage();
     print = new UIPrintHandler();
+    recipeStorage = new RecipeStorage();
     init();
     printFridge();
     start();
@@ -106,6 +110,9 @@ public class UserInterface {
           printFridgeAlphabetical();
           break;
         case "9":
+          addRecipeToBook();
+          break;
+        case "10":
           running = false;
           print.exit();
           break;
@@ -153,19 +160,7 @@ public class UserInterface {
     String units = input.scannerString();
 
 
-    switch (units) {
-      case "1":
-        units = "kg";
-        break;
-      case "2":
-        units = "liter";
-        break;
-      case "3":
-        units = "stk";
-        break;
-      default:
-        print.invalidUnitChoice();
-    }
+    units = getUnitOfFoodItem(units);
     try {
       FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
       fridgeRegister.addFoodItem(food);
@@ -175,6 +170,22 @@ public class UserInterface {
 
   }
 
+  private String getUnitOfFoodItem(String units) {
+    switch (units) {
+      case "1":
+        units = "kg";
+        break;
+      case "2":
+        units = "liter";
+        break;
+      case "3":
+        units = "pieces";
+        break;
+      default:
+        print.invalidUnitChoice();
+    }
+    return units;
+  }
 
 
   /**
@@ -300,6 +311,38 @@ public class UserInterface {
     print.printLocatedExpiredFood(item);
   }
 
+  public void addRecipeToBook(){
+    System.out.println("What is the name");
+    String nameOfRecipe = input.scannerString();
+
+    System.out.println("What is the description");
+    String description = input.scannerString();
+
+    System.out.println("Steps to make it");
+    String steps = input.scannerString();
+
+    System.out.println("How mann ingrediense");
+    int amountOfRecpies = input.amountOfIngredients();
+    for(int indexOfAmount = 0; indexOfAmount < amountOfRecpies; indexOfAmount++){
+      System.out.println("What is the name");
+      String name = input.scannerString();
+      System.out.println("What is the amount");
+      Float amount = input.getValidAmount();
+
+      print.choiceOfUnits();
+      String unit = input.scannerString();
+      unit = getUnitOfFoodItem(unit);
+      recipeStorage.addIngredientForRecipe(nameOfRecipe, name, amount, unit);
+    }
+    try{
+      Recipes newRecipes = new Recipes(nameOfRecipe, description, steps);
+      recipeStorage.addRecipe(newRecipes);
+    } catch (IllegalArgumentException e) {
+      System.out.println(e.getMessage());
+    }
+  }
+
+
   /**
    * Initializes the fridge with a set of predefined food items.
    *
@@ -322,7 +365,6 @@ public class UserInterface {
     fridgeRegister.addFoodItem(milk);
     fridgeRegister.addFoodItem(chicken);
   }
-
 
 
 }
