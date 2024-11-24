@@ -46,4 +46,13 @@ public class Recipes {
     public Iterator<FoodItem> getIngredients() {
         return ingredients.iterator();
     }
+
+    public void addIngredient(String name, Float amount, String unit) {
+        ingredients.add(new FoodItem(name, amount, unit));
+
+    }
+
+
+
+
 }
