@@ -4,6 +4,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import static java.lang.System.in;
 
+/**
+ * Represents the scanner.
+ *<p>Handles the users input to application and supports
+ * {@link UserInterface} to start an operation and set values.
+ *</p>
+ * @version 0.0.2
+ * @author Arpit Sahoo
+ */
 public class InputReader {
   private final Scanner scanner;
   private final UIPrintHandler print;
@@ -78,4 +86,21 @@ public class InputReader {
     }
     return amount;
   }
+
+  public int amountOfIngredients(){
+    int amount = 0; // amount is 0
+    boolean validInt = false;
+    while (!validInt) {
+      String priceInput = scannerString();
+      try { // tries the scanner method
+        amount = Integer.parseInt(priceInput); // converts the string to a float
+        validInt = true;
+      } catch (Exception e){ // catches an exception if the number is 0 or under or not a number.
+        print.invalidFoodAmountOutput();
+      }
+    }
+    return amount;
+  }
+
+
 }
