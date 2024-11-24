@@ -1,17 +1,19 @@
 package edu.ntnu.idi.bidata.food;
 
+import edu.ntnu.idi.bidata.fridge.FridgeStorage;
+
 import java.time.LocalDate;
 
 /**
  * Represents a food item.
  *
- * <p><code>FoodItem</code> class is used to store relevant information about a specific food item.
+ * <p>{@code FoodItem}class is used to store relevant information about a specific food item.
  * Allows the user to set and retrieve information about the food item.
- * It also communicates with the {@code FridgeStorage}.
+ * It also communicates with the {@link FridgeStorage}.
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.1
+ * @version 0.0.2
  *
  */
 public class FoodItem {
@@ -40,6 +42,12 @@ public class FoodItem {
   public FoodItem(String nameOfFood, Float amount) {
     setNameOfFood(nameOfFood);
     setAmount(amount);
+  }
+
+  public FoodItem(String nameOfFood, Float amount, String units) {
+    setNameOfFood(nameOfFood);
+    setAmount(amount);
+    setUnits(units);
   }
 
   /**
