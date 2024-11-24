@@ -342,7 +342,6 @@ public class UserInterface {
     }
   }
 
-
   /**
    * Initializes the fridge with a set of predefined food items.
    *
