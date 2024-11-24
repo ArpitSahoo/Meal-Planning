@@ -1,8 +1,13 @@
 package edu.ntnu.idi.bidata.recipe;
-/**
 
+import edu.ntnu.idi.bidata.food.FoodItem;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+/**
  *
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 
