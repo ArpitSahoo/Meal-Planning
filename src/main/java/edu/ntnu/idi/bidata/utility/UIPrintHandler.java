@@ -1,8 +1,6 @@
 package edu.ntnu.idi.bidata.utility;
 import edu.ntnu.idi.bidata.food.FoodItem;
 import edu.ntnu.idi.bidata.recipe.Recipes;
-import edu.ntnu.idi.bidata.recipebook.RecipeStorage;
-
 import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
@@ -22,7 +20,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 
@@ -155,6 +153,22 @@ public class UIPrintHandler {
       );
   }
 
+  public void printLocatedRecipe(Recipes recipe) {
+    System.out.println("Name:" + recipe.getNameOfRecipe() //Gets all the information of the Recipe.
+            + " | Description: " + recipe.getDescription() //Formatted print.
+            + " | Steps: " + recipe.getSteps()
+            + " | Ingredients: "
+
+    );
+    Iterator<FoodItem> ingredients = recipe.getIngredients();
+    while (ingredients.hasNext()) { //Recommended by ChatGPT 2024, Iterates through the list.
+      FoodItem ingredient = ingredients.next();
+      System.out.println("Name: " + ingredient.getNameOfFood() //Gets all the information of the ingredient from the list.
+              + " | Amount: " + ingredient.getAmount() + " " + ingredient.getUnits() //Formatted print.
+
+      );
+    }
+  }
 
   public void printLocatedExpiredFood(List<FoodItem> foodList) {
     if (foodList.isEmpty()) { // If statement recommended by OpenAI.
