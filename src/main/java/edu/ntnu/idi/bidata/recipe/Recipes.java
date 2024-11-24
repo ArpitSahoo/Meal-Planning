@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 /**
  *
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 
@@ -29,6 +29,9 @@ public class Recipes {
     }
 
     public void setNameOfRecipe(String nameOfRecipe) {
+        if(nameOfRecipe == null || nameOfRecipe.isEmpty() || nameOfRecipe.isBlank()){
+            throw new IllegalArgumentException("Recipe name cannot be blank");
+        }
         this.nameOfRecipe = nameOfRecipe;
     }
 
@@ -37,6 +40,9 @@ public class Recipes {
     }
 
     public void setDescription(String description) {
+        if(description == null || description.isEmpty() || description.isBlank()){
+            throw new IllegalArgumentException("Recipe description cannot be blank");
+        }
         this.description = description;
     }
 
@@ -45,6 +51,9 @@ public class Recipes {
     }
 
     public void setSteps(String steps) {
+        if(steps == null || steps.isEmpty() || steps.isBlank()){
+            throw new IllegalArgumentException("Recipe steps cannot be blank");
+        }
         this.steps = steps;
     }
 
@@ -53,6 +62,15 @@ public class Recipes {
     }
 
     public void addIngredient(String name, Float amount, String unit) {
+        if (ingredients.isEmpty()){
+            throw new IllegalStateException("Recipe has no ingredients");
+        } else if (name.isBlank() || name.isEmpty()) {
+             throw new IllegalArgumentException("Recipe name cannot be blank");
+        } else if (amount >= 0) {
+            throw new IllegalArgumentException("Recipe amount cannot be negative or zero");
+        } else if (unit == null || unit.isEmpty() || unit.isBlank()) {
+            throw new IllegalArgumentException("Recipe unit cannot be blank");
+        }
         ingredients.add(new FoodItem(name, amount, unit));
 
     }
