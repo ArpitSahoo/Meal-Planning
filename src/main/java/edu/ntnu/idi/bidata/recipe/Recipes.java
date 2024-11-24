@@ -10,13 +10,13 @@ public class Recipes {
     private String nameOfRecipe;
     private String description;
     private String steps;
-    private String ingredients;
+    private final ArrayList<FoodItem>ingredients;
 
-    public Recipes(String nameOfRecipe, String description, String steps, String ingredients) {
+    public Recipes(String nameOfRecipe, String description, String steps) {
         setNameOfRecipe(nameOfRecipe);
         setDescription(description);
         setSteps(steps);
-        setIngredients(ingredients);
+        this.ingredients = new ArrayList<>();
     }
 
     public String getNameOfRecipe() {
@@ -43,11 +43,7 @@ public class Recipes {
         this.steps = steps;
     }
 
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
-    }
-
-    public String getIngredients() {
-        return ingredients;
+    public Iterator<FoodItem> getIngredients() {
+        return ingredients.iterator();
     }
 }
