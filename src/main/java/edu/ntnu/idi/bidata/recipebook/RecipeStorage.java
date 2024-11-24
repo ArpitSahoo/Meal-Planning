@@ -26,10 +26,10 @@ public class RecipeStorage {
         return wasAdded;
     }
 
-    public Recipes getRecipe (String recipeName) {
+    public Recipes getRecipe(String recipeName) {
         return recipesMap.get(recipeName);
     }
-
+    /*
     public boolean addIngredientForRecipe(String nameOfRecipe, String name, Float amount, String unit) {
         boolean exists = false;
         Recipes exRecipe = recipesMap.get(nameOfRecipe);
@@ -39,6 +39,8 @@ public class RecipeStorage {
         }
         return exists;
     }
+
+     */
 
 
 
