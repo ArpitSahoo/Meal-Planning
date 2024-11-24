@@ -21,7 +21,7 @@ import java.util.Map;
  * It also uses {@link UIPrintHandler} for displaying output to the user.
  * </p>
  * @author Arpit Sahoo
- * @version 0.0.1
+ * @version 0.0.2
  *
  */
 public class UserInterface {
@@ -113,6 +113,9 @@ public class UserInterface {
           addRecipeToBook();
           break;
         case "10":
+          findRecipeByName();
+          break;
+        case "11":
           running = false;
           print.exit();
           break;
@@ -279,6 +282,7 @@ public class UserInterface {
     }
   }
 
+
   /**
    * Iterates through the fridge and prints the fridge content.
    *
@@ -321,9 +325,10 @@ public class UserInterface {
     System.out.println("Steps to make it");
     String steps = input.scannerString();
 
-    System.out.println("How mann ingrediense");
-    int amountOfRecpies = input.amountOfIngredients();
-    for(int indexOfAmount = 0; indexOfAmount < amountOfRecpies; indexOfAmount++){
+    Recipes newRecipes = new Recipes(nameOfRecipe, description, steps);
+    System.out.println("How mann ingredients");
+    int amountOfRecipes = input.amountOfIngredients(); //How many loops?
+    for(int indexOfAmount = 0; indexOfAmount < amountOfRecipes; indexOfAmount++){ //Loops.
       System.out.println("What is the name");
       String name = input.scannerString();
       System.out.println("What is the amount");
@@ -331,21 +336,34 @@ public class UserInterface {
 
       print.choiceOfUnits();
       String unit = input.scannerString();
-      unit = getUnitOfFoodItem(unit);
-      recipeStorage.addIngredientForRecipe(nameOfRecipe, name, amount, unit);
+      unit = getUnitOfFoodItem(unit); // switch-case choice method.
+      newRecipes.addIngredient(name, amount, unit); //adds ingredient to list.
     }
     try{
-      Recipes newRecipes = new Recipes(nameOfRecipe, description, steps);
-      recipeStorage.addRecipe(newRecipes);
+      recipeStorage.addRecipe(newRecipes); // adds recipe to recipe book.
     } catch (IllegalArgumentException e) {
       System.out.println(e.getMessage());
     }
   }
 
+  public void findRecipeByName() {
+    System.out.println("What is the recipe name?");
+    String name = input.scannerString();
+
+    // Fetch the recipe from storage
+    Recipes recipe = recipeStorage.getRecipe(name);
+    if (recipe != null) {
+      print.printLocatedRecipe(recipe); // Print the located recipe
+    } else {
+      System.out.println("Recipe not found.");
+    }
+  }
+
+
   /**
    * Initializes the fridge with a set of predefined food items.
    *
-   * <p>This method creates several {@link FoodItem} objects with predefined values
+   * <p>This adds several {@link FoodItem} with predefined values
    * for name, amount, unit, price, and expiration date. These items are then added
    * to the {@code fridgeRegister} for use in the application.
    * </p>
