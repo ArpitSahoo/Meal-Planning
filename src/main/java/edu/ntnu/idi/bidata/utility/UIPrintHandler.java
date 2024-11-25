@@ -20,7 +20,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  */
 
 
@@ -29,19 +29,20 @@ public class UIPrintHandler {
   public void choiceScreen() {
     System.out.println("\n--- Fridge ---");
     System.out.println("Choose 1, 2, 3, 4, 5 or 6: ");
-    System.out.println("1. Add food");
-    System.out.println("2. Remove food");
+    System.out.println("1. Add a food");
+    System.out.println("2. Remove a food");
     System.out.println("3. Take out an item");
     System.out.println("4. Find food by name");
     System.out.println("5. Display all expired food");
-    System.out.println("6. Check food with a certain expiry date");
+    System.out.println("6. Display foods with a certain expiry date");
     System.out.println("7. Display fridge contents");
     System.out.println("8. Display fridge contents in an alphabetical order");
-    System.out.println("9. Exit");
+    System.out.println("9. Add a recipe to recipe book");
+    System.out.println("10. Find a recipe by name");
+    System.out.println("11. Exit");
     System.out.println("Choose a following number: ");
   }
 
-  //TODO organize this
   public void invalidChoice(){
     System.out.println("Invalid choice. Food item not added.");
   }
@@ -223,5 +224,24 @@ public class UIPrintHandler {
     System.out.println("Goodbye...");
   }
 
+  public void recipeNameOutput(){
+    System.out.println("What is the name of the recipe?: ");
+  }
+
+  public void descriptionOutput(){
+    System.out.println("What is the description?: ");
+  }
+
+  public void stepsOutput(){
+    System.out.println("what are the steps to make it");
+  }
+
+  public void howManyIngredientsOutput(){
+    System.out.println("How many ingredients");
+  }
+
+  public void recipeNotFound(){
+    System.out.println("Recipe not found.");
+  }
 
 }
