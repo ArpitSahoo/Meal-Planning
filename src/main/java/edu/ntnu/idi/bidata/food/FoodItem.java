@@ -27,10 +27,10 @@ public class FoodItem {
   /**
    * A constructor for the class FoodItem.
    *
-   * @param nameOfFood     of FoodItem..
+   * @param nameOfFood of FoodItem.
    */
-  public FoodItem(String nameOfFood) {
-    setNameOfFood(nameOfFood);
+  public FoodItem(String nameOfFood) { // Allows the user to search food by name.
+    setNameOfFood(nameOfFood); // Also allows the method in UI to work.
   }
 
   /**
@@ -39,11 +39,18 @@ public class FoodItem {
    * @param nameOfFood of FoodItem.
    * @param amount of FoodItem.
    */
-  public FoodItem(String nameOfFood, Float amount) {
-    setNameOfFood(nameOfFood);
+  public FoodItem(String nameOfFood, Float amount) { // Allows the user to remove and take food
+    setNameOfFood(nameOfFood); // Also allows the method in UI to work.
     setAmount(amount);
   }
 
+  /**
+   * A constructor for the class FoodItem.
+   *
+   * @param nameOfFood of FoodItem.
+   * @param amount of FoodItem.
+   * @param units of FoodItem.
+   */
   public FoodItem(String nameOfFood, Float amount, String units) {
     setNameOfFood(nameOfFood);
     setAmount(amount);
@@ -60,7 +67,7 @@ public class FoodItem {
    * @param expirationDate of FoodItem.
    */
   public FoodItem(String nameOfFood, Float amount, String units,
-                  Double pricePerUnit, LocalDate expirationDate) {
+                  Double pricePerUnit, LocalDate expirationDate){ // Makes it possible to create a FoodItem object.
     setNameOfFood(nameOfFood);
     setAmount(amount);
     setUnits(units);
