@@ -10,18 +10,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The {@code UserInterface} class handles user interactions for managing the fridge.
+ * The {@code UserInterface} class handles user interactions for managing the fridge and recipe book.
  *
  * <p>This class provides methods to add, remove, take out
- * and display food items and manage expired food items.
+ * and display food items or recipes.
  * It presents a menu to the user, processes different commands,
- * and interfaces with {@link FridgeStorage}
- * to update and retrieve fridge data.
+ * and interfaces with {@link FridgeStorage} and {@link RecipeStorage}
+ * to update and retrieve fridge and recipe data.
  * The class understands the user commands by help from the {@link InputReader}.
  * It also uses {@link UIPrintHandler} for displaying output to the user.
  * </p>
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  *
  */
 public class UserInterface {
@@ -35,11 +35,12 @@ public class UserInterface {
    *
    * <p>This constructor creates an instance of {@code FridgeStorage}
    * to manage the fridge's contents,
-   * initializes a {@code Scanner} for user input,
+   * an instance of {@code InputReader} for user prompt,
    * and sets up a {@code UIPrintHandler} for output.
    * It also initializes the {@code init} to add food to the fridge.
    * After the initialization,
-   * it starts the user interface by calling the {@code start} method.
+   * it has a {@code printFridge} to display all the initialized food.
+   * It starts the user interface by calling the {@code start} method.
    * </p>
    */
 
@@ -58,11 +59,9 @@ public class UserInterface {
    *
    * <p>This method presents a choice menu to the user
    * and processes commands in a loop until the user chooses to exit.
-   * Based on the user's input, it can add a food item, remove a food item,
-   * take out a specified quantity of food,
-   * display expired food, print all fridge contents, or exit
-   * the application. If an invalid choice is entered,
-   * an error message is displayed.
+   * Based on the user's input, the user can do various of commands
+   * as displayed in the list below.
+   * If an invalid choice is entered, an error message is displayed.
    * </p>
    *
    * <p>Menu options:
@@ -70,12 +69,16 @@ public class UserInterface {
    *   <li><b>1:</b> Add a food item to the fridge</li>
    *   <li><b>2:</b> Remove a food item by name</li>
    *   <li><b>3:</b> Take out a specified amount of a food item</li>
-   *   <li><b>4:</b> Display all expired food items</li>
-   *   <li><b>5:</b> Print the contents of the fridge</li>
-   *   <li><b>6:</b> Exit the application</li>
+   *   <li><b>4:</b> Search a food by name</li>
+   *   <li><b>5:</b> Display all expired food items</li>
+   *   <li><b>6:</b> Find all food in the specific expiry date.</li>
+   *   <li><b>7:</b> Display all the food with details</li>
+   *   <li><b>8:</b> Display all the food alphabetical</li>
+   *   <li><b>9:</b> Add Recipe to the recipe book</li>
+   *   <li><b>10:</b> Find a recipe by name</li>
+   *   <li><b>11:</b> Exit the application</li>
    * </ul>
    * </p>
-   * TODO Needs to be updated
    */
   private void start() {
     boolean running = true;
@@ -305,7 +308,7 @@ public class UserInterface {
    *    </ul>
    *    Checks if there are food that goes out in that
    *    expiration date in the fridge. If found in the fridge it
-   *    prints out that it is not in the fridge else
+   *    prints out the food and the details. Else
    *    it prints out that it is not in the fridge.
    * </p>
    */
@@ -316,22 +319,22 @@ public class UserInterface {
   }
 
   public void addRecipeToBook(){
-    System.out.println("What is the name");
+    print.recipeNameOutput();
     String nameOfRecipe = input.scannerString();
 
-    System.out.println("What is the description");
+    print.descriptionOutput();
     String description = input.scannerString();
 
-    System.out.println("Steps to make it");
+    print.stepsOutput();
     String steps = input.scannerString();
 
     Recipes newRecipes = new Recipes(nameOfRecipe, description, steps);
-    System.out.println("How mann ingredients");
+    print.howManyIngredientsOutput();
     int amountOfRecipes = input.amountOfIngredients(); //How many loops?
     for(int indexOfAmount = 0; indexOfAmount < amountOfRecipes; indexOfAmount++){ //Loops.
-      System.out.println("What is the name");
+      print.nameOfFoodOutput();
       String name = input.scannerString();
-      System.out.println("What is the amount");
+      print.foodAmountOutput();
       Float amount = input.getValidAmount();
 
       print.choiceOfUnits();
@@ -339,15 +342,15 @@ public class UserInterface {
       unit = getUnitOfFoodItem(unit); // switch-case choice method.
       newRecipes.addIngredient(name, amount, unit); //adds ingredient to list.
     }
-    try{
+    try{ //Tries to add recipe to book map.
       recipeStorage.addRecipe(newRecipes); // adds recipe to recipe book.
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException e) { // Catches illegal argument exception.
       System.out.println(e.getMessage());
     }
   }
 
   public void findRecipeByName() {
-    System.out.println("What is the recipe name?");
+    print.recipeNameOutput();
     String name = input.scannerString();
 
     // Fetch the recipe from storage
@@ -355,7 +358,7 @@ public class UserInterface {
     if (recipe != null) {
       print.printLocatedRecipe(recipe); // Print the located recipe
     } else {
-      System.out.println("Recipe not found.");
+      print.recipeNotFound();
     }
   }
 
