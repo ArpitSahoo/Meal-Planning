@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
+ * Represents a recipe.
  *
+ * @since 0.0.1
+ * @author Arpit Sahoo
  * @version 0.0.4
  */
 
@@ -70,10 +73,5 @@ public class Recipes {
             throw new IllegalArgumentException("Recipe unit cannot be blank");
         }
         ingredients.add(new FoodItem(name, amount, unit));
-
     }
-
-
-
-
 }
