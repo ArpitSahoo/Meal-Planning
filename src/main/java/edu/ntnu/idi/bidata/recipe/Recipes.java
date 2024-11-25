@@ -7,7 +7,7 @@ import java.util.Iterator;
 
 /**
  *
- * @version 0.0.3
+ * @version 0.0.4
  */
 
 
@@ -62,11 +62,9 @@ public class Recipes {
     }
 
     public void addIngredient(String name, Float amount, String unit) {
-        if (ingredients.isEmpty()){
-            throw new IllegalStateException("Recipe has no ingredients");
-        } else if (name.isBlank() || name.isEmpty()) {
+        if (name.isBlank() || name.isEmpty()) {
              throw new IllegalArgumentException("Recipe name cannot be blank");
-        } else if (amount >= 0) {
+        } else if (amount <= 0) {
             throw new IllegalArgumentException("Recipe amount cannot be negative or zero");
         } else if (unit == null || unit.isEmpty() || unit.isBlank()) {
             throw new IllegalArgumentException("Recipe unit cannot be blank");
