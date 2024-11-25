@@ -20,7 +20,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.4
+ * @version 0.0.5
  */
 
 
@@ -237,7 +237,7 @@ public class UIPrintHandler {
   }
 
   public void howManyIngredientsOutput(){
-    System.out.println("How many ingredients");
+    System.out.println("How many ingredients?: ");
   }
 
   public void recipeNotFound(){
