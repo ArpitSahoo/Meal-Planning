@@ -1,15 +1,15 @@
 package edu.ntnu.idi.bidata.fridge;
-import edu.ntnu.idi.bidata.food.FoodItem;
 
+import edu.ntnu.idi.bidata.food.FoodItem;
 import java.time.LocalDate;
 import java.util.*;
 
 /**
  * Represents the fridge.
  *
- * <p>{@code FridgeStorage} is a class used to store alle the food item.
+ * <p>{@code FridgeStorage} is a class used to store all the food item.
  * The class interacts with {@link FoodItem} objects and stores them.
- * this class allows the user add, remove, take, find and display all the food items
+ * This class allows the user add, remove, take, find and display all the food items
  * stored in the fridge.
  * It also handles the validation and organization of food items, ensuring they are managed in an
  * efficiently.</p>
@@ -42,7 +42,7 @@ public class FridgeStorage {
    *
    * @param foodToBeAdded the {@link FoodItem} to be added or updated in the fridge
    * @return  {@code true} if the food item was added.
-   *          {@code false} if the food was not added.
+   *          {@code false} if the food item was not added.
    */
   public boolean addFoodItem(FoodItem foodToBeAdded) {
     boolean wasFoodAdded = false;
@@ -59,9 +59,13 @@ public class FridgeStorage {
 
   /**
    * Removes a food item in the fridge.
-   * <p>This method checks if the specified {@code FoodItem} is already present in the fridge (based on its name).
-   * if the food item is found it will remove the food from the fridge. If not the return will be {@code false}.
+   *
+   * <p>This method checks if the specified {@code FoodItem}
+   * is already present in the fridge (based on its name).
+   * if the food item is found it will remove the food from the fridge.
+   * If not the return will be {@code false}.
    * </p>
+   *
    * @param foodToBeRemoved the {@code FoodItem} to be removed.
    * @return {@code true} if the food item was found and removed.
    *         {@code false} otherwise.
@@ -76,11 +80,15 @@ public class FridgeStorage {
   }
 
   /**
-   * Takes out a specified amount of a food item from the fridge.
+   * Takes out a specified amount of a food item
+   * from the fridge.
    *
-   * <p>This method checks if the specified {@code FoodItem} is present in the fridge (based on its name).
-   * If the food item is found, it removes the specified amount from the fridge. If the amount becomes
-   * 0 or less after the operation, the food item is removed from the fridge entirely. If the food item
+   * <p>This method checks if the specified {@code FoodItem}
+   * is present in the fridge (based on its name).
+   * If the food item is found, it removes the specified amount from the fridge.
+   * If the amount becomes
+   * 0 or less after the operation, the food item is removed from the fridge entirely.
+   * If the food item
    * is not found, the method returns {@code false}.</p>
    *
    * @param foodToBeTaken the {@code FoodItem} to be removed from the fridge.
@@ -96,8 +104,7 @@ public class FridgeStorage {
       float newAmount = oldAmount - foodToBeTaken.getAmount();
       if (newAmount <= 0) {
         fridgeRegister.remove(foodToBeTaken.getNameOfFood());
-      }
-      else{
+      } else {
         fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
       }
       wasFoodFound = true;
@@ -116,13 +123,21 @@ public class FridgeStorage {
   }
 
 
-
+  /**
+   * Searches food item by expiration date.
+   *
+   * <p>Goes trough the fridge and checks if there are any food items
+   * specific expiration date. If found, the food gets added to the {@code foodList}.</p>
+   *
+   * @param expirationDate of the food item.
+   * @return foodList a list with food items in the specific expiration date.
+   */
   public List<FoodItem> searchByDate(LocalDate expirationDate) {
-    List<FoodItem> foodList = new ArrayList<>();
+    List<FoodItem> foodList = new ArrayList<>(); // new list
     for (Map.Entry<String, FoodItem> entry : fridgeRegister.entrySet()) {
       FoodItem food = entry.getValue();
       if (food.getExpirationDate().equals(expirationDate)) {
-        foodList.add(food);
+        foodList.add(food); // Adds it to the list
       }
     }
     return foodList; // Always returns a list, possibly empty.
@@ -130,22 +145,21 @@ public class FridgeStorage {
 
 
   /**
-   * Gets an iterator over the HashMap entries.
+   * Gets an iterator over the fridge entries.
    *
-   * @return fridgeRegister.entrySet().iterator();
+   * @return food items from fridge to iterator.
    */
   public Iterator<Map.Entry<String, FoodItem>> getIterator() {
-    return fridgeRegister.
-            entrySet(). // Sends key and value (OpenAI 2024).
+    return fridgeRegister.entrySet(). // Sends key and value (OpenAI 2024).
             iterator();
   }
 
   /**
-   * Gets an iterator over the HashMap entries.
+   * Gets an iterator over the fridge entries.
    *
-   * @return fridgeRegister.keySet().stream().sorted(String::compareToIgnoreCase).iterator();
+   * @return food items from fridge to iterator in alphabetical order.
    */
-  public Iterator<String> getIteratorAlphabetical(){
+  public Iterator<String> getIteratorAlphabetical() {
     return fridgeRegister.keySet()
             .stream()
             .sorted(String::compareToIgnoreCase)
