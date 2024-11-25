@@ -29,19 +29,5 @@ public class RecipeStorage {
     public Recipes getRecipe(String recipeName) {
         return recipesMap.get(recipeName);
     }
-    /*
-    public boolean addIngredientForRecipe(String nameOfRecipe, String name, Float amount, String unit) {
-        boolean exists = false;
-        Recipes exRecipe = recipesMap.get(nameOfRecipe);
-        if(exRecipe != null){
-            exRecipe.addIngredient(name, amount, unit);
-            exists = true;
-        }
-        return exists;
-    }
-
-     */
-
-
 
 }
