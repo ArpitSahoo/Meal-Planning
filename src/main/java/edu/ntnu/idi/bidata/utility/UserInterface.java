@@ -21,7 +21,7 @@ import java.util.Map;
  * It also uses {@link UIPrintHandler} for displaying output to the user.
  * </p>
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  *
  */
 public class UserInterface {
@@ -132,7 +132,7 @@ public class UserInterface {
    * Adds a new food item to the fridge with user-specified details.
    *
    * <p>This method prompts the user to input details about a food item, including
-   * the name, price per unit, amount, expiration date, and unit. After collecting
+   * the name, price per unit, amount, expiration date, and unit from {@code getUnitOfFoodItem}. After collecting
    * and validating each input, a {@link FoodItem} object is created and added to
    * the {@code fridgeRegister}.
    * </p>
@@ -143,7 +143,7 @@ public class UserInterface {
    *   <li><b>Price per Unit:</b> The cost per unit of the food item</li>
    *   <li><b>Amount:</b> The quantity of the food item</li>
    *   <li><b>Expiration Date:</b> The expiration date in yyyy-MM-dd format</li>
-   *   <li><b>Unit:</b> The unit of measure, chosen from predefined options (kg, liter, stk)</li>
+   *   <li><b>Unit:</b> The unit of measure, chosen from predefined options (kg, liter, pieces)</li>
    * </ul>
    * </p>
    *
@@ -176,6 +176,11 @@ public class UserInterface {
 
   }
 
+  /**
+   * A method that allows the user to add a unit.
+   * @param units the unit of food item.
+   * @return unit of the food item.
+   */
   private String getUnitOfFoodItem(String units) {
     switch (units) {
       case "1":
@@ -196,9 +201,11 @@ public class UserInterface {
 
   /**
    * Removes a food item from the fridge by name.
-   *
+   * <p>UserInput:
+   * <ul><li><b>nameOfFood: </b>The name of the food item.</li></ul></p>
+   * </p>
    * <p>This method prompts the user to enter the name of a food item to remove. If the
-   * item exists in the fridge, it is removed, and a success message is displayed.
+   * item exists in the fridge, it is removed, and a message is displayed.
    * Otherwise, an error message is shown to indicate that the item was not found.
    * </p>
    */
@@ -216,7 +223,9 @@ public class UserInterface {
 
   /**
    * Takes out a fixed amount from the fridge by name.
-   *
+   * <p>UserInput:
+   * <ul><li><b>nameOfFood: </b>The name of the food item.</li></ul></p>
+   * <ul><li><b>amount: </b>The amount of the food item.</li></ul></p>
    * <p>This method prompts the user to enter the name and amount of a food item to take out. If the
    * item exists in the fridge, the amount is taken out and a success message is displayed.
    * Otherwise, an error message is shown to indicate that the item was not found.
@@ -239,7 +248,7 @@ public class UserInterface {
   /**
    * Iterates through the fridge and prints the fridge content.
    *
-   * <p>This method retrieves an iterator from {@link FridgeStorage}
+   * <p>Retrieves an iterator from {@link FridgeStorage}
    * and passes it to the {@link UIPrintHandler}.
    * to print the details of each food item stored in the fridge.
    *</p>
@@ -252,7 +261,7 @@ public class UserInterface {
   /**
    * Iterates through the fridge and prints the fridge content.
    *
-   * <p>This method retrieves an iterator from the {@link FridgeStorage}
+   * <p>Retrieves an iterator from the {@link FridgeStorage}
    * and passes it to the {@link UIPrintHandler}.
    * to print the details of each expired food item stored in the fridge.
    * </p>
@@ -265,13 +274,13 @@ public class UserInterface {
   /**
    * Finds the food by its name.
    *
-   * <p>Checks if the food is in the fridge.
+   *
+   * <p>
+   * UserInput:
+   * <ul><li><b>Name: </b>The name of the food item.</li></ul>
+   * Checks if the food is in the fridge.
    * If found in the fridge it prints out that it is in the fridge
    * else it prints out that it is not in the fridge.
-   * UserInput:
-   *    <ul>
-   *      <li><b>Name of Food:</b> The name of the food item</li>
-   *    </ul>
    * </p>
    */
   private void findFoodByName() {
@@ -318,7 +327,58 @@ public class UserInterface {
     print.printLocatedExpiredFood(item);
   }
 
-  public void addRecipeToBook(){
+  /**
+   * Adds recipe to recipe book.
+   *
+   * <p>Gets the information form {@code getRecipe}.
+   * Asks the user of how many ingredients they want to add.
+   * Loops the following inputs till the user has added the all the ingredient.
+   * </p>
+   *
+   * <p>
+   *     <ul><li><b>Name: </b>The name of the ingredient.</li></ul>
+   *     <ul><li><b>Amount: </b>The amount of ingredient.</li></ul>
+   *     <ul><li><b>Unit: </b>The unit of the ingredient</li></ul>
+   * </p>
+   *
+   * <p>When all the inputs are filled the recipe will be added to the
+   * recipe book.
+   * If any of the inputs are invalid,
+   * the user will be sent back to the command screen.</p>
+   */
+
+  private void addRecipeToBook(){
+    try{ //Tries to add recipe to book map.
+      Recipes newRecipes = getRecipes();
+      print.howManyIngredientsOutput();
+      int amountOfIngredient = input.amountOfIngredients(); //How many loops?
+      for(int indexOfAmount = 0; indexOfAmount < amountOfIngredient; indexOfAmount++){ //Loops.
+        print.nameOfFoodOutput();
+        String name = input.scannerString();
+        Float amount = input.getValidAmount();
+
+        print.choiceOfUnits();
+        String unit = input.scannerString();
+        unit = getUnitOfFoodItem(unit); // switch-case choice method.
+        newRecipes.addIngredient(name, amount, unit); //adds ingredient to list.
+      }
+      recipeStorage.addRecipe(newRecipes); // adds recipe to recipe book.
+    } catch (IllegalArgumentException e) { // Catches illegal argument exception.
+      System.out.println(e.getMessage());
+    }
+  }
+
+  /**
+   * Adds information of the Recipe.
+   * <p>User inputs:
+   * <ul><li><b>Name of recipe: </b>The name of the recipe.</></li></ul>
+   * <ul><li><b>Description: </b>The description of the recipe.</></li></ul>
+   * <ul><li><b>Steps: </b>The steps to make the recipe.</li></ul>
+   * </p>
+   *
+   * @return a new recipe.
+   */
+  private Recipes getRecipes() {
     print.recipeNameOutput();
     String nameOfRecipe = input.scannerString();
 
@@ -327,38 +387,32 @@ public class UserInterface {
 
     print.stepsOutput();
     String steps = input.scannerString();
-
-    Recipes newRecipes = new Recipes(nameOfRecipe, description, steps);
-    print.howManyIngredientsOutput();
-    int amountOfRecipes = input.amountOfIngredients(); //How many loops?
-    for(int indexOfAmount = 0; indexOfAmount < amountOfRecipes; indexOfAmount++){ //Loops.
-      print.nameOfFoodOutput();
-      String name = input.scannerString();
-      print.foodAmountOutput();
-      Float amount = input.getValidAmount();
-
-      print.choiceOfUnits();
-      String unit = input.scannerString();
-      unit = getUnitOfFoodItem(unit); // switch-case choice method.
-      newRecipes.addIngredient(name, amount, unit); //adds ingredient to list.
-    }
-    try{ //Tries to add recipe to book map.
-      recipeStorage.addRecipe(newRecipes); // adds recipe to recipe book.
-    } catch (IllegalArgumentException e) { // Catches illegal argument exception.
-      System.out.println(e.getMessage());
-    }
+      return new Recipes(nameOfRecipe, description, steps);
   }
 
-  public void findRecipeByName() {
+  /**
+   * Finds the recipe by name.
+   *
+   * <p>UserInput:
+   *    <ul>
+   *      <li><b>Name:</b> The name of the Recipe</li>
+   *    </ul>
+   *    Checks if there is a recipe in the {@link RecipeStorage}.
+   *    If found in the recipe book it
+   *    prints out the recipes detail. Else
+   *    it prints out that it is not in the fridge.
+   * </p>
+   */
+  private void findRecipeByName() {
     print.recipeNameOutput();
     String name = input.scannerString();
 
-    // Fetch the recipe from storage
+    // Fetch the recipe from recipe book.
     Recipes recipe = recipeStorage.getRecipe(name);
     if (recipe != null) {
-      print.printLocatedRecipe(recipe); // Print the located recipe
+      print.printLocatedRecipe(recipe); // Print the located recipe.
     } else {
-      print.recipeNotFound();
+      print.recipeNotFound(); // print not found.
     }
   }
 
