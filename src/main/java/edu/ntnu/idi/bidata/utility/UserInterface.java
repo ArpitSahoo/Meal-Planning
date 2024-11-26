@@ -61,7 +61,8 @@ public class UserInterface {
    * and processes commands in a loop until the user chooses to exit.
    * Based on the user's input, the user can do various of commands
    * as displayed in the list below.
-   * If an invalid choice is entered, an error message is displayed.
+   * If an invalid choice is entered, an error message is displayed
+   * and the code reruns.
    * </p>
    *
    * <p>Menu options:
@@ -178,6 +179,7 @@ public class UserInterface {
 
   /**
    * A method that allows the user to add a unit.
+   *
    * @param units the unit of food item.
    * @return unit of the food item.
    */
@@ -223,6 +225,7 @@ public class UserInterface {
 
   /**
    * Takes out a fixed amount from the fridge by name.
+   *
    * <p>UserInput:
    * <ul><li><b>nameOfFood: </b>The name of the food item.</li></ul></p>
    * <ul><li><b>amount: </b>The amount of the food item.</li></ul></p>
