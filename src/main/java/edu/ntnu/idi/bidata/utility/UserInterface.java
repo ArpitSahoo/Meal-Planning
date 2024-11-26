@@ -21,7 +21,7 @@ import java.util.Map;
  * It also uses {@link UIPrintHandler} for displaying output to the user.
  * </p>
  * @author Arpit Sahoo
- * @version 0.0.4
+ * @version 0.0.5
  *
  */
 public class UserInterface {
@@ -234,14 +234,13 @@ public class UserInterface {
   private void takeOutFoodItem() {
     print.foodToTakeOutput();
     String nameOfFood = input.scannerString();
-    print.foodAmountOutput();
     Float amount = input.getValidAmount();
     FoodItem item = new FoodItem(nameOfFood, amount);
     boolean taken = fridgeRegister.foodToTake(item);
     if (taken) {
       print.foodTakenOutput();
     } else {
-      print.foodNotFoundOutput();
+      print.foodNotTakenOutput();
     }
   }
 
