@@ -2,7 +2,11 @@ package edu.ntnu.idi.bidata.fridge;
 
 import edu.ntnu.idi.bidata.food.FoodItem;
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Represents the fridge.
@@ -15,13 +19,14 @@ import java.util.*;
  * efficiently.</p>
  * </p>
  *
+ * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  *
  */
 
 public class FridgeStorage {
-  private final Map<String, FoodItem> fridgeRegister;
+  private final Map<String, FoodItem> fridgeRegister; //Allows the user
 
   /**
    * Constructs a {@code FridgeStorage} instance and initializes the fridge register.
@@ -99,15 +104,17 @@ public class FridgeStorage {
     boolean wasFoodFound = false;
     if (fridgeRegister.containsKey(foodToBeTaken.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount();
-      //TODO find a method that makes sure that if the old amount.
-      // to take out is to big, the user hase to choose another another amount
-      float newAmount = oldAmount - foodToBeTaken.getAmount();
-      if (newAmount <= 0) {
-        fridgeRegister.remove(foodToBeTaken.getNameOfFood());
+      if (oldAmount > foodToBeTaken.getAmount()) {
+        float newAmount = oldAmount - foodToBeTaken.getAmount();
+        if (newAmount <= 0) {
+          fridgeRegister.remove(foodToBeTaken.getNameOfFood());
+        } else {
+          fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
+        }
+        wasFoodFound = true;
       } else {
-        fridgeRegister.get(foodToBeTaken.getNameOfFood()).setAmount(newAmount);
+        return false;
       }
-      wasFoodFound = true;
     }
     return wasFoodFound;
   }
@@ -151,7 +158,7 @@ public class FridgeStorage {
    */
   public Iterator<Map.Entry<String, FoodItem>> getIterator() {
     return fridgeRegister.entrySet(). // Sends key and value (OpenAI 2024).
-            iterator();
+            iterator(); //return an iterator because, you cant send a whole list to another class.
   }
 
   /**
@@ -161,8 +168,8 @@ public class FridgeStorage {
    */
   public Iterator<String> getIteratorAlphabetical() {
     return fridgeRegister.keySet()
-            .stream()
-            .sorted(String::compareToIgnoreCase)
-            .iterator();
+        .stream()
+        .sorted(String::compareToIgnoreCase) //Streams it and sorts it and ignores casings.
+        .iterator(); //return an iterator because, should not send a whole list to another class.
   }
 }
