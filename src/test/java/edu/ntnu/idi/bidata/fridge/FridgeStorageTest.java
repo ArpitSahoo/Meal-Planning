@@ -14,8 +14,9 @@ import static org.junit.jupiter.api.Assertions.*;
  * It also ensures that the food is organized and managed correctly.
  * </p>
  *
+ * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.1
+ * @version 0.0.2
  */
 
 class FridgeStorageTest {
@@ -93,16 +94,16 @@ class FridgeStorageTest {
 
     @Test
     void searchFoodByNamePositiveTest() {
-        fridgeRegister.addFoodItem(foodItem1);
-        boolean wasFoodTaken = fridgeRegister.foodToTake(foodItem1);
-        assertTrue(wasFoodTaken, "food was found");
+        fridgeRegister.addFoodItem(foodItem1); // Act
+        assertEquals(foodItem1, fridgeRegister.searchFoodByName("milk")); // Arrange
     }
 
     @Test
     void SearchFoodByNameNegativeTest() {
-        FoodItem foodNotExisting =  new FoodItem("juice", 2f, "liter", 20.0, expirationDate);
-        boolean wasFoodTaken = fridgeRegister.foodToTake(foodNotExisting);
-        assertFalse(wasFoodTaken);
+        FoodItem foodNotExisting =
+            new FoodItem("juice", 2f, "liter", 20.0, expirationDate);
+        boolean wasFoodAdded = fridgeRegister.foodToTake(foodNotExisting);
+        assertFalse(wasFoodAdded);
     }
 
     @Test
@@ -125,11 +126,66 @@ class FridgeStorageTest {
         assertFalse(getIteratorTest.hasNext());
 
     }
-    /*
-    // needs to be made.
+
     @Test
-    void getIteratorAlphabetical() {
+    void getIteratorNegativeTest() {
+        fridgeRegister.addFoodItem(foodItem1);
+        fridgeRegister.addFoodItem(foodItem2);
+        fridgeRegister.addFoodItem(foodItem3);
+
+        Iterator<Map.Entry<String, FoodItem>> getIteratorTest = fridgeRegister.getIterator();
+
+        assertTrue(getIteratorTest.hasNext());
+        assertEquals("bread", getIteratorTest.next().getKey());
+
+        assertTrue(getIteratorTest.hasNext());
+        assertNotEquals("juice", getIteratorTest.next().getKey());
+
+        assertTrue(getIteratorTest.hasNext());
+        assertEquals("monster white", getIteratorTest.next().getKey());
+
+        assertFalse(getIteratorTest.hasNext());
+
     }
 
-     */
+    @Test
+    void getIteratorAlphabetical() {
+        fridgeRegister.addFoodItem(foodItem1);
+        fridgeRegister.addFoodItem(foodItem2);
+        fridgeRegister.addFoodItem(foodItem3);
+
+        Iterator<String> getIteratorTest = fridgeRegister.getIteratorAlphabetical();
+
+        assertTrue(getIteratorTest.hasNext());
+        assertEquals("bread", getIteratorTest.next());
+
+        assertTrue(getIteratorTest.hasNext());
+        assertEquals("milk", getIteratorTest.next());
+
+        assertTrue(getIteratorTest.hasNext());
+        assertEquals("monster white", getIteratorTest.next());
+
+        assertFalse(getIteratorTest.hasNext());
+    }
+
+    @Test
+    void getIteratorAlphabeticalNegativeTest(){
+        fridgeRegister.addFoodItem(foodItem1);
+        fridgeRegister.addFoodItem(foodItem2);
+        fridgeRegister.addFoodItem(foodItem3);
+
+        Iterator<String> getIteratorTest = fridgeRegister.getIteratorAlphabetical();
+
+        assertTrue(getIteratorTest.hasNext());
+        assertNotEquals("milk", getIteratorTest.next());
+
+        assertTrue(getIteratorTest.hasNext());
+        assertNotEquals("monster white", getIteratorTest.next());
+
+
+        assertTrue(getIteratorTest.hasNext());
+        assertNotEquals("bread", getIteratorTest.next());
+
+        assertFalse(getIteratorTest.hasNext());
+    }
 }
