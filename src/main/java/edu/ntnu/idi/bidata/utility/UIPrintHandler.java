@@ -20,7 +20,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.5
+ * @version 0.0.6
  */
 
 
@@ -28,10 +28,10 @@ public class UIPrintHandler {
 
   public void choiceScreen() {
     System.out.println("\n--- Fridge ---");
-    System.out.println("Choose 1, 2, 3, 4, 5 or 6: ");
-    System.out.println("1. Add a food");
-    System.out.println("2. Remove a food");
-    System.out.println("3. Take out an item");
+    System.out.println("Choose a number between 1 to 11: ");
+    System.out.println("1. Add a food from fridge");
+    System.out.println("2. Remove a food from fridge");
+    System.out.println("3. Take out a fixed amount of a food");
     System.out.println("4. Find food by name");
     System.out.println("5. Display all expired food");
     System.out.println("6. Display foods with a certain expiry date");
@@ -218,6 +218,11 @@ public class UIPrintHandler {
 
   public void foodTakenOutput(){
     System.out.println("Food item taken out.");
+  }
+
+  public void foodNotTakenOutput(){
+    System.out.println("Food is not taken out");
+    System.out.println("Please choose an existing food item \nor a correct amount");
   }
 
   public void exit(){
