@@ -5,6 +5,7 @@ import org.junit.jupiter.api.*;
 
 import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  */
 
 class FridgeStorageTest {
@@ -199,7 +200,7 @@ class FridgeStorageTest {
   @Test
   void searchFoodByNamePositiveTest() {
     fridgeRegister.addFoodItem(foodItem1); // Act
-    assertEquals(foodItem1, fridgeRegister.searchFoodByName("milk")); // Arrange
+    assertEquals(foodItem1, fridgeRegister.searchFoodByName("milk")); // Assert
   }
 
   /**
@@ -284,6 +285,7 @@ class FridgeStorageTest {
    *   <li>{@code getIterator().next().getKey()} returns the correct key for {@code foodItem2}</li>
    *   <li>assert will mot equal to juice, since it does not exist the fridge.</li>
    * </ul>
+   * </p>
    */
   @Test
   void getIteratorNegativeTest() {
@@ -305,6 +307,44 @@ class FridgeStorageTest {
     assertFalse(getIteratorTest.hasNext());
 
   }
+
+  /**
+   * A positive test that tests the {@code searchByDate} method of the {@code FridgeRegister} class.
+   *
+   * <p>This test ensures that the method {@code searchByDate} finds an existing food item in
+   * {@code FridgeRegister} with the specific expiration date and adds it to the list.</p>
+   *
+   * <p>Expected behavior:
+   *   <ul>
+   *     <li>Adds {@code foodItem1} to the list {@code results} since the dates match.</li>
+   *     <li>The code asserts {@code true} when it finds {@code foodItem1} in the list</li>
+   *     <li>Expects the list to have a size of 1. Hence, there is only one {@code foodItem}</li>
+   *   </ul>
+   * </p>
+   *
+   */
+  @Test
+  void searchByDatePositiveTest() {
+    fridgeRegister.addFoodItem(foodItem1);
+
+    List<FoodItem> result = fridgeRegister.searchByDate(expirationDate); // searches if the
+
+    assertTrue(result.contains(foodItem1)); // This line inspired by ChatGPT 2024
+    assertEquals(1, result.size()); // This line inspired by ChatGPT 2024
+  }
+
+  //TODO documentation needed
+  @Test
+  void searchByDateNegativeTest() {
+    fridgeRegister.addFoodItem(foodItem1);
+
+    LocalDate expirationDate2 = LocalDate.of(2026, 10, 20);
+    List<FoodItem> result = fridgeRegister.searchByDate(expirationDate2); // searches if the
+
+    assertFalse(result.contains(foodItem1)); // False since the date do not match and not added to list.
+    assertEquals(0, result.size()); // Expected 0 since not in the list.
+  }
+
 
   /**
    * Tests the {@code getIteratorAlphabetical} method of the {@code FridgeRegister} class.
