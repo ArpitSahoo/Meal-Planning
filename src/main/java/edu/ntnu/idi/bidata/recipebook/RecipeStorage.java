@@ -12,7 +12,7 @@ import java.util.Map;
  * This class allows the user add, remove and get the name of the recipe.</p>
  *
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  * @since 0.0.1
  */
 public class RecipeStorage {
@@ -49,6 +49,15 @@ public class RecipeStorage {
       wasAdded = true;
     }
     return wasAdded;
+  }
+
+  public boolean removeRecipe(String recipeName) {
+    boolean wasRemoved = false;
+    if (recipesMap.containsKey(recipeName)) {
+      recipesMap.remove(recipeName);
+      wasRemoved = true;
+    }
+    return wasRemoved;
   }
 
   /**
