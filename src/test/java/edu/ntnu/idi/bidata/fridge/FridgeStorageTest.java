@@ -63,13 +63,6 @@ class FridgeStorageTest {
    * <p>This test verifies that a food item is successfully added to the fridge.
    * It asserts that the method returns {@code true} when the food item
    * is added successfully.</p>
-   *
-   * <p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
-   * </ul>
-   *</p>
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code addFoodItem(foodItem1)} returns {@code true}.</li>
@@ -88,14 +81,6 @@ class FridgeStorageTest {
    *
    * <p>This test verifies that a not exiting food item is not added to the fridge.
    * It asserts that the method returns {@code false} when using {@code foodToTake}.
-   *</p>
-   *
-   * <p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code notExistingFood} is a valid {@code FoodItem} object.</li>
-   *   <li>{@code notExistingFood} is not added.</li>
-   * </ul>
    *</p>
    *
    * <p>Expected behavior:
@@ -120,13 +105,6 @@ class FridgeStorageTest {
    * is removed from the fridge.
    * It asserts that the method returns {@code true} when using {@code removeFoodItem}.</p>
    *
-   *<p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
-   * </ul>
-   *</p>
-   *
    * <p>Expected behavior:
    *   <ul><li>{@code removeFoodItem(foodItem1)} returns {@code True}.</li></ul>
    *</p>
@@ -147,13 +125,6 @@ class FridgeStorageTest {
    * is removed from the fridge.
    * It asserts that the method returns {@code false} when using {@code removeFoodItem}.</p>
    *
-   *<p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
-   *   <li>{@code foodItem1} is not added to the fridge</li>
-   * </ul>
-   *</p>
    * <p>Expected behavior:
    *   <ul><li>{@code removeFoodItem(foodItem1)} returns {@code false}.</li></ul>
    *</p>
@@ -173,13 +144,6 @@ class FridgeStorageTest {
    * A new {@code FoodItem} is initialized to take out from the fridge.
    * It asserts that the method returns {@code True} when using {@code foodToTake}.</p>
    *
-   *<p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
-   *   <li>{@code foodToTake} is a valid {@code FoodItem} object.</li>
-   * </ul>
-   *</p>
    * <p>Expected behavior:
    *   <ul><li>{@code foodToTake(foodItem1)} returns {@code True}.</li></ul>
    *</p>
@@ -202,15 +166,9 @@ class FridgeStorageTest {
    * <p>This test if a fixed amount of a {@code FoodItem} in the {@code FridgeRegister}
    * is taken from the fridge.
    * A new {@code FoodItem} is initialized to take out from the fridge.
-   * It asserts that the method returns {@code false} when using {@code foodToTake}.</p>
+   * It asserts that the method returns {@code false} when using {@code foodToTake}.
+   * Since the {@code foodToTake} does not exists in the fridge.</p>
    *
-   *<p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodToTake} is a valid {@code FoodItem} object.</li>
-   *   <li>{@code foodToTake} does not exists in the fridge.</li>
-   * </ul>
-   *</p>
    *
    * <p>Expected behavior:
    *   <ul><li>{@code foodToTake(foodToTake)} returns {@code false}.</li></ul>
@@ -235,12 +193,6 @@ class FridgeStorageTest {
    * A new {@code FoodItem} is initialized to find in the fridge.
    * It asserts that the method is passed when searching {@code foodItem1}.</p>
    *
-   *<p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
-   *   <li>{@code foodToTake} exists in the fridge.</li>
-   * </ul>
    * Return the food's name.
    *</p>
    */
@@ -258,14 +210,7 @@ class FridgeStorageTest {
    * exits in the fridge.
    * A new {@code FoodItem} is initialized to find in the fridge.
    * It asserts that the method returns {@code false},
-   * when searching {@code foodItem1}.</p>
-   *
-   *<p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
-   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
-   *   <li>{@code foodToTake} does not exist in the fridge.</li>
-   * </ul>
+   * when searching {@code foodNotExisting}.</p>
    *
    * Does not return the food's name.
    *</p>
@@ -291,18 +236,13 @@ class FridgeStorageTest {
    *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
    * </ul>
    *
-   * <p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} contains three food items: {@code foodItem1}, {@code foodItem2}, and {@code foodItem3}.</li>
-   *   <li>The food items are added with keys {@code "bread"}, {@code "milk"}, and {@code "monster white"} respectively.</li>
-   * </ul>
-   *
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
    *   <li>{@code getIterator().next().getKey()} returns the correct key for each item in the expected order.</li>
    *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
    * </ul>
+   *
    */
   @Test
   void getIteratorTest() {
@@ -338,18 +278,11 @@ class FridgeStorageTest {
    *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
    * </ul>
    *
-   * <p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} contains to food items: {@code foodItem1} and {@code foodItem3}.</li>
-   *   <li>The food items are added with keys {@code "bread"}  and {@code "monster white"} respectively.</li>
-   *   <li>A non-existing food "juice" is tested.</li>
-   * </ul>
-   *
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
    *   <li>{@code getIterator().next().getKey()} returns the correct key for {@code foodItem2}</li>
-   *   <li>{@code getIterator().hasNext()} is {@code false} trying to find juice. </li>
+   *   <li>assert will mot equal to juice, since it does not exist the fridge.</li>
    * </ul>
    */
   @Test
@@ -388,12 +321,6 @@ class FridgeStorageTest {
    *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
    * </ul>
    *
-   * <p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} contains three food items: {@code foodItem1}, {@code foodItem2}, and {@code foodItem3}.</li>
-   *   <li>The food items are added with keys {@code "bread"}, {@code "milk"}, and {@code "monster white"} respectively.</li>
-   * </ul>
-   *
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
@@ -425,19 +352,12 @@ class FridgeStorageTest {
    * A negative test that test the {@code getIteratorAlphabetical} method of the {@code FridgeRegister} class.
    *
    * <p>This test ensures that the {@code getIteratorAlphabetical} method fails to return an iterator
-   * that retrieves the food items in the correct alphabetical order. The test verifies the following:
+   * that retrieves the food items in the correct alphabetical order:
    *
    * <ul>
    *   <li>The iterator starts with the first item and tries the next.</li>
    *   <li>The keys of the food items are not in the expected alphabetical order.</li>
    *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
-   *
-   * <p>Preconditions:
-   * <ul>
-   *   <li>{@code fridgeRegister} contains three food items: {@code foodItem1}, {@code foodItem2}, and {@code foodItem3}.</li>
-   *   <li>The food items are added with keys {@code "bread"}, {@code "milk"}, and {@code "monster white"} respectively.</li>
-   *   <li>The food items are not in an alphabetical order.</li>
    * </ul>
    *
    * <p>Expected behavior:
