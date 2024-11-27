@@ -4,22 +4,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.*;
 import java.time.LocalDate; // Import LocalDate
+
+/**
+ *
+ * @author Arpit Sahoo
+ * @version 0.0.2
+ */
 class FoodItemTest {
     private FoodItem foodItemTest; //Arrange
     private final LocalDate expirationDate = LocalDate.of(2025, 10, 20); //Arrange
 
-    /**
-     * Arrange
-     * act
-     * assert
-     * assertEquals
-     * assertThrows
-     */
 
     @BeforeEach
     void setUp()
     {
-
         foodItemTest = new FoodItem("milk", 7f, "liter", 20.0, expirationDate);
         // Other arrange
     }
@@ -34,22 +32,15 @@ class FoodItemTest {
     }
 
     @Test
-    void setNameOfFoodTestForString() {
-        foodItemTest.setNameOfFood("milk");
+    void setNameOfFoodPositiveTest() {
         assertEquals("milk", foodItemTest.getNameOfFood());
     }
 
     @Test
-    void setNameOfFoodTestForEmptyString() {
+    void setNameOfFoodNegativeTest() {
         assertThrows(IllegalArgumentException.class, () -> foodItemTest.setNameOfFood(""));
-    }
-
-
-    @Test
-    void setNameOfFoodTestForNull() {
         assertThrows(IllegalArgumentException.class, () -> foodItemTest.setNameOfFood(null));
     }
-
 
     @Test
     void setAmountTestForNegativeValues() {
