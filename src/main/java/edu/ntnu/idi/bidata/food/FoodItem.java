@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  *
  */
 public class FoodItem {
@@ -22,16 +22,6 @@ public class FoodItem {
   private String units;
   private LocalDate expirationDate;
   private Double pricePerUnit;
-
-
-  /**
-   * A constructor for the class FoodItem.
-   *
-   * @param nameOfFood of FoodItem.
-   */
-  public FoodItem(String nameOfFood) { // Allows the user to search food by name.
-    setNameOfFood(nameOfFood); // Also allows the method in UI to work.
-  }
 
   /**
    * A constructor for the class FoodItem.
