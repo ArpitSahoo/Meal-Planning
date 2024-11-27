@@ -21,7 +21,7 @@ import java.util.Map;
  * It also uses {@link UIPrintHandler} for displaying output to the user.
  * </p>
  * @author Arpit Sahoo
- * @version 0.0.5
+ * @version 0.0.6
  *
  */
 public class UserInterface {
@@ -50,6 +50,7 @@ public class UserInterface {
     print = new UIPrintHandler();
     recipeStorage = new RecipeStorage();
     init();
+    initRecipe();
     printFridge();
     start();
   }
@@ -120,6 +121,9 @@ public class UserInterface {
           findRecipeByName();
           break;
         case "11":
+          removeRecipeByName();
+          break;
+        case "12":
           running = false;
           print.exit();
           break;
@@ -214,8 +218,7 @@ public class UserInterface {
   private void removeFoodItem() {
     print.removeFoodOutput();
     String name = input.scannerString();
-    FoodItem item = new FoodItem(name);
-    boolean removed = fridgeRegister.removeFoodItem(item);
+    boolean removed = fridgeRegister.removeFoodItem(name);
     if (removed) {
       print.foodRemovedOutput();
     } else {
@@ -420,6 +423,31 @@ public class UserInterface {
 
 
   /**
+   * Removes the recipe by name.
+   *
+   * <p>UserInput:
+   *    <ul>
+   *      <li><b>Name:</b> The name of the Recipe</li>
+   *    </ul>
+   *    Checks if there is a recipe in the {@link RecipeStorage}.
+   *    If found in the recipe book, it
+   *    removes the recipe. Else
+   *    it prints out that it is not in the fridge.
+   * </p>
+   */
+  private void removeRecipeByName(){
+    print.recipeNameOutput();
+    String nameOfRecipe = input.scannerString();
+    boolean removed = recipeStorage.removeRecipe(nameOfRecipe);
+    if (removed) {
+      print.recipeWasRemoved();
+    } else {
+      print.recipeNotFound();
+    }
+  }
+
+
+  /**
    * Initializes the fridge with a set of predefined food items.
    *
    * <p>This adds several {@link FoodItem} with predefined values
@@ -440,6 +468,25 @@ public class UserInterface {
     fridgeRegister.addFoodItem(banana);
     fridgeRegister.addFoodItem(milk);
     fridgeRegister.addFoodItem(chicken);
+  }
+
+  /**
+   * Initializes the fridge with a set of predefined food items.
+   *
+   * <p>This adds several {@link Recipes} with predefined values
+   * for name, description, steps, expiration ingredient. These items are then added
+   * to the {@link RecipeStorage} for use in the application.
+   * </p>
+   */
+  private void initRecipe(){
+    Recipes butterChicken = new Recipes("butter chicken",
+        "Good indian dish", "First make chicken, then make butter");
+    butterChicken.addIngredient("Butter", 2f, "Kg");
+    butterChicken.addIngredient("Chicken", 2f, "Kg");
+    Recipes tomatoSauce = new Recipes("tomato sauce",
+        "Good italian dish", "Add Tomato to the sauce");
+    tomatoSauce.addIngredient("Tomato", 2f, "pieces");
+    tomatoSauce.addIngredient("Kiwi finished sauce", 1f, "Liters");
   }
 
 
