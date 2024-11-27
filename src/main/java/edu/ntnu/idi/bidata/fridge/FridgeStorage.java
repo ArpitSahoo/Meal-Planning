@@ -21,7 +21,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  *
  */
 
@@ -75,10 +75,10 @@ public class FridgeStorage {
    * @return {@code true} if the food item was found and removed.
    *         {@code false} otherwise.
    */
-  public boolean removeFoodItem(FoodItem foodToBeRemoved) {
+  public boolean removeFoodItem(String foodToBeRemoved) {
     boolean wasFoodFound = false;
-    if (fridgeRegister.containsKey(foodToBeRemoved.getNameOfFood())) {
-      fridgeRegister.remove(foodToBeRemoved.getNameOfFood());
+    if (fridgeRegister.containsKey(foodToBeRemoved)) {
+      fridgeRegister.remove(foodToBeRemoved);
       wasFoodFound = true;
     }
     return wasFoodFound;
