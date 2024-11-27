@@ -85,20 +85,21 @@ public class FridgeStorage {
   }
 
   /**
-   * Takes out a specified amount of a food item
-   * from the fridge.
+   * Removes a specified amount of a food item from the fridge.
    *
    * <p>This method checks if the specified {@code FoodItem}
-   * is present in the fridge (based on its name).
-   * If the food item is found, it removes the specified amount from the fridge.
-   * If the amount becomes
-   * 0 or less after the operation, the food item is removed from the fridge entirely.
-   * If the food item
-   * is not found, the method returns {@code false}.</p>
+   * exists in the fridge (based on its name and amount).
+   * If the food item is found and the specified amount is smaller than or equal to the amount in
+   * fridge, it reduces the quantity. If the remaining amount is 0 or less, the item is removed
+   * entirely. If the item is not found or the amount exceeds the available quantity, the method
+   * returns {@code false}.</p>
+   *
+   * <p>If the prompted amount to remove is bigger than amount in the fridge.
+   * the food will not be touched.</p>
    *
    * @param foodToBeTaken the {@code FoodItem} to be removed from the fridge.
    * @return {@code true} if the food item was found and the amount was successfully removed,
-   *         {@code false} otherwise.
+   * {@code false} otherwise.
    */
   public boolean foodToTake(FoodItem foodToBeTaken) {
     boolean wasFoodFound = false;
