@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  */
 
 class FridgeStorageTest {
@@ -132,9 +132,9 @@ class FridgeStorageTest {
    *</p>
    */
   @Test
-  void removeFoodItem() {
+  void removeFoodItemPositiveTest() {
     fridgeRegister.addFoodItem(foodItem1); // act
-    boolean removed = fridgeRegister.removeFoodItem(foodItem1); //act
+    boolean removed = fridgeRegister.removeFoodItem("milk"); //act
     assertTrue(removed); // Assert - true if condition is true.
 
   }
@@ -160,7 +160,7 @@ class FridgeStorageTest {
    */
   @Test
   void removeFoodItemNegativeTest() {
-    boolean removed = fridgeRegister.removeFoodItem(foodItem1);
+    boolean removed = fridgeRegister.removeFoodItem("milk");
     assertFalse(removed); // False if condition is false.
 
   }
@@ -226,14 +226,50 @@ class FridgeStorageTest {
     assertFalse(wasFoodTaken);
   }
 
-
+  /**
+   *Tests the {@code searchFoodByName} method
+   * of the {@code FridgeRegister} class.
+   *
+   * <p>This test if a {@code FoodItem} in the {@code FridgeRegister}
+   * exits in the fridge.
+   * A new {@code FoodItem} is initialized to find in the fridge.
+   * It asserts that the method is passed when searching {@code foodItem1}.</p>
+   *
+   *<p>Preconditions:
+   * <ul>
+   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
+   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
+   *   <li>{@code foodToTake} exists in the fridge.</li>
+   * </ul>
+   * Return the food's name.
+   *</p>
+   */
   @Test
   void searchFoodByNamePositiveTest() {
     fridgeRegister.addFoodItem(foodItem1); // Act
     assertEquals(foodItem1, fridgeRegister.searchFoodByName("milk")); // Arrange
   }
 
-
+  /**
+   * A negative test that tests if the {@code searchFoodByName} method
+   * of the {@code FridgeRegister} class. '
+   *
+   * <p>This test if a non-existing {@code FoodItem} is in the {@code FridgeRegister}
+   * exits in the fridge.
+   * A new {@code FoodItem} is initialized to find in the fridge.
+   * It asserts that the method returns {@code false},
+   * when searching {@code foodItem1}.</p>
+   *
+   *<p>Preconditions:
+   * <ul>
+   *   <li>{@code fridgeRegister} is an initialized and empty fridge.</li>
+   *   <li>{@code foodItem1} is a valid {@code FoodItem} object.</li>
+   *   <li>{@code foodToTake} does not exist in the fridge.</li>
+   * </ul>
+   *
+   * Does not return the food's name.
+   *</p>
+   */
   @Test
   void SearchFoodByNameNegativeTest() {
     FoodItem foodNotExisting =
@@ -242,6 +278,32 @@ class FridgeStorageTest {
     assertFalse(wasFoodAdded);
   }
 
+  /**
+   * Tests the {@code getIterator} method of the {@code FridgeRegister} class.
+   *
+   * <p>This test ensures that the {@code getIterator} method correctly provides an iterator
+   * over the items stored in the fridge register. It verifies that the iterator retrieves
+   * the food items in the expected order, and checks the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and progresses sequentially.</li>
+   *   <li>The keys of the food items match the expected values.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Preconditions:
+   * <ul>
+   *   <li>{@code fridgeRegister} contains three food items: {@code foodItem1}, {@code foodItem2}, and {@code foodItem3}.</li>
+   *   <li>The food items are added with keys {@code "bread"}, {@code "milk"}, and {@code "monster white"} respectively.</li>
+   * </ul>
+   *
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIterator().next().getKey()} returns the correct key for each item in the expected order.</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
+   * </ul>
+   */
   @Test
   void getIteratorTest() {
     fridgeRegister.addFoodItem(foodItem1);
@@ -263,6 +325,33 @@ class FridgeStorageTest {
 
   }
 
+  /**
+   * A negative test that tests the {@code getIterator} method of the {@code FridgeRegister} class.
+   *
+   * <p>This test ensures that the {@code getIterator} method fails to return an iterator
+   * over the items stored in the fridge register. It verifies that the iterator retrieves
+   * the food items in the expected order, and checks the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and progresses sequentially.</li>
+   *   <li>The keys of the food items match the expected values.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Preconditions:
+   * <ul>
+   *   <li>{@code fridgeRegister} contains to food items: {@code foodItem1} and {@code foodItem3}.</li>
+   *   <li>The food items are added with keys {@code "bread"}  and {@code "monster white"} respectively.</li>
+   *   <li>A non-existing food "juice" is tested.</li>
+   * </ul>
+   *
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIterator().next().getKey()} returns the correct key for {@code foodItem2}</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} trying to find juice. </li>
+   * </ul>
+   */
   @Test
   void getIteratorNegativeTest() {
     fridgeRegister.addFoodItem(foodItem1);
@@ -284,6 +373,34 @@ class FridgeStorageTest {
 
   }
 
+  /**
+   * Tests the {@code getIteratorAlphabetical} method of the {@code FridgeRegister} class.
+   *
+   * <p>This test ensures that the {@code getIteratorAlphabetical} method correctly provides an iterator
+   * over the items stored in the fridge register. It also ensures that the {@code FoodItem} are
+   * sorted alphabetical.
+   * It verifies that the iterator retrieves
+   * the food items in the expected order, and checks the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and progresses sequentially.</li>
+   *   <li>The keys of the food items are in the expected alphabetical order.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Preconditions:
+   * <ul>
+   *   <li>{@code fridgeRegister} contains three food items: {@code foodItem1}, {@code foodItem2}, and {@code foodItem3}.</li>
+   *   <li>The food items are added with keys {@code "bread"}, {@code "milk"}, and {@code "monster white"} respectively.</li>
+   * </ul>
+   *
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIterator().next().getKey()} returns the correct key for each item in the expected order.</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
+   * </ul>
+   */
   @Test
   void getIteratorAlphabetical() {
     fridgeRegister.addFoodItem(foodItem1);
@@ -304,6 +421,32 @@ class FridgeStorageTest {
     assertFalse(getIteratorTest.hasNext());
   }
 
+  /**
+   * A negative test that test the {@code getIteratorAlphabetical} method of the {@code FridgeRegister} class.
+   *
+   * <p>This test ensures that the {@code getIteratorAlphabetical} method fails to return an iterator
+   * that retrieves the food items in the correct alphabetical order. The test verifies the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and tries the next.</li>
+   *   <li>The keys of the food items are not in the expected alphabetical order.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Preconditions:
+   * <ul>
+   *   <li>{@code fridgeRegister} contains three food items: {@code foodItem1}, {@code foodItem2}, and {@code foodItem3}.</li>
+   *   <li>The food items are added with keys {@code "bread"}, {@code "milk"}, and {@code "monster white"} respectively.</li>
+   *   <li>The food items are not in an alphabetical order.</li>
+   * </ul>
+   *
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getIteratorAlphabetical().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIteratorAlphabetical().next()} does not return keys in the correct alphabetical order.</li>
+   *   <li>{@code getIteratorAlphabetical().hasNext()} is {@code false} after the last item.</li>
+   * </ul>
+   */
   @Test
   void getIteratorAlphabeticalNegativeTest() {
     fridgeRegister.addFoodItem(foodItem1);
