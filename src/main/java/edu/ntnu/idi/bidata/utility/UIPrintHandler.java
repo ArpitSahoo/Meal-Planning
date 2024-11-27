@@ -20,7 +20,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.6
+ * @version 0.0.7
  */
 
 
@@ -39,7 +39,8 @@ public class UIPrintHandler {
     System.out.println("8. Display fridge contents in an alphabetical order");
     System.out.println("9. Add a recipe to recipe book");
     System.out.println("10. Find a recipe by name");
-    System.out.println("11. Exit");
+    System.out.println("11. Remove a recipe from recipe book");
+    System.out.println("12. Exit");
     System.out.println("Choose a following number: ");
   }
 
@@ -249,4 +250,7 @@ public class UIPrintHandler {
     System.out.println("Recipe not found.");
   }
 
+  public void recipeWasRemoved(){
+    System.out.println("Recipe was removed.");
+  }
 }
