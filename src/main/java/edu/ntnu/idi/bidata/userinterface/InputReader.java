@@ -1,4 +1,4 @@
-package edu.ntnu.idi.bidata.utility;
+package edu.ntnu.idi.bidata.userinterface;
 
 
 import static java.lang.System.in;
