@@ -11,7 +11,6 @@ package edu.ntnu.idi.bidata;
  * @version 0.0.1
  */
 public class ObjectValidation {
-
 }
 
 
