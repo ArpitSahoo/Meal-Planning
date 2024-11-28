@@ -1,6 +1,6 @@
 package edu.ntnu.idi.bidata;
 
-import edu.ntnu.idi.bidata.utility.UserInterface;
+import edu.ntnu.idi.bidata.userinterface.UserInterface;
 
 /**
  * The main starting point of your application. Let this class create the
