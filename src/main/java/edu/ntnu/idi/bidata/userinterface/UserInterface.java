@@ -1,4 +1,4 @@
-package edu.ntnu.idi.bidata.utility;
+package edu.ntnu.idi.bidata.userinterface;
 
 import edu.ntnu.idi.bidata.food.FoodItem;
 import edu.ntnu.idi.bidata.fridge.FridgeStorage;
