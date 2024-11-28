@@ -3,21 +3,22 @@ package edu.ntnu.idi.bidata.recipe;
 import edu.ntnu.idi.bidata.food.FoodItem;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Represents a recipe.
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.5
+ * @version 0.0.6
  */
 
-
+//TODO documentation
 public class Recipes {
   private String nameOfRecipe;
   private String description;
   private String steps;
-  private final ArrayList<FoodItem> ingredients;
+  private final List<FoodItem> ingredients;
 
   public Recipes(String nameOfRecipe, String description, String steps) {
     setNameOfRecipe(nameOfRecipe);
