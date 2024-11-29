@@ -18,15 +18,17 @@ import java.util.Map;
  * and interfaces with {@link FridgeStorage} and {@link RecipeStorage}
  * to update and retrieve fridge and recipe data.
  * The class understands the user commands by help from the {@link InputReader}.
- * It also uses {@link UIPrintHandler} for displaying output to the user.
+ * It also uses {@link UiPrintHandler} for displaying output to the user.
  * </p>
+ *
+ * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.6
+ * @version 0.0.7
  *
  */
 public class UserInterface {
   private final FridgeStorage fridgeRegister;
-  private final UIPrintHandler print;
+  private final UiPrintHandler print;
   private final InputReader input;
   private final RecipeStorage recipeStorage;
 
@@ -39,6 +41,8 @@ public class UserInterface {
    * and sets up a {@code UIPrintHandler} for output.
    * It also initializes the {@code init} to add food to the fridge.
    * After the initialization,
+   * It also initializes the {@code initRecipe} to add recipes to the recipe book.
+   * After the initialization,
    * it has a {@code printFridge} to display all the initialized food.
    * It starts the user interface by calling the {@code start} method.
    * </p>
@@ -47,7 +51,7 @@ public class UserInterface {
   public UserInterface() {
     input = new InputReader();
     fridgeRegister = new FridgeStorage();
-    print = new UIPrintHandler();
+    print = new UiPrintHandler();
     recipeStorage = new RecipeStorage();
     init();
     initRecipe();
@@ -152,9 +156,11 @@ public class UserInterface {
    * </ul>
    * </p>
    *
-   * <p>If the expiration date or unit selection is invalid, the user is prompted
+   * <p>If the any of the inputs are invalid, the user is prompted
    * to re-enter the information. The food item is only added to the fridge if
    * all input values are valid.
+   * If the food item was added, the user will be informed that it is added
+   * and what happens if it already exists.
    * </p>
    */
   private void addFood() {
@@ -175,6 +181,8 @@ public class UserInterface {
     try {
       FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
       fridgeRegister.addFoodItem(food);
+      print.alreadyExisting();
+      print.foodAdded();
     } catch (Exception e) {
       System.out.println(e.getMessage());
     }
@@ -254,7 +262,7 @@ public class UserInterface {
    * Iterates through the fridge and prints the fridge content.
    *
    * <p>Retrieves an iterator from {@link FridgeStorage}
-   * and passes it to the {@link UIPrintHandler}.
+   * and passes it to the {@link UiPrintHandler}.
    * to print the details of each food item stored in the fridge.
    *</p>
    */
@@ -267,7 +275,7 @@ public class UserInterface {
    * Iterates through the fridge and prints the fridge content.
    *
    * <p>Retrieves an iterator from the {@link FridgeStorage}
-   * and passes it to the {@link UIPrintHandler}.
+   * and passes it to the {@link UiPrintHandler}.
    * to print the details of each expired food item stored in the fridge.
    * </p>
    */
@@ -304,7 +312,7 @@ public class UserInterface {
    * Iterates through the fridge and prints the fridge content.
    *
    * <p>This method retrieves an iterator from the {@link FridgeStorage}
-   * and passes it to the {@link UIPrintHandler}.
+   * and passes it to the {@link UiPrintHandler}.
    * to print food in an alphabetical order.
    * </p>
    */
@@ -368,6 +376,7 @@ public class UserInterface {
         newRecipes.addIngredient(name, amount, unit); //adds ingredient to list.
       }
       recipeStorage.addRecipe(newRecipes); // adds recipe to recipe book.
+      print.recipeAdded();
     } catch (IllegalArgumentException e) { // Catches illegal argument exception.
       System.out.println(e.getMessage());
     }
