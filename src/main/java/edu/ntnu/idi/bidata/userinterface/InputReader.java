@@ -20,15 +20,15 @@ import java.util.Scanner;
  */
 public class InputReader {
   private final Scanner scanner;
-  private final UIPrintHandler print;
+  private final UiPrintHandler print;
 
 
   /**
-   * A constructor that initializes the {@link Scanner} and {@link UIPrintHandler}.
+   * A constructor that initializes the {@link Scanner} and {@link UiPrintHandler}.
    */
   public InputReader() {
     scanner = new Scanner(in);
-    print = new UIPrintHandler();
+    print = new UiPrintHandler();
   }
 
   /**
