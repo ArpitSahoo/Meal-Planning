@@ -1,6 +1,6 @@
 package edu.ntnu.idi.bidata.food;
 
-import edu.ntnu.idi.bidata.fridge.FridgeStorage;
+import edu.ntnu.idi.bidata.fridge.FridgeStorage; //imported for documentation.
 
 import java.time.LocalDate;
 
