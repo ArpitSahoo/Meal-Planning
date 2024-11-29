@@ -21,7 +21,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.8
+ * @version 0.0.10
  */
 
 
@@ -121,6 +121,13 @@ public class UiPrintHandler {
    */
   public void invalidUnitChoice() {
     System.out.println("Invalid unit choice. Food item not added.");
+  }
+
+  /**
+   * Informs the user that the food was added.
+   */
+  public void foodAdded() {
+    System.out.println("Food was added to fridge!");
   }
 
   /**
@@ -341,6 +348,13 @@ public class UiPrintHandler {
   }
 
   /**
+   * Informs the user that the recipe was added.
+   */
+  public void recipeAdded() {
+    System.out.println("Yummy! Recipe was added to the recipe book");
+  }
+
+  /**
    * Informs the user that the recipe was not found.
    */
   public void recipeNotFound() {
@@ -352,5 +366,15 @@ public class UiPrintHandler {
    */
   public void recipeWasRemoved() {
     System.out.println("Recipe was removed.");
+  }
+
+  /**
+   * Informs the user what happens when the food already exists.
+   */
+  public void alreadyExisting() {
+    System.out.println("\nNotice!");
+    System.out.println("If the fridge already exists"
+        + "the amount will increase, but the expiration date "
+        + "will be the same as the was added. ");
   }
 }
