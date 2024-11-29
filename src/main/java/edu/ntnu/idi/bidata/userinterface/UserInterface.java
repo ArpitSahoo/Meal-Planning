@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.7
+ * @version 0.0.8
  *
  */
 public class UserInterface {
@@ -94,45 +94,22 @@ public class UserInterface {
       String choice = input.scannerString();
 
       switch (choice) {
-        case "1":
-          addFood();
-          break;
-        case "2":
-          removeFoodItem();
-          break;
-        case "3":
-          takeOutFoodItem();
-          break;
-        case "4":
-          findFoodByName();
-          break;
-        case "5":
-          displayAllExpiredFood();
-          break;
-        case "6":
-          findFoodByExpiryDate();
-          break;
-        case "7":
-          printFridge();
-          break;
-        case "8":
-          printFridgeAlphabetical();
-          break;
-        case "9":
-          addRecipeToBook();
-          break;
-        case "10":
-          findRecipeByName();
-          break;
-        case "11":
-          removeRecipeByName();
-          break;
-        case "12":
+        case "1" -> addFood();
+        case "2" -> removeFoodItem();
+        case "3" -> takeOutFoodItem();
+        case "4" -> findFoodByName();
+        case "5" -> displayAllExpiredFood();
+        case "6" -> findFoodByExpiryDate();
+        case "7" -> printFridge();
+        case "8" -> printFridgeAlphabetical();
+        case "9" -> addRecipeToBook();
+        case "10" -> findRecipeByName();
+        case "11" -> removeRecipeByName();
+        case "12" -> {
           running = false;
           print.exit();
-          break;
-        default:
-          print.invalidChoice();
+        }
+        default -> print.invalidChoice();
       }
     }
   }
@@ -176,7 +153,6 @@ public class UserInterface {
     print.choiceOfUnits();
     String units = input.scannerString();
 
-
     units = getUnitOfFoodItem(units);
     try {
       FoodItem food = new FoodItem(nameOfFood, amount, units, price, expirationDate);
@@ -197,17 +173,10 @@ public class UserInterface {
    */
   private String getUnitOfFoodItem(String units) {
     switch (units) {
-      case "1":
-        units = "kg";
-        break;
-      case "2":
-        units = "liter";
-        break;
-      case "3":
-        units = "pieces";
-        break;
-      default:
-        print.invalidUnitChoice();
+      case "1" -> units = "kg";
+      case "2" -> units = "liter";
+      case "3" -> units = "pieces";
+      default -> print.invalidUnitChoice();
     }
     return units;
   }
@@ -225,8 +194,8 @@ public class UserInterface {
    */
   private void removeFoodItem() {
     print.removeFoodOutput();
-    String name = input.scannerString();
-    boolean removed = fridgeRegister.removeFoodItem(name);
+    String nameOfFood = input.scannerString();
+    boolean removed = fridgeRegister.removeFoodItem(nameOfFood);
     if (removed) {
       print.foodRemovedOutput();
     } else {
@@ -298,8 +267,8 @@ public class UserInterface {
    */
   private void findFoodByName() {
     print.nameOfFoodOutput();
-    String name = input.scannerString();
-    FoodItem item = fridgeRegister.searchFoodByName(name);
+    String nameOfFood = input.scannerString();
+    FoodItem item = fridgeRegister.searchFoodByName(nameOfFood);
     if (item != null) { //recommended by (OpenAI, 2024)
       print.printLocatedFood(item);
     } else {
