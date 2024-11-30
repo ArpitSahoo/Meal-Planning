@@ -37,20 +37,27 @@ public class RecipeStorage {
    * the recipe will be added as a new entry.</p>
    *
    * @param newRecipe the {@link Recipes} to be added or updated in the fridge
-   * @return {@code true} if the recipe was added.
-   *{@code false} if the recipe was not added.
+   * @return wasAdded, if {@code true} the recipe was added. If {@code false}
+   * food was not added.
    */
   public boolean addRecipe(Recipes newRecipe) {
-    boolean wasAdded;
-    if (recipesMap.containsKey(newRecipe.getNameOfRecipe())) {
-      wasAdded = false;
-    } else {
+    boolean waAdded = false;
+    if (!recipesMap.containsKey(newRecipe.getNameOfRecipe())) {
       recipesMap.put(newRecipe.getNameOfRecipe(), newRecipe);
-      wasAdded = true;
+      waAdded = true;
     }
-    return wasAdded;
+    return waAdded;
   }
 
+  /**
+   * Removes recipe from the recipe book.
+   *
+   * <p>Removes recipe from recipe book if it exists in the recipe book.
+   * Compares the name prompted and checks for a similar recipe.
+   * </p>
+   * @param recipeName
+   * @return wasRemoved is {@code false} till removed, then {@code true}.
+   */
   public boolean removeRecipe(String recipeName) {
     boolean wasRemoved = false;
     if (recipesMap.containsKey(recipeName)) {
