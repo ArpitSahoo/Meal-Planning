@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.4
+ * @version 0.0.5
  */
 
 class FridgeStorageTest {
@@ -30,7 +30,10 @@ class FridgeStorageTest {
   private final LocalDate expirationDate = LocalDate.of(2025, 10, 20); //Arrange
 
   /**
-   * Before each test method a new test, a new food item is made.
+   * Before each test method, a new food item is made.
+   *
+   * <p>Creates a new instance of {@code FridgeStorage} and {@code FoodItem}
+   * objects before each test.</p>
    */
   @BeforeEach
   void setUp() {
@@ -77,26 +80,25 @@ class FridgeStorageTest {
   }
 
   /**
-   *Negative test to test the {@code addFoodItem} method
-   * of the {@code FridgeRegister} class.
+   *A negative test for the {@code addFoodItem} method of the {@code FridgeRegister} class.
    *
-   * <p>This test verifies that a not exiting food item is not added to the fridge.
-   * It asserts that the method returns {@code false} when using {@code foodToTake}.
-   *</p>
-   *
+   * <p>This test verifies that a food item is not added to the fridge.
+   * It asserts that the method returns {@code false}, since {@code foodItem1}
+   * already exists. But amount is expected  to be updated.</p>
    * <p>Expected behavior:
    * <ul>
-   *   <li>{@code foodToTake(foodItem1)} returns {@code false}.</li>
+   *   <li>{@code addFoodItem(foodItem1)} returns {@code false}.</li>
+   *   <li>The {@code foodItem1} amount is updated.</li>
    * </ul>
    *</p>
    */
   @Test
   void addFoodItemNegativeTest() {
-      FoodItem notExistingFood = new FoodItem("juice",
-          2f, "liter", 20.0, expirationDate
-      );
-      boolean wasFoodAdded = fridgeRegister.foodToTake(notExistingFood); //Act
-      assertFalse(wasFoodAdded); //Assert
+    fridgeRegister.addFoodItem(foodItem1);
+    boolean wasFoodAdded = fridgeRegister.addFoodItem(foodItem1); //Act
+    assertFalse(wasFoodAdded); //Assert
+    assertEquals(14f, fridgeRegister.searchFoodByName(foodItem1.getNameOfFood()).getAmount());
+    //Since the food already exists, the amount will be updated.
   }
 
   /**
@@ -168,7 +170,7 @@ class FridgeStorageTest {
    * is taken from the fridge.
    * A new {@code FoodItem} is initialized to take out from the fridge.
    * It asserts that the method returns {@code false} when using {@code foodToTake}.
-   * Since the {@code foodToTake} does not exists in the fridge.</p>
+   * Since a similar {@code foodToTake} does not exists in the fridge.</p>
    *
    *
    * <p>Expected behavior:
@@ -333,7 +335,20 @@ class FridgeStorageTest {
     assertEquals(1, result.size()); // This line inspired by ChatGPT 2024
   }
 
-  //TODO documentation needed
+  /**
+   * A negative test that tests {@code searchByDate} method of the {@code FridgeRegister} class.
+   *
+   * <p>This ensures that the method {@code searchByDate} fails
+   * when searching for a {@code FoodItem} the specific expiration date.</p>
+   *
+   * <p>Expected behavior:
+   *   <ul>
+   *     <li>Does not {@code foodItem1} to the list {@code results}</li>
+   *     <li>The code asserts {@code false}.</li>
+   *     <li>Expects the list to have a size of 0.</li>
+   *   </ul>
+   * </p>
+   */
   @Test
   void searchByDateNegativeTest() {
     fridgeRegister.addFoodItem(foodItem1);
