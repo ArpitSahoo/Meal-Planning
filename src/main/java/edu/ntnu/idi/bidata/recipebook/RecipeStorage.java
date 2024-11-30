@@ -11,9 +11,9 @@ import java.util.Map;
  * The class interacts with {@link Recipes} objects and stores them.
  * This class allows the user add, remove and get the name of the recipe.</p>
  *
- * @author Arpit Sahoo
- * @version 0.0.4
  * @since 0.0.1
+ * @author Arpit Sahoo
+ * @version 0.0.5
  */
 public class RecipeStorage {
   private final Map<String, Recipes> recipesMap;
