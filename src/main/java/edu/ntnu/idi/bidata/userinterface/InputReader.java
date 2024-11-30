@@ -11,10 +11,13 @@ import java.util.Scanner;
 /**
  * Represents the scanner.
  *
- * <p>Handles the users input to application and supports
- * {@link UserInterface} to start an operation and set values.
+ * <p>This class had the responsibility to handle the users
+ * prompt amd supports {@link UserInterface} to start operations and set values
+ * in different situations. It handles the prompts and makes sure that all the
+ * prompts are valid.
  * </p>
  *
+ * @since 0.0.1
  * @author Arpit Sahoo
  * @version 0.0.3
  */
@@ -34,7 +37,7 @@ public class InputReader {
   /**
    * Takes inn the users input as a string.
    *
-   * @return String that the user inputs to lowercase.
+   * @return String that the user prompts to lowercase.
    */
   public String scannerString() {
     String stringInput = scanner.nextLine();
