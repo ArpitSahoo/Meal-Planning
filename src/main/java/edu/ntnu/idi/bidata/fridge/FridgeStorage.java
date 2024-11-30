@@ -23,7 +23,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.4
+ * @version 0.0.5
  *
  */
 
@@ -107,7 +107,7 @@ public class FridgeStorage {
     boolean wasFoodFound = false;
     if (fridgeRegister.containsKey(foodToBeTaken.getNameOfFood())) {
       float oldAmount = fridgeRegister.get(foodToBeTaken.getNameOfFood()).getAmount();
-      if (oldAmount > foodToBeTaken.getAmount()) {
+      if (oldAmount >= foodToBeTaken.getAmount()) {
         float newAmount = oldAmount - foodToBeTaken.getAmount();
         if (newAmount <= 0) {
           fridgeRegister.remove(foodToBeTaken.getNameOfFood());
