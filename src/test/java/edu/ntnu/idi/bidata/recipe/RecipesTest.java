@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Test class for {@link Recipes} class.
  *
- * <p>This class tests different methods from the {@link Recipes} class.
+ * <p>This class tests different methods from the {@code Recipes} class.
  * It checks if it is possible to access, mutate the recipes.
  * </p>
  *
