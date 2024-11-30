@@ -10,14 +10,19 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * The {@code UserInterface} class handles user interactions for managing the fridge and recipe book.
+ * The {@code UserInterface} class handles user interactions
+ * for managing the fridge and recipe book.
  *
  * <p>This class provides methods to add, remove, take out
  * and display food items or recipes.
  * It presents a menu to the user, processes different commands,
- * and interfaces with {@link FridgeStorage} and {@link RecipeStorage}
- * to update and retrieve fridge and recipe data.
- * The class understands the user commands by help from the {@link InputReader}.
+ * and interfaces with {@link FridgeStorage}
+ * to update and retrieve fridge.</p>
+ *
+ * <p>This class also provides methods to add, remove
+ * and find recipes from the {@link RecipeStorage}.</p>
+ *
+ * <p>The class understands the user commands by help from the {@link InputReader}.
  * It also uses {@link UiPrintHandler} for displaying output to the user.
  * </p>
  *
@@ -38,10 +43,10 @@ public class UserInterface {
    * <p>This constructor creates an instance of {@code FridgeStorage}
    * to manage the fridge's contents,
    * an instance of {@code InputReader} for user prompt,
-   * and sets up a {@code UIPrintHandler} for output.
-   * It also initializes the {@code init} to add food to the fridge.
-   * After the initialization,
-   * It also initializes the {@code initRecipe} to add recipes to the recipe book.
+   * and sets up a {@code UIPrintHandler} for output.</p>
+   *
+   * <p>It also initializes the {@code init} to add food to the fridge and
+   * {@code initRecipe} to add recipes to the recipe book.
    * After the initialization,
    * it has a {@code printFridge} to display all the initialized food.
    * It starts the user interface by calling the {@code start} method.
@@ -59,7 +64,7 @@ public class UserInterface {
     start();
   }
 
-  /**
+  /*
    * Starts the main loop of the fridge management application.
    *
    * <p>This method presents a choice menu to the user
@@ -82,12 +87,13 @@ public class UserInterface {
    *   <li><b>8:</b> Display all the food alphabetical</li>
    *   <li><b>9:</b> Add Recipe to the recipe book</li>
    *   <li><b>10:</b> Find a recipe by name</li>
-   *   <li><b>11:</b> Exit the application</li>
+   *   <li><b>11:</b> find and remove recipe by searching the name.</li>
+   *   <li><b>12:</b> Exit the program.</li>
    * </ul>
    * </p>
    */
   private void start() {
-    boolean running = true;
+    boolean running = true; // Keeps the program running til false.
     while (running) {
       print.choiceScreen();
 
@@ -106,7 +112,7 @@ public class UserInterface {
         case "10" -> findRecipeByName();
         case "11" -> removeRecipeByName();
         case "12" -> {
-          running = false;
+          running = false; // program stops running.
           print.exit();
         }
         default -> print.invalidChoice();
@@ -114,26 +120,16 @@ public class UserInterface {
     }
   }
 
-  /**
+  /*
    * Adds a new food item to the fridge with user-specified details.
    *
    * <p>This method prompts the user to input details about a food item, including
-   * the name, price per unit, amount, expiration date, and unit from {@code getUnitOfFoodItem}. After collecting
-   * and validating each input, a {@link FoodItem} object is created and added to
+   * the name, price per unit, amount, expiration date, and unit from {@code getUnitOfFoodItem}.
+   * Once the {@link FoodItem} object it created, it will be added to
    * the {@code fridgeRegister}.
    * </p>
    *
-   * <p>User inputs:
-   * <ul>
-   *   <li><b>Name of Food:</b> The name of the food item</li>
-   *   <li><b>Price per Unit:</b> The cost per unit of the food item</li>
-   *   <li><b>Amount:</b> The quantity of the food item</li>
-   *   <li><b>Expiration Date:</b> The expiration date in yyyy-MM-dd format</li>
-   *   <li><b>Unit:</b> The unit of measure, chosen from predefined options (kg, liter, pieces)</li>
-   * </ul>
-   * </p>
-   *
-   * <p>If the any of the inputs are invalid, the user is prompted
+   * <p>If any of the inputs are invalid, the user is prompted
    * to re-enter the information. The food item is only added to the fridge if
    * all input values are valid.
    * If the food item was added, the user will be informed that it is added
@@ -165,7 +161,7 @@ public class UserInterface {
 
   }
 
-  /**
+  /*
    * A method that allows the user to add a unit.
    *
    * @param units the unit of food item.
@@ -182,8 +178,9 @@ public class UserInterface {
   }
 
 
-  /**
+  /*
    * Removes a food item from the fridge by name.
+   *
    * <p>UserInput:
    * <ul><li><b>nameOfFood: </b>The name of the food item.</li></ul></p>
    * </p>
@@ -203,7 +200,7 @@ public class UserInterface {
     }
   }
 
-  /**
+  /*
    * Takes out a fixed amount from the fridge by name.
    *
    * <p>UserInput:
@@ -227,7 +224,7 @@ public class UserInterface {
     }
   }
 
-  /**
+  /*
    * Iterates through the fridge and prints the fridge content.
    *
    * <p>Retrieves an iterator from {@link FridgeStorage}
@@ -240,7 +237,7 @@ public class UserInterface {
     print.printItFridge(iterator);
   }
 
-  /**
+  /*
    * Iterates through the fridge and prints the fridge content.
    *
    * <p>Retrieves an iterator from the {@link FridgeStorage}
@@ -253,9 +250,8 @@ public class UserInterface {
     print.printExpiredFood(iterator);
   }
 
-  /**
+  /*
    * Finds the food by its name.
-   *
    *
    * <p>
    * UserInput:
@@ -277,20 +273,21 @@ public class UserInterface {
   }
 
 
-  /**
+  /*
    * Iterates through the fridge and prints the fridge content.
    *
    * <p>This method retrieves an iterator from the {@link FridgeStorage}
    * and passes it to the {@link UiPrintHandler}.
-   * to print food in an alphabetical order.
+   * to print food in alphabetical order.
    * </p>
    */
   private void printFridgeAlphabetical() {
-    Iterator<String> sortedNames = fridgeRegister.getIteratorAlphabetical();
-    print.printFoodAlphabetical(sortedNames);
+    Iterator<String> sortedNames = fridgeRegister
+        .getIteratorAlphabetical(); // calls for the iterator.
+    print.printFoodAlphabetical(sortedNames); // Sends the iterator to the print handler.
   }
 
-  /**
+  /*
    * Finds the food by expiration date.
    *
    * <p>UserInput:
@@ -309,7 +306,7 @@ public class UserInterface {
     print.printLocatedExpiredFood(item);
   }
 
-  /**
+  /*
    * Adds recipe to recipe book.
    *
    * <p>Gets the information form {@code getRecipe}.
@@ -329,12 +326,12 @@ public class UserInterface {
    * the user will be sent back to the command screen.</p>
    */
 
-  private void addRecipeToBook(){
-    try{ //Tries to add recipe to book map.
+  private void addRecipeToBook() {
+    try { //Tries to add recipe to book map.
       Recipes newRecipes = getRecipes();
       print.howManyIngredientsOutput();
       int amountOfIngredient = input.amountOfIngredients(); //How many loops?
-      for(int indexOfAmount = 0; indexOfAmount < amountOfIngredient; indexOfAmount++){ //Loops.
+      for (int indexOfAmount = 0; indexOfAmount < amountOfIngredient; indexOfAmount++) { //Loops.
         print.nameOfFoodOutput();
         String name = input.scannerString();
         Float amount = input.getValidAmount();
@@ -351,7 +348,7 @@ public class UserInterface {
     }
   }
 
-  /**
+  /*
    * Adds information of the Recipe.
    * <p>User inputs:
    * <ul><li><b>Name of recipe: </b>The name of the recipe.</></li></ul>
@@ -370,20 +367,20 @@ public class UserInterface {
 
     print.stepsOutput();
     String steps = input.scannerString();
-      return new Recipes(nameOfRecipe, description, steps);
+    return new Recipes(nameOfRecipe, description, steps);
   }
 
-  /**
+  /*
    * Finds the recipe by name.
    *
    * <p>UserInput:
    *    <ul>
    *      <li><b>Name:</b> The name of the Recipe</li>
    *    </ul>
-   *    Checks if there is a recipe in the {@link RecipeStorage}.
+   *    Checks if there is a recipe in the recipe book.
    *    If found in the recipe book it
    *    prints out the recipes detail. Else
-   *    it prints out that it is not in the fridge.
+   *    it prints out that it is not in the recipe book.
    * </p>
    */
   private void findRecipeByName() {
@@ -400,7 +397,7 @@ public class UserInterface {
   }
 
 
-  /**
+  /*
    * Removes the recipe by name.
    *
    * <p>UserInput:
@@ -413,7 +410,7 @@ public class UserInterface {
    *    it prints out that it is not in the fridge.
    * </p>
    */
-  private void removeRecipeByName(){
+  private void removeRecipeByName() {
     print.recipeNameOutput();
     String nameOfRecipe = input.scannerString();
     boolean removed = recipeStorage.removeRecipe(nameOfRecipe);
@@ -425,7 +422,7 @@ public class UserInterface {
   }
 
 
-  /**
+  /*
    * Initializes the fridge with a set of predefined food items.
    *
    * <p>This adds several {@link FoodItem} with predefined values
@@ -448,7 +445,7 @@ public class UserInterface {
     fridgeRegister.addFoodItem(chicken);
   }
 
-  /**
+  /*
    * Initializes the fridge with a set of predefined food items.
    *
    * <p>This adds several {@link Recipes} with predefined values
@@ -456,7 +453,7 @@ public class UserInterface {
    * to the {@link RecipeStorage} for use in the application.
    * </p>
    */
-  private void initRecipe(){
+  private void initRecipe() {
     Recipes butterChicken = new Recipes("butter chicken",
         "Good indian dish", "First make chicken, then make butter");
     butterChicken.addIngredient("Butter", 2f, "Kg");
