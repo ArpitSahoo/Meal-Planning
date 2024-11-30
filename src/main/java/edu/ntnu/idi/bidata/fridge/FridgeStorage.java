@@ -12,12 +12,14 @@ import java.util.Map;
  * Represents the fridge.
  *
  * <p>{@code FridgeStorage} is a class used to store all the food item.
- * The class interacts with {@link FoodItem} objects and stores them.
- * This class allows the user add, remove, take, find and display all the food items
+ * The class interacts with {@link FoodItem} objects and stores them.</p>
+ *
+ * <p>This class allows the user add, remove, take, find and display all the food items
  * stored in the fridge.
- * It also handles the validation and organization of food items, ensuring they are managed in an
+ * It also handles the validation and organization of food items, ensuring they are managed
  * efficiently.</p>
- * </p>
+ *
+ *
  *
  * @since 0.0.1
  * @author Arpit Sahoo
