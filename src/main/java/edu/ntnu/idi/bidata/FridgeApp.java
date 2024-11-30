@@ -3,8 +3,8 @@ package edu.ntnu.idi.bidata;
 import edu.ntnu.idi.bidata.userinterface.UserInterface;
 
 /**
- * The main starting point of your application. Let this class create the
- * instance of your main-class that starts your application.
+ * The main starting point of the application. This class creates an instance
+ * of {@link UserInterface} to start the whole application.
  *
  * @author Arpit Sahoo
  * @version 0.0.1
