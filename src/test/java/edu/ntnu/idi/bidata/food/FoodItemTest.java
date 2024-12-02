@@ -11,8 +11,9 @@ import java.time.LocalDate; // Import LocalDate
  * It checks if it is possible to access, mutate the recipes.
  * </p>
  *
+ * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  */
 class FoodItemTest {
   private FoodItem foodItemTest; //Arrange
@@ -177,6 +178,34 @@ class FoodItemTest {
         new FoodItem("milk", 7f, "liters", 10.0, pastDate)
     );
   }
+
+  /**
+   * A positive test that tests the method {@code setUnits}.
+   *
+   * <p>This methods tests if the {@code setUnits} is a valid input.</p>
+   */
+  @Test
+  void setUnitsTestForPositiveValues() {
+    assertEquals("liter", foodItemTest.getUnits());
+  }
+
+  /**
+   * A negative test that test the {@code setUnits} method of the {@code FoodItem} class.
+   *
+   * <p>This test ensures that the {@code setUnits} method correctly throws an
+   * {@code IllegalArgumentException} when provided with invalid input.
+   *
+   * <p>Expected:
+   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is empty</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is null</li></ul>
+   * </p>
+   */
+  @Test
+  void setUnitsTestForNegativeValues() {
+    assertThrows(IllegalArgumentException.class, () -> foodItemTest.setUnits(null));
+    assertThrows(IllegalArgumentException.class, () -> foodItemTest.setUnits(""));
+  }
+
 
 }
 
