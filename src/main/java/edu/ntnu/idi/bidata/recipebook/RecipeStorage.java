@@ -2,6 +2,7 @@ package edu.ntnu.idi.bidata.recipebook;
 
 import edu.ntnu.idi.bidata.recipe.Recipes;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.5
+ * @version 0.0.6
  */
 public class RecipeStorage {
   private final Map<String, Recipes> recipesMap;
@@ -55,7 +56,7 @@ public class RecipeStorage {
    * <p>Removes recipe from recipe book if it exists in the recipe book.
    * Compares the name prompted and checks for a similar recipe.
    * </p>
-   * @param recipeName
+   * @param recipeName is the name of the recipe.
    * @return wasRemoved is {@code false} till removed, then {@code true}.
    */
   public boolean removeRecipe(String recipeName) {
@@ -77,5 +78,16 @@ public class RecipeStorage {
     return recipesMap.get(recipeName); // allows the other method get the name of the recipe
   }
 
+  /**
+   * Gets an iterator over the recipe book.
+   *
+   * @return recipes from recipe book to iterator in alphabetical order.
+   */
+  public Iterator<String> getRecipeNamesAlphabeticalOrder() {
+    return recipesMap.keySet()
+        .stream()
+        .sorted(String::compareToIgnoreCase)
+        .iterator();
+  }
 
 }
