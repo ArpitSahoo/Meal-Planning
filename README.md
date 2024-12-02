@@ -14,7 +14,8 @@ The purpose of this application is to help the user to have a better overview of
 and have the meals they can prepare. This application also supports user to add recipes they want
 to make. The goal of the application is to reduce food waste. 
 ## Project structure
-
+```
+.
 ├── main/
 │   ├── food/
 │   │   ├── FoodItem.java
@@ -37,7 +38,7 @@ to make. The goal of the application is to reduce food waste.
 │   └── RecipesTest.java
 └── recipebook/
 └── RecipeStorageTest.java
-
+```
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
 
 ## Link to repository
