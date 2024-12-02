@@ -417,9 +417,9 @@ class FridgeStorageTest {
    *
    * <p>Expected behavior:
    * <ul>
-   *   <li>{@code getIteratorAlphabetical().hasNext()} is {@code true} initially and until the last item.</li>
-   *   <li>{@code getIteratorAlphabetical().next()} does not return keys in the correct alphabetical order.</li>
-   *   <li>{@code getIteratorAlphabetical().hasNext()} is {@code false} after the last item.</li>
+   *   <li>{@code getIteratorTest().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIteratorTest().next()} does not return keys in the correct alphabetical order.</li>
+   *   <li>{@code getIteratorTest().hasNext()} is {@code false} after the last item.</li>
    * </ul>
    */
   @Test
