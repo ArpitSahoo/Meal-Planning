@@ -4,22 +4,55 @@ This file uses Mark Down syntax. For more information see [here](https://www.mar
 
 [//]: # (TODO: Fill inn your name and student ID)
 
-STUDENT NAME = "Your name"  
-STUDENT ID = "Your ID"
+STUDENT NAME = "ARPIT SAHOO"  
+STUDENT ID = "131809"
 
 ## Project description
 
 [//]: # (TODO: Write a short description of your project/product here.)
-
+The purpose of this application is to help the user to have a better overview of food in their fridge
+and have the meals they can prepare. This application also supports user to add recipes they want
+to make. The goal of the application is to reduce food waste. 
 ## Project structure
+
+├── main/
+│   ├── food/
+│   │   ├── FoodItem.java
+│   │   └── FridgeStorage.java
+│   ├── recipe/
+│   │   └── Recipes.java
+│   ├── recipebook/
+│   │   └── RecipeStorage.java
+│   ├── userinterface/
+│   │   ├── InputReader.java
+│   │   ├── UiPrintHandler.java
+│   │   └── UserInterface.java
+│   └── FridgeApp
+└── test/
+├── food/
+│   └── FoodItemTest.java
+├── fridge/
+│   └── FridgeStorageTest.java
+├── recipes/
+│   └── RecipesTest.java
+└── recipebook/
+└── RecipeStorageTest.java
 
 [//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
 
 ## Link to repository
 
 [//]: # (TODO: Include a link to your GitHub repository here.)
-
+This is the link to the git repository:
+https://github.com/NTNU-BIDATA-IDATG1003-2024/meal-planning-ArpitSahoo.git
 ## How to run the project
+The FridgeApp is the main class and it there you have to run the application.
+It initializes UserInterface class which initializes the other classes and so on. 
+
+Once you have started the application you will be welcomed with a choice screen.
+Here you can choose different commands to execute. 
+
+The application will only exit when commanded to exit. 
 
 [//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
 What is the input and output of the program? What is the expected behaviour of the program?)
@@ -27,8 +60,11 @@ What is the input and output of the program? What is the expected behaviour of t
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)
-
+It is highly recommended to clean and compile before running test. Click on the Maven 
+button on top left and click on the test. It will be prompted that the test has passed.
 ## References
+Codes that have been used from websites or ChatGPT, have been referenced as 
+a comment in the code. 
 
 [//]: # (TODO: Include references here, if any. For example, if you have used code from the course book, include a reference to the chapter.
 Or if you have used code from a website or other source, include a link to the source.)
