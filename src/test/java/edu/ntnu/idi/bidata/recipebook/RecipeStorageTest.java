@@ -2,6 +2,9 @@ package edu.ntnu.idi.bidata.recipebook;
 
 import edu.ntnu.idi.bidata.recipe.Recipes;
 import org.junit.jupiter.api.*;
+
+import java.util.Iterator;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -14,11 +17,13 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.1
+ * @version 0.0.2
  */
 class RecipeStorageTest {
   private RecipeStorage storage;
   private Recipes recipes1;
+  private Recipes recipes2;
+  private Recipes recipes3;
 
   /**
    * Before each test method, a new food item is made.
@@ -33,6 +38,16 @@ class RecipeStorageTest {
         "Good indian dish", "First make chicken, then make butter");
     recipes1.addIngredient("Butter", 2f, "Kg");
     recipes1.addIngredient("Chicken", 1f, "Kg");
+
+    recipes2 = new Recipes("tomato sauce",
+        "Good italian dish", "Add Tomato to the sauce");
+    recipes2.addIngredient("Tomato", 1f, "Kg");
+    recipes2.addIngredient("Sauce", 1f, "liter");
+    recipes3 = new Recipes("kebab in pita","Delicacy from Turkey",
+        "Cook the meat, add the sauce and add it to the pita bread.");
+    recipes3.addIngredient("Pita", 2f, "pieces");
+    recipes3.addIngredient("Meat", 200f, "Kg");
+    recipes3.addIngredient("Sauce", 0.5f, "liters");
   }
 
   /**
@@ -143,5 +158,90 @@ class RecipeStorageTest {
   void getRecipe() {
     storage.addRecipe(recipes1);
     assertEquals(recipes1, storage.getRecipe("butter chicken"));
+  }
+
+  /**
+   * Tests the {@code getRecipeNamesAlphabeticalOrder}
+   * method of the {@code FridgeRegister} class.
+   *
+   * <p>This test ensures that the {@code getRecipeNamesAlphabeticalOrder}
+   * method correctly provides an iterator
+   * over the items stored in the fridge register. It also ensures that the {@code Recipes} are
+   * sorted alphabetical.
+   * It verifies that the iterator retrieves
+   * the food items in the expected order, and checks the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and progresses sequentially.</li>
+   *   <li>The keys of the recipe are in the expected alphabetical order.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIterator().next().getKey()} returns the correct key for each item in the expected order.</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
+   * </ul>
+   */
+  @Test
+  void getRecipeNamesAlphabeticalOrderPositiveTest(){
+    storage.addRecipe(recipes1);
+    storage.addRecipe(recipes2);
+    storage.addRecipe(recipes3);
+
+    Iterator<String> getIteratorTest = storage.getRecipeNamesAlphabeticalOrder();
+    assertTrue(getIteratorTest.hasNext());
+    assertEquals("butter chicken", getIteratorTest.next());
+    assertTrue(getIteratorTest.hasNext());
+    assertEquals("kebab in pita", getIteratorTest.next());
+    assertTrue(getIteratorTest.hasNext());
+    assertEquals("tomato sauce", getIteratorTest.next());
+    assertFalse(getIteratorTest.hasNext());
+  }
+
+  /**
+   * A negative test that test the {@code getRecipeNamesAlphabeticalOrder}
+   * method of the {@code RecipeStorage} class.
+   *
+   * <p>This test ensures that the {@code getRecipeNamesAlphabeticalOrder}
+   * method fails to return an iterator
+   * that retrieves the food items in the correct alphabetical order:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and tries the next.</li>
+   *   <li>The keys of the recipe are not in the expected alphabetical order.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   * </p>
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getIteratorTest().hasNext()}
+   *   is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIteratorTest().next()}
+   *   does not return keys in the correct alphabetical order.</li>
+   *   <li>{@code getIteratorTest().hasNext()}
+   *   is {@code false} after the last item.</li>
+   * </ul>
+   * </p>
+   */
+  @Test
+  void getRecipeNamesAlphabeticalOrderNegativeTest(){
+    storage.addRecipe(recipes1);
+    storage.addRecipe(recipes2);
+    storage.addRecipe(recipes3);
+    Iterator<String> getIteratorTest = storage.getRecipeNamesAlphabeticalOrder();
+
+    assertTrue(getIteratorTest.hasNext());
+    assertNotEquals("tomato sauce", getIteratorTest.next());
+
+    assertTrue(getIteratorTest.hasNext());
+    assertNotEquals("butter chicken", getIteratorTest.next());
+
+    assertTrue(getIteratorTest.hasNext());
+    assertNotEquals("kebab in pita", getIteratorTest.next());
+
+    assertFalse(getIteratorTest.hasNext());
+
   }
 }
