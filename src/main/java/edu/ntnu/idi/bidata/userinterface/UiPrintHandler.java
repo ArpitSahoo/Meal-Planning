@@ -21,7 +21,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.10
+ * @version 0.0.11
  */
 
 
@@ -44,9 +44,10 @@ public class UiPrintHandler {
     System.out.println("7. Display fridge contents");
     System.out.println("8. Display fridge contents in an alphabetical order");
     System.out.println("9. Add a recipe to recipe book");
-    System.out.println("10. Find a recipe by name");
-    System.out.println("11. Remove a recipe from recipe book");
-    System.out.println("12. Exit");
+    System.out.println("10. Display all the recipes in an alphabetical order");
+    System.out.println("11. Find a recipe by name");
+    System.out.println("12. Remove a recipe from recipe book");
+    System.out.println("13. Exit");
     System.out.println("Choose a following number: ");
   }
 
