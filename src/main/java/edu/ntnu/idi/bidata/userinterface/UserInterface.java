@@ -28,7 +28,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.8
+ * @version 0.0.9
  *
  */
 public class UserInterface {
@@ -84,11 +84,12 @@ public class UserInterface {
    *   <li><b>5:</b> Display all expired food items</li>
    *   <li><b>6:</b> Find all food in the specific expiry date.</li>
    *   <li><b>7:</b> Display all the food with details</li>
-   *   <li><b>8:</b> Display all the food alphabetical</li>
+   *   <li><b>8:</b> Display all the food alphabetical order</li>
    *   <li><b>9:</b> Add Recipe to the recipe book</li>
    *   <li><b>10:</b> Find a recipe by name</li>
-   *   <li><b>11:</b> find and remove recipe by searching the name.</li>
-   *   <li><b>12:</b> Exit the program.</li>
+   *   <li><b>11:</b> Display all recipes in alphabetical order</li>
+   *   <li><b>12:</b> find and remove recipe by searching the name.</li>
+   *   <li><b>13:</b> Exit the program.</li>
    * </ul>
    * </p>
    */
@@ -109,9 +110,10 @@ public class UserInterface {
         case "7" -> printFridge();
         case "8" -> printFridgeAlphabetical();
         case "9" -> addRecipeToBook();
-        case "10" -> findRecipeByName();
-        case "11" -> removeRecipeByName();
-        case "12" -> {
+        case "10" -> displayRecipesAlphabetical();
+        case "11" -> findRecipeByName();
+        case "12" -> removeRecipeByName();
+        case "13" -> {
           running = false; // program stops running.
           print.exit();
         }
@@ -171,7 +173,7 @@ public class UserInterface {
     switch (units) {
       case "1" -> units = "kg";
       case "2" -> units = "liter";
-      case "3" -> units = "pieces";
+      case "3" -> units = "piece";
       default -> print.invalidUnitChoice();
     }
     return units;
@@ -328,7 +330,7 @@ public class UserInterface {
 
   private void addRecipeToBook() {
     try { //Tries to add recipe to book map.
-      Recipes newRecipes = getRecipes();
+      Recipes newRecipes = getRecipeInformation();
       print.howManyIngredientsOutput();
       int amountOfIngredient = input.amountOfIngredients(); //How many loops?
       for (int indexOfAmount = 0; indexOfAmount < amountOfIngredient; indexOfAmount++) { //Loops.
@@ -358,7 +360,7 @@ public class UserInterface {
    *
    * @return a new recipe.
    */
-  private Recipes getRecipes() {
+  private Recipes getRecipeInformation() {
     print.recipeNameOutput();
     String nameOfRecipe = input.scannerString();
 
@@ -435,7 +437,7 @@ public class UserInterface {
             5.0, LocalDate.of(2025, 12, 12));
     FoodItem banana = new FoodItem("banana", 10f, "kg",
             5.0, LocalDate.of(2025, 12, 12));
-    FoodItem milk = new FoodItem("milk", 2f, "kg",
+    FoodItem milk = new FoodItem("milk", 1f, "liter",
             20.0, LocalDate.of(2025, 1, 20));
     FoodItem chicken = new FoodItem("chicken", 1f, "kg",
             140.0, LocalDate.of(2025, 1, 20));
@@ -444,6 +446,21 @@ public class UserInterface {
     fridgeRegister.addFoodItem(milk);
     fridgeRegister.addFoodItem(chicken);
   }
+
+  /*
+   * Iterates through the recipe book and prints the recipe books content.
+   *
+   * <p>This method retrieves an iterator from the {@link RecipeStorage}
+   * and passes it to the {@link UiPrintHandler}.
+   * to print food in alphabetical order.
+   * </p>
+   */
+  private void displayRecipesAlphabetical() {
+    Iterator<String> sortedNames = recipeStorage
+        .getRecipeNamesAlphabeticalOrder(); // calls for the iterator.
+    print.printFoodAlphabetical(sortedNames); // Sends the iterator to the print handler.
+  }
+
 
   /*
    * Initializes the fridge with a set of predefined food items.
@@ -458,12 +475,20 @@ public class UserInterface {
         "Good indian dish", "First make chicken, then make butter");
     butterChicken.addIngredient("Butter", 2f, "Kg");
     butterChicken.addIngredient("Chicken", 2f, "Kg");
+    butterChicken.addIngredient("milk", 1f, "liters");
     Recipes tomatoSauce = new Recipes("tomato sauce",
         "Good italian dish", "Add Tomato to the sauce");
     tomatoSauce.addIngredient("Tomato", 2f, "pieces");
     tomatoSauce.addIngredient("Kiwi finished sauce", 1f, "Liters");
+    Recipes kebabInPita = new Recipes("kebab in pita","Delicacy from Turkey",
+        "Cook the meat, add the sauce and add it to the pita bread.");
+    kebabInPita.addIngredient("Pita", 2f, "pieces");
+    kebabInPita.addIngredient("Meat", 200f, "Kg");
+    kebabInPita.addIngredient("Sauce", 0.5f, "liters");
+    recipeStorage.addRecipe(butterChicken);
+    recipeStorage.addRecipe(tomatoSauce);
+    recipeStorage.addRecipe(kebabInPita);
   }
-
 
 }
 
