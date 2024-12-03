@@ -12,9 +12,9 @@ import java.time.LocalDate;
  * It also communicates with the {@link FridgeStorage}.
  * </p>
  *
+ * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.3
- *
+ * @version 0.0.4
  */
 public class FoodItem {
   private String nameOfFood; //used food instead
@@ -143,11 +143,11 @@ public class FoodItem {
    * Mutates the <code>expirationDate</code>.
    *
    * @param expirationDate the FoodItem's expiration date.
-   * @throws IllegalArgumentException if expirationDate is in the past.
+   * @throws IllegalArgumentException if expirationDate is null.
    */
   public void setExpirationDate(LocalDate expirationDate) throws IllegalArgumentException {
-    if (expirationDate.isBefore(LocalDate.now())) {
-      throw new IllegalArgumentException("Expiration date cannot be in the past.");
+    if (expirationDate == null) {
+      throw new IllegalArgumentException("Expiration date cannot be blank.");
     }
     this.expirationDate = expirationDate;
   }
