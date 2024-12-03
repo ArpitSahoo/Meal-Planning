@@ -21,7 +21,7 @@ import java.util.Map;
  * </p>
  *
  * @author Arpit Sahoo
- * @version 0.0.11
+ * @version 0.0.12
  */
 
 
@@ -176,7 +176,7 @@ public class UiPrintHandler {
       if (food.getExpirationDate() != null && food.getExpirationDate().isBefore(currentDate)) {
         hasExpiredItems = true;
         printLocatedFood(food);
-        totalPrice = food.getAmount() * food.getPricePerUnit();
+        totalPrice += food.getAmount() * food.getPricePerUnit();
       }
     }
     if (hasExpiredItems) {
@@ -199,6 +199,7 @@ public class UiPrintHandler {
     System.out.println("Name: " + food.getNameOfFood()
         + " | Amount: " + food.getAmount() + " " + food.getUnits()
         + " | Price per unit: " + food.getPricePerUnit()
+        + " | Total price: " + food.getAmount() * food.getPricePerUnit()
         + " | Expiry: " + food.getExpirationDate()
     );
   }
@@ -222,7 +223,7 @@ public class UiPrintHandler {
     );
 
     Iterator<FoodItem> ingredients = recipe.getIngredients();
-    while (ingredients.hasNext()) { //Recommended by ChatGPT 2024, Iterates through the list.
+    while (ingredients.hasNext()) { //Recommended by OpenAI 2024, Iterates through the list.
       FoodItem ingredient = ingredients.next();
       System.out.println("Name: " + ingredient.getNameOfFood()
           //Gets all the information of the ingredient from the list.
@@ -242,12 +243,12 @@ public class UiPrintHandler {
    * @param foodList a list of food the has the same expiration date.
    */
   public void printLocatedExpiredFood(List<FoodItem> foodList) {
-    if (foodList.isEmpty()) { // If statement recommended by OpenAI.
+    if (foodList.isEmpty()) { // If statement recommended by OpenAI 2024.
       System.out.println("No food was found with the specified expiration date.");
       return;
     }
     System.out.println("Matching food items:");
-    for (FoodItem food : foodList) { //Partially recommended by OpenAI.
+    for (FoodItem food : foodList) { //Partially recommended by OpenAI 2024
       printLocatedFood(food);
     }
   }
