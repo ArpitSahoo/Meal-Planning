@@ -13,7 +13,7 @@ import java.time.LocalDate; // Import LocalDate
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.4
+ * @version 0.0.5
  */
 class FoodItemTest {
   private FoodItem foodItemTest; //Arrange
@@ -149,34 +149,25 @@ class FoodItemTest {
   @Test
   void setExpirationDatePositiveTest() {
 
-    // Create FoodItem with a valid future expiration date
-    FoodItem foodDate = new FoodItem("milk", 7f, "liters", 10.0, expirationDate);
-
-    // Assert that the expiration date is set correctly
-    assertEquals(expirationDate, foodDate.getExpirationDate());
+    // Asserts that the expiration date is set correctly.
+    assertEquals(expirationDate, foodItemTest.getExpirationDate());
   }
 
   /**
    * A negative test that test the {@code setExpirationDate} method of the {@code FoodItem} class.
    *
-   * <p>This test ensures that the {@code setAmount} method correctly throws an
+   * <p>This test ensures that the {@code setExpirationDate} method correctly throws an
    * {@code IllegalArgumentException} when provided with invalid input.
    *
-   * <p> Notice:
-   *   <ul><li>A new {@code FoodItem} is created to be tested.</li></ul>
-   * </p>
    * <p>Expected:
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the date is in the past</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown is if the date is null</li></ul>
    * </p>
    */
   @Test
-  void setExpirationDateTestInPastThrowsException() {
-    LocalDate pastDate = LocalDate.of(2020, 1, 1); // arrange
+  void setExpirationDateNegativeTest() {
 
     // Verify that creating a FoodItem with a past date throws an exception
-    assertThrows(IllegalArgumentException.class, () ->
-        new FoodItem("milk", 7f, "liters", 10.0, pastDate)
-    );
+    assertThrows(IllegalArgumentException.class, () -> foodItemTest.setExpirationDate(null));
   }
 
   /**
