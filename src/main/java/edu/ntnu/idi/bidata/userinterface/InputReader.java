@@ -65,7 +65,7 @@ public class InputReader {
             DateTimeFormatter.ofPattern("yyyy-MM-dd")); // (OpenAI, 2024)
         //converts the String to a LocalDate and formats it.
         validDate = true;
-      } catch (Exception e) { //catches illegal argument if it is not correct format
+      } catch (Exception e) { //catches illegal argument if it is not correct format.
         print.invalidExpirationDateOutput();
       }
     }
@@ -133,12 +133,12 @@ public class InputReader {
    */
   public int amountOfIngredients() { //int because this method is for
     // the quantity of recipes, not FoodItem.
-    int quantity = 0; // quantity is 0
+    int quantity = 0; // quantity is 0.
     boolean validInt = false;
     while (!validInt) {
       String priceInput = scannerString();
       try { // tries the scanner method.
-        quantity = Integer.parseInt(priceInput); // converts the string to a float
+        quantity = Integer.parseInt(priceInput); // converts the string to Integer.
         validInt = true;
       } catch (Exception e) { // catches an exception if the number is 0 or under or not a number.
         print.invalidFoodAmountOutput();
