@@ -28,7 +28,7 @@ import java.util.Map;
  */
 
 public class FridgeStorage {
-  private final Map<String, FoodItem> fridgeRegister; //Allows the user
+  private final Map<String, FoodItem> fridgeRegister;
 
   /**
    * Constructs a {@code FridgeStorage} instance and initializes the fridge register.
@@ -160,7 +160,7 @@ public class FridgeStorage {
    * @return food items from fridge to iterator.
    */
   public Iterator<Map.Entry<String, FoodItem>> getIterator() {
-    return fridgeRegister.entrySet(). // Sends key and value (OpenAI 2024).
+    return fridgeRegister.entrySet(). // Sends key and value (recommended by Copilot 2024).
             iterator(); //return an iterator because, you cant send a whole list to another class.
   }
 
