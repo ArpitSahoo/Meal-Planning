@@ -20,6 +20,7 @@ import java.util.Map;
  * formatting the output and guiding the user through actions and options.
  * </p>
  *
+ * @since 0.0.1
  * @author Arpit Sahoo
  * @version 0.0.12
  */
@@ -143,14 +144,13 @@ public class UiPrintHandler {
   public void printItFridge(Iterator<Map.Entry<String, FoodItem>> foodIterator) {
     double totalPrice = 0;
     System.out.println("\n--- Fridge Contents---");
-    while (foodIterator.hasNext()) {
+    while (foodIterator.hasNext()) { // Iterates with entrySet:
       Map.Entry<String, FoodItem> entry = foodIterator.next();
-      FoodItem food = entry.getValue();
-      printLocatedFood(food);
-      totalPrice += food.getAmount() * food.getPricePerUnit();
+      FoodItem food = entry.getValue(); // Gets the value.
+      printLocatedFood(food); // Prints the values.
+      totalPrice += food.getAmount() * food.getPricePerUnit(); // Calculates the total price.
     }
     System.out.println("The total price is: " + totalPrice + " kr");
-
   }
 
   /**
@@ -167,16 +167,16 @@ public class UiPrintHandler {
    * @param foodIterator an iterator over the entries of food items stored in the fridge
    */
   public void printExpiredFood(Iterator<Map.Entry<String, FoodItem>> foodIterator) {
-    boolean hasExpiredItems = false;
-    double totalPrice = 0;
+    boolean hasExpiredItems = false; //No expired food.
+    double totalPrice = 0; // starts at 0.
     LocalDate currentDate = LocalDate.now();
     while (foodIterator.hasNext()) { // while loop that iterates with entrySet (OpenAI 2024)
       Map.Entry<String, FoodItem> entry = foodIterator.next();
       FoodItem food = entry.getValue();
       if (food.getExpirationDate() != null && food.getExpirationDate().isBefore(currentDate)) {
-        hasExpiredItems = true;
-        printLocatedFood(food);
-        totalPrice += food.getAmount() * food.getPricePerUnit();
+        hasExpiredItems = true; //When it finds the foods, it is true.
+        printLocatedFood(food); // Prints the values.
+        totalPrice += food.getAmount() * food.getPricePerUnit(); // calculates the total price.
       }
     }
     if (hasExpiredItems) {
@@ -185,7 +185,6 @@ public class UiPrintHandler {
       System.out.println("No expired food was found.");
     }
   }
-
 
   /**
    * Prints the details of a specific food item.
@@ -219,17 +218,15 @@ public class UiPrintHandler {
         + " | Description: " + recipe.getDescription() //Formatted print.
         + " | Steps: " + recipe.getSteps()
         + " | Ingredients: "
-
     );
 
     Iterator<FoodItem> ingredients = recipe.getIngredients();
-    while (ingredients.hasNext()) { //Recommended by OpenAI 2024, Iterates through the list.
+    while (ingredients.hasNext()) { //(Recommended by OpenAI 2024), Iterates through the list.
       FoodItem ingredient = ingredients.next();
       System.out.println("Name: " + ingredient.getNameOfFood()
           //Gets all the information of the ingredient from the list.
           + " | Amount: " + ingredient.getAmount() + " "
           + ingredient.getUnits() //Formatted print.
-
       );
     }
   }
