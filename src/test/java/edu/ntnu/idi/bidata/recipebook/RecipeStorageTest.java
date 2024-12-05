@@ -166,21 +166,21 @@ class RecipeStorageTest {
    *
    * <p>This test ensures that the {@code getRecipeNamesAlphabeticalOrder}
    * method correctly provides an iterator
-   * over the items stored in the fridge register. It also ensures that the {@code Recipes} are
+   * over the items stored in the recipe book. It also ensures that the {@code Recipes} are
    * sorted alphabetical.
    * It verifies that the iterator retrieves
-   * the food items in the expected order, and checks the following:
+   * the recipes in the expected order, and checks the following:
    *
    * <ul>
    *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The keys of the recipe are in the expected alphabetical order.</li>
+   *   <li>The names of the recipe are in the expected alphabetical order.</li>
    *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
    * </ul>
    *
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
-   *   <li>{@code getIterator().next().getKey()} returns the correct key for each item in the expected order.</li>
+   *   <li>{@code getIterator().next()} returns the correct name for each item in the expected order.</li>
    *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
    * </ul>
    */
@@ -201,27 +201,26 @@ class RecipeStorageTest {
   }
 
   /**
-   * A negative test that test the {@code getRecipeNamesAlphabeticalOrder}
-   * method of the {@code RecipeStorage} class.
+   * A negative test for the {@code getRecipeNamesAlphabeticalOrder} method
+   * in the {@code RecipeStorage} class.
    *
-   * <p>This test ensures that the {@code getRecipeNamesAlphabeticalOrder}
-   * method fails to return an iterator
-   * that retrieves the food items in the correct alphabetical order:
-   *
+   * <p>This test verifies that the {@code getRecipeNamesAlphabeticalOrder} method
+   * does not incorrectly return recipe names in the wrong alphabetical order.
+   * Specifically, it ensures the following:
    * <ul>
-   *   <li>The iterator starts with the first item and tries the next.</li>
-   *   <li>The keys of the recipe are not in the expected alphabetical order.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   *   <li>The iterator starts with the first item and proceeds correctly.</li>
+   *   <li>The recipe names are not in the incorrect order as expected in this test.</li>
+   *   <li>The iterator correctly identifies when no more items are available.</li>
    * </ul>
    * </p>
+   *
    * <p>Expected behavior:
    * <ul>
-   *   <li>{@code getIteratorTest().hasNext()}
-   *   is {@code true} initially and until the last item.</li>
-   *   <li>{@code getIteratorTest().next()}
-   *   does not return keys in the correct alphabetical order.</li>
-   *   <li>{@code getIteratorTest().hasNext()}
-   *   is {@code false} after the last item.</li>
+   *   <li>{@code hasNext()} returns {@code true} for each item in the iterator
+   *       until the last item is reached.</li>
+   *   <li>{@code next()} does not return recipe names in the expected alphabetical order
+   *       in this negative test case.</li>
+   *   <li>{@code hasNext()} returns {@code false} after the last item is retrieved.</li>
    * </ul>
    * </p>
    */
