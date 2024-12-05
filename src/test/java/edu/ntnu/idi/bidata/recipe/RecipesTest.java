@@ -132,15 +132,9 @@ class RecipesTest {
   /**
    * Tests the {@code getIngredients} method of the {@code Recipes} class.
    *
-   * <p>This test ensures that the {@code getIngredients} method correctly provides an iterator
-   * over the ingredients.
-   * It verifies that the iterator retrieves
-   * checks the following:
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * <p>This test ensures that the {@code getIngredients} method correctly provides the correct
+   * ingredient with an iterator.
+   * </p>
    *
    * <p>Expected:
    * <ul>
@@ -148,6 +142,7 @@ class RecipesTest {
    *   <li>{@code getIterator().next()} returns the correct ingredient.</li>
    *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
    * </ul>
+   * </p>
    */
   @Test
   void getIngredientsPositiveTest(){
@@ -167,23 +162,18 @@ class RecipesTest {
   /**
    * A negative test of the {@code getIngredients} method of the {@code Recipes} class.
    *
-   * <p>This test ensures that the {@code getIngredients} method correctly provides an iterator
-   * over the ingredients.
-   * It verifies that the iterator retrieves
-   * checks the following:
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * <p>This test ensures that the {@code getIngredients} does not incorrectly provide a
+   * wrong ingredient.
+   * </p>
    *
    * <p>Expected:
    * <ul>
    *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
-   *   <li>{@code getIterator().next()} does not returns the correct ingredient. Since this is a
-   *   negative test.</li>
+   *   <li>It will not return milk, since it does not exist in the recipe</li>
+   *   <li>It will not return mango, since it does not exist in the fridge</li>
    *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
    * </ul>
+   * </p>
    */
   @Test
   void getIngredientsNegativeTest(){
@@ -192,11 +182,11 @@ class RecipesTest {
     assertTrue(getIteratorTest.hasNext());
     FoodItem firstItem = getIteratorTest.next(); //Inspired by OpenAI 2024
     assertNotEquals("milk", firstItem.getNameOfFood());
-
+    //milk does not exist in the recipe.
     assertTrue(getIteratorTest.hasNext());
     FoodItem secondFoodItem = getIteratorTest.next();
-    assertNotEquals("Butter", secondFoodItem.getNameOfFood());
-
+    assertNotEquals("mango", secondFoodItem.getNameOfFood());
+    //Butter exists in the recipe book.
     assertFalse(getIteratorTest.hasNext());
   }
 
