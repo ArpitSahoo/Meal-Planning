@@ -126,13 +126,6 @@ public class Recipes {
    * @throws IllegalArgumentException if unit is null, blank or empty.
    */
   public void addIngredient(String name, Float amount, String unit) {
-    if (name == null || name.isBlank() || name.isEmpty()) {
-      throw new IllegalArgumentException("Recipe name cannot be blank");
-    } else if (amount <= 0) {
-      throw new IllegalArgumentException("Recipe amount cannot be negative or zero");
-    } else if (unit == null || unit.isEmpty() || unit.isBlank()) {
-      throw new IllegalArgumentException("Recipe unit cannot be blank");
-    }
     ingredients.add(new FoodItem(name, amount, unit));
   }
 }
