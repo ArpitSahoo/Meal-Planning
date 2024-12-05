@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  */
 class RecipeStorageTest {
   private RecipeStorage storage;
@@ -155,10 +155,28 @@ class RecipeStorageTest {
    * </ul>
    */
   @Test
-  void getRecipe() {
+  void getRecipePositiveTest() {
     storage.addRecipe(recipes1);
     assertEquals(recipes1, storage.getRecipe("butter chicken"));
   }
+
+  /**
+   * A positive test for the {@code getRecipe} method.
+   *
+   * <p>This method ensures that the {@code getRecipe}, does not get
+   * a non-existing recipe from {@code RecipeStorage}.</p>
+   *
+   * <p>Expected behavior:
+   * <ul>
+   *   <li>{@code getRecipe} does not equals to getRecipe("butter chicken").</li>
+   * </ul>
+   */
+  @Test
+  void getRecipeNegativeTest() {
+    assertNotEquals(recipes1, storage.getRecipe("butter chicken"));
+  }
+
+
 
   /**
    * Tests the {@code getRecipeNamesAlphabeticalOrder}
@@ -170,19 +188,15 @@ class RecipeStorageTest {
    * sorted alphabetical.
    * It verifies that the iterator retrieves
    * the recipes in the expected order, and checks the following:
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The names of the recipe are in the expected alphabetical order.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * </p>
    *
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
-   *   <li>{@code getIterator().next()} returns the correct name for each item in the expected order.</li>
-   *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
+   *   <li>{@code getIterator().next()} returns the correct name for each recipe in the expected order.</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} after the last recipe.</li>
    * </ul>
+   * </p>
    */
   @Test
   void getRecipeNamesAlphabeticalOrderPositiveTest(){
@@ -206,12 +220,6 @@ class RecipeStorageTest {
    *
    * <p>This test verifies that the {@code getRecipeNamesAlphabeticalOrder} method
    * does not incorrectly return recipe names in the wrong alphabetical order.
-   * Specifically, it ensures the following:
-   * <ul>
-   *   <li>The iterator starts with the first item and proceeds correctly.</li>
-   *   <li>The recipe names are not in the incorrect order as expected in this test.</li>
-   *   <li>The iterator correctly identifies when no more items are available.</li>
-   * </ul>
    * </p>
    *
    * <p>Expected behavior:
@@ -220,7 +228,7 @@ class RecipeStorageTest {
    *       until the last item is reached.</li>
    *   <li>{@code next()} does not return recipe names in the expected alphabetical order
    *       in this negative test case.</li>
-   *   <li>{@code hasNext()} returns {@code false} after the last item is retrieved.</li>
+   *   <li>{@code hasNext()} returns {@code false} after the last recipe is retrieved.</li>
    * </ul>
    * </p>
    */
