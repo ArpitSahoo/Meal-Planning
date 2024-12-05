@@ -42,7 +42,7 @@ public class FoodItem {
    * @param units of FoodItem.
    */
   public FoodItem(String nameOfFood, Float amount, String units) {
-    setNameOfFood(nameOfFood);
+    setNameOfFood(nameOfFood); //Used for ingredients.
     setAmount(amount);
     setUnits(units);
   }
