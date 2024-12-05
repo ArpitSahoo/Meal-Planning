@@ -84,7 +84,7 @@ class FridgeStorageTest {
    *
    * <p>This test verifies that a food item is not added to the fridge.
    * It asserts that the method returns {@code false}, since {@code foodItem1}
-   * already exists. But amount is expected  to be updated.</p>
+   * already exists. But amount is expected to be updated.</p>
    * <p>Expected behavior:
    * <ul>
    *   <li>{@code addFoodItem(foodItem1)} returns {@code false}.</li>
@@ -124,8 +124,8 @@ class FridgeStorageTest {
    *Negative test to test the {@code removeFoodItem} method
    * of the {@code FridgeRegister} class.
    *
-   * <p>This test if an non-existing {@code FoodItem} in the {@code FridgeRegister}
-   * is removed from the fridge.
+   * <p>This test the {@code FridgeRegister} does not remove
+   * a non-existing {@code FoodItem}.
    * It asserts that the method returns {@code false} when using {@code removeFoodItem}.</p>
    *
    * <p>Expected behavior:
@@ -163,27 +163,26 @@ class FridgeStorageTest {
   }
 
   /**
-   *Negative test to test the {@code foodToTake} method
+   *Negative test for the {@code foodToTake} method
    * of the {@code FridgeRegister} class.
    *
-   * <p>This test if a fixed amount of a {@code FoodItem} in the {@code FridgeRegister}
-   * is taken from the fridge.
+   * <p>This test the {@code FridgeRegister} does not take
+   * out a non-existing {@code FoodItem}.
    * A new {@code FoodItem} is initialized to take out from the fridge.
-   * It asserts that the method returns {@code false} when using {@code foodToTake}.
-   * Since a similar {@code foodToTake} does not exists in the fridge.</p>
-   *
+   * It asserts that the method returns {@code false} when using {@code foodToTaken}.
+   * Since a similar {@code foodToTaken} does not exists in the fridge.</p>
    *
    * <p>Expected behavior:
-   *   <ul><li>{@code foodToTake(foodToTake)} returns {@code false}.</li></ul>
+   *   <ul><li>{@code foodToTake(foodToTaken)} returns {@code false}.</li></ul>
    *</p>
    */
   @Test
   void FoodToTakeNegativeTest() {
-    FoodItem foodToTake = new FoodItem("juice",
+    FoodItem foodToTaken = new FoodItem("juice",
         2f, "liter", 20.0, expirationDate
     );
 
-    boolean wasFoodTaken = fridgeRegister.foodToTake(foodToTake);
+    boolean wasFoodTaken = fridgeRegister.foodToTake(foodToTaken);
     assertFalse(wasFoodTaken);
   }
 
@@ -194,9 +193,7 @@ class FridgeStorageTest {
    * <p>This test if a {@code FoodItem} in the {@code FridgeRegister}
    * exits in the fridge.
    * A new {@code FoodItem} is initialized to find in the fridge.
-   * It asserts that the method is passed when searching {@code foodItem1}.</p>
-   *
-   * Return the food's name.
+   * It asserts that the method is passed when searching {@code foodItem1}.
    *</p>
    */
   @Test
@@ -230,14 +227,8 @@ class FridgeStorageTest {
    * Tests the {@code getIterator} method of the {@code FridgeRegister} class.
    *
    * <p>This test ensures that the {@code getIterator} method correctly provides an iterator
-   * over the items stored in the fridge register. It verifies that the iterator retrieves
-   * the food items in the expected order, and checks the following:
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The keys of the food items match the expected values.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * over the food item stored in the fridge register.
+   * </p>
    *
    * <p>Expected behavior:
    * <ul>
@@ -245,7 +236,7 @@ class FridgeStorageTest {
    *   <li>{@code getIterator().next().getKey()} returns the correct key for each item in the expected order.</li>
    *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
    * </ul>
-   *
+   * </p>
    */
   @Test
   void getIteratorTest() {
@@ -271,15 +262,9 @@ class FridgeStorageTest {
   /**
    * A negative test that tests the {@code getIterator} method of the {@code FridgeRegister} class.
    *
-   * <p>This test ensures that the {@code getIterator} method fails to return an iterator
-   * over the items stored in the fridge register. It verifies that the iterator retrieves
-   * the food items in the expected order, and checks the following:
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The keys of the food items match the expected values.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * <p>This test ensures that the {@code getIterator} method does not incorrectly returns a non-existing
+   * food item stored in the fridge register.
+   * </p>
    *
    * <p>Expected behavior:
    * <ul>
@@ -368,13 +353,7 @@ class FridgeStorageTest {
    * over the items stored in the fridge register. It also ensures that the {@code FoodItem} are
    * sorted alphabetical.
    * It verifies that the iterator retrieves
-   * the food items in the expected order, and checks the following:
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and progresses sequentially.</li>
-   *   <li>The name of the food items are in the expected alphabetical order.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * the food items in the expected order.
    * </p>
    *
    * <p>Expected behavior:
@@ -410,12 +389,7 @@ class FridgeStorageTest {
    *
    * <p>This test ensures that the {@code getIteratorAlphabetical}
    * method does not incorrectly return the foods name in the wrong alphabetical order.
-   *
-   * <ul>
-   *   <li>The iterator starts with the first item and tries the next.</li>
-   *   <li>The keys of the food items are not in the expected alphabetical order.</li>
-   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
-   * </ul>
+   * </p>
    *
    * <p>Expected behavior:
    * <ul>
