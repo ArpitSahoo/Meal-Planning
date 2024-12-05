@@ -1,6 +1,8 @@
 package edu.ntnu.idi.bidata.recipe;
 
+import edu.ntnu.idi.bidata.food.FoodItem;
 import org.junit.jupiter.api.*;
+import java.util.Iterator;
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -13,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.1
+ * @version 0.0.2
  */
 class RecipesTest {
   private Recipes recipes1;
@@ -126,6 +128,78 @@ class RecipesTest {
     assertThrows(IllegalArgumentException.class, () -> recipes1.setSteps(null));
     assertThrows(IllegalArgumentException.class, () -> recipes1.setSteps(""));
   }
+
+  /**
+   * Tests the {@code getIngredients} method of the {@code Recipes} class.
+   *
+   * <p>This test ensures that the {@code getIngredients} method correctly provides an iterator
+   * over the ingredients.
+   * It verifies that the iterator retrieves
+   * checks the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and progresses sequentially.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Expected:
+   * <ul>
+   *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIterator().next()} returns the correct ingredient.</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
+   * </ul>
+   */
+  @Test
+  void getIngredientsPositiveTest(){
+    Iterator<FoodItem> getIteratorTest = recipes1.getIngredients();
+
+    assertTrue(getIteratorTest.hasNext());
+    FoodItem firstItem = getIteratorTest.next(); //Inspired by OpenAI 2024
+    assertEquals("Butter", firstItem.getNameOfFood());
+
+    assertTrue(getIteratorTest.hasNext());
+    FoodItem secondFoodItem = getIteratorTest.next();
+    assertEquals("Beer", secondFoodItem.getNameOfFood());
+
+    assertFalse(getIteratorTest.hasNext());
+  }
+
+  /**
+   * A negative test of the {@code getIngredients} method of the {@code Recipes} class.
+   *
+   * <p>This test ensures that the {@code getIngredients} method correctly provides an iterator
+   * over the ingredients.
+   * It verifies that the iterator retrieves
+   * checks the following:
+   *
+   * <ul>
+   *   <li>The iterator starts with the first item and progresses sequentially.</li>
+   *   <li>The iterator correctly identifies when there are no more items to iterate.</li>
+   * </ul>
+   *
+   * <p>Expected:
+   * <ul>
+   *   <li>{@code getIterator().hasNext()} is {@code true} initially and until the last item.</li>
+   *   <li>{@code getIterator().next()} does not returns the correct ingredient. Since this is a
+   *   negative test.</li>
+   *   <li>{@code getIterator().hasNext()} is {@code false} after the last item.</li>
+   * </ul>
+   */
+  @Test
+  void getIngredientsNegativeTest(){
+    Iterator<FoodItem> getIteratorTest = recipes1.getIngredients();
+
+    assertTrue(getIteratorTest.hasNext());
+    FoodItem firstItem = getIteratorTest.next(); //Inspired by OpenAI 2024
+    assertNotEquals("milk", firstItem.getNameOfFood());
+
+    assertTrue(getIteratorTest.hasNext());
+    FoodItem secondFoodItem = getIteratorTest.next();
+    assertNotEquals("Butter", secondFoodItem.getNameOfFood());
+
+    assertFalse(getIteratorTest.hasNext());
+  }
+
 
 
 }
