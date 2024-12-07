@@ -131,14 +131,14 @@ public class InputReader {
    *
    * @return quantity if price is valid {@code true}.
    */
-  public int amountOfIngredients() { //int because this method is for
+  public int getValidInt() { //int because this method is for
     // the quantity of recipes, not FoodItem.
     int quantity = 0; // quantity is 0.
     boolean validInt = false;
     while (!validInt) {
-      String priceInput = scannerString();
+      String integerInput = scannerString();
       try { // tries the scanner method.
-        quantity = Integer.parseInt(priceInput); // converts the string to Integer.
+        quantity = Integer.parseInt(integerInput); // converts the string to Integer.
         validInt = true;
       } catch (Exception e) { // catches an exception if the number is 0 or under or not a number.
         print.invalidFoodAmountOutput();
