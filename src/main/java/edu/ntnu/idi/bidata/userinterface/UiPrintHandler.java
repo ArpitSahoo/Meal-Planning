@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.12
+ * @version 0.0.13
  */
 
 
@@ -217,6 +217,7 @@ public class UiPrintHandler {
     System.out.println("Name:" + recipe.getNameOfRecipe() //Gets all the information of the Recipe.
         + " | Description: " + recipe.getDescription() //Formatted print.
         + " | Steps: " + recipe.getSteps()
+        + " | portion: " + recipe.getPortion()
         + " | Ingredients: "
     );
 
@@ -344,6 +345,10 @@ public class UiPrintHandler {
    */
   public void howManyIngredientsOutput() {
     System.out.println("How many ingredients are needed to make the recipe?: ");
+  }
+
+  public void howManyPortion() {
+    System.out.println("How many portion is this dish made for?: ");
   }
 
   /**
