@@ -16,12 +16,13 @@ import java.util.List;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.7
+ * @version 0.0.8
  */
 public class Recipes {
   private String nameOfRecipe;
   private String description;
   private String steps;
+  private Integer portion;
   private final List<FoodItem> ingredients;
 
   /**
@@ -33,10 +34,11 @@ public class Recipes {
    * @param description of the recipe.
    * @param steps to make the recipe.
    */
-  public Recipes(String nameOfRecipe, String description, String steps) {
+  public Recipes(String nameOfRecipe, String description, String steps, int portion) {
     setNameOfRecipe(nameOfRecipe);
     setDescription(description);
     setSteps(steps);
+    setPortion(portion);
     this.ingredients = new ArrayList<>();
   }
 
@@ -104,6 +106,28 @@ public class Recipes {
       throw new IllegalArgumentException("Recipe steps cannot be blank");
     }
     this.steps = steps;
+  }
+
+  /**
+   * Access the portion of the recipe.
+   * @return portion.
+   */
+  public int getPortion() {
+    return portion;
+  }
+
+  /**
+   * Mutates the portion for the recipe.
+   *
+   * @param portion the portion for the recipe.
+   * @throws IllegalArgumentException if the portion is lower than 0
+   * or bigger than 100.
+   */
+  public void setPortion(int portion) {
+    if (portion <= 0  || portion > 100) {
+      throw new IllegalArgumentException("Portion must be between 0 and 100");
+    }
+    this.portion = portion;
   }
 
   /**
