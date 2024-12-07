@@ -356,6 +356,7 @@ public class UserInterface {
    * <ul><li><b>Name of recipe: </b>The name of the recipe.</></li></ul>
    * <ul><li><b>Description: </b>The description of the recipe.</></li></ul>
    * <ul><li><b>Steps: </b>The steps to make the recipe.</li></ul>
+   * <ul><li><b>portion: </b>How many portion is the recipe.</li></ul>
    * </p>
    *
    * @return a new recipe.
