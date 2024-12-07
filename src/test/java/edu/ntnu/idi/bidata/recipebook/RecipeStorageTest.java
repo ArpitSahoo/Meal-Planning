@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.3
+ * @version 0.0.4
  */
 class RecipeStorageTest {
   private RecipeStorage storage;
@@ -35,16 +35,16 @@ class RecipeStorageTest {
   void setUp() {
     storage = new RecipeStorage();
     recipes1 = new Recipes("butter chicken",
-        "Good indian dish", "First make chicken, then make butter");
+        "Good indian dish", "First make chicken, then make butter",2);
     recipes1.addIngredient("Butter", 2f, "Kg");
     recipes1.addIngredient("Chicken", 1f, "Kg");
 
     recipes2 = new Recipes("tomato sauce",
-        "Good italian dish", "Add Tomato to the sauce");
+        "Good italian dish", "Add Tomato to the sauce", 2);
     recipes2.addIngredient("Tomato", 1f, "Kg");
     recipes2.addIngredient("Sauce", 1f, "liter");
     recipes3 = new Recipes("kebab in pita","Delicacy from Turkey",
-        "Cook the meat, add the sauce and add it to the pita bread.");
+        "Cook the meat, add the sauce and add it to the pita bread.", 2);
     recipes3.addIngredient("Pita", 2f, "pieces");
     recipes3.addIngredient("Meat", 200f, "Kg");
     recipes3.addIngredient("Sauce", 0.5f, "liters");
