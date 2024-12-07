@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.2
+ * @version 0.0.3
  */
 class RecipesTest {
   private Recipes recipes1;
@@ -24,10 +24,10 @@ class RecipesTest {
    * Before each test methods, a new recipe is made.
    */
   @BeforeEach
-  void setUp(){
+  void setUp() {
     recipes1 = new Recipes("Butter beer",
         "Beer with butter. A great drink from Harry Potter",
-        "Add butter to beer and then boil");
+        "Add butter to beer and then boil", 3);
     recipes1.addIngredient("Butter", 1f, "Kg");
     recipes1.addIngredient("Beer", 1f, "Liter"); // arrange
   }
@@ -54,7 +54,7 @@ class RecipesTest {
    * <p>This methods tests if the {@code setNameOfRecipe} is a valid input.</p>
    */
   @Test
-  void setNameOfRecipePositiveTest(){
+  void setNameOfRecipePositiveTest() {
     assertEquals("Butter beer", recipes1.getNameOfRecipe());
   }
 
@@ -70,7 +70,7 @@ class RecipesTest {
    * </p>
    */
   @Test
-  void setNameOfRecipeNegativeTest(){
+  void setNameOfRecipeNegativeTest() {
     assertThrows(IllegalArgumentException.class, () -> recipes1.setNameOfRecipe(" "));
     assertThrows(IllegalArgumentException.class, () -> recipes1.setNameOfRecipe(null));
   }
@@ -81,7 +81,7 @@ class RecipesTest {
    * <p>This methods tests if the {@code setDescriptionOfRecipe} is a valid input.</p>
    */
   @Test
-  void setDescriptionOfRecipePositiveTest(){
+  void setDescriptionOfRecipePositiveTest() {
     assertEquals("Beer with butter. A great drink from Harry Potter", recipes1.getDescription());
   }
 
@@ -97,7 +97,7 @@ class RecipesTest {
    * </p>
    */
   @Test
-  void setDescriptionOfRecipeNegativeTest(){
+  void setDescriptionOfRecipeNegativeTest() {
     assertThrows(IllegalArgumentException.class, () -> recipes1.setDescription(null));
     assertThrows(IllegalArgumentException.class, () -> recipes1.setDescription(""));
   }
@@ -108,7 +108,7 @@ class RecipesTest {
    * <p>This methods tests if the {@code setSteps} is a valid input.</p>
    */
   @Test
-  void setStepsPositiveTest(){
+  void setStepsPositiveTest() {
     assertEquals("Add butter to beer and then boil", recipes1.getSteps());
   }
 
@@ -124,10 +124,34 @@ class RecipesTest {
    * </p>
    */
   @Test
-  void setStepsNegativeTest(){
+  void setStepsNegativeTest() {
     assertThrows(IllegalArgumentException.class, () -> recipes1.setSteps(null));
     assertThrows(IllegalArgumentException.class, () -> recipes1.setSteps(""));
   }
+
+  /**
+   * A positive test that tests the method {@code setPortion}.
+   *
+   * <p>This methods tests if the {@code setAmount} is a valid input.</p>
+   */
+  @Test
+  void setPortionsPositiveTest() {
+    assertEquals(3, recipes1.getPortion());
+  }
+
+  /**
+   * A negative test that tests the method {@code setPortion}.
+   *
+   * <p>This test ensures that the {@code setPortion} method correctly throws an
+   * {@code IllegalArgumentException} when provided with invalid input.
+   */
+  @Test
+  void setPortionsNegativeTest() {
+    assertThrows(IllegalArgumentException.class, () -> recipes1.setPortion(-1));
+    assertThrows(IllegalArgumentException.class, () -> recipes1.setPortion(101));
+  }
+
+
 
   /**
    * Tests the {@code getIngredients} method of the {@code Recipes} class.
