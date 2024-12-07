@@ -14,14 +14,14 @@ import java.time.LocalDate;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.4
+ * @version 0.0.5
  */
 public class FoodItem {
   private String nameOfFood; //used food instead
-  private Float amount;
+  private float amount;
   private String units;
   private LocalDate expirationDate;
-  private Double pricePerUnit;
+  private double pricePerUnit;
 
   /**
    * A constructor for the class FoodItem.
@@ -29,7 +29,7 @@ public class FoodItem {
    * @param nameOfFood of FoodItem.
    * @param amount of FoodItem.
    */
-  public FoodItem(String nameOfFood, Float amount) { // Allows the user to remove and take food
+  public FoodItem(String nameOfFood, float amount) { // Allows the user to remove and take food
     setNameOfFood(nameOfFood); // Also allows the method in UI to work.
     setAmount(amount);
   }
@@ -41,7 +41,7 @@ public class FoodItem {
    * @param amount of FoodItem.
    * @param units of FoodItem.
    */
-  public FoodItem(String nameOfFood, Float amount, String units) {
+  public FoodItem(String nameOfFood, float amount, String units) {
     setNameOfFood(nameOfFood); //Used for ingredients.
     setAmount(amount);
     setUnits(units);
@@ -56,8 +56,8 @@ public class FoodItem {
    * @param pricePerUnit          of FoodItem.
    * @param expirationDate of FoodItem.
    */
-  public FoodItem(String nameOfFood, Float amount, String units,
-                  Double pricePerUnit, LocalDate expirationDate){ // Makes it possible to create a FoodItem object.
+  public FoodItem(String nameOfFood, float amount, String units,
+                  double pricePerUnit, LocalDate expirationDate){ // Makes it possible to create a FoodItem object.
     setNameOfFood(nameOfFood);
     setAmount(amount);
     setUnits(units);
@@ -91,7 +91,7 @@ public class FoodItem {
    *
    * @return the amount of FoodItem.
    */
-  public Float getAmount() {
+  public float getAmount() {
     return amount;
   }
 
@@ -101,7 +101,7 @@ public class FoodItem {
    * @param amount the FoodItem's amount.
    * @throws IllegalArgumentException if amount is 0 or a negative number.
    */
-  public void setAmount(Float amount) throws IllegalArgumentException {
+  public void setAmount(float amount) throws IllegalArgumentException {
     if (amount <= 0) {
       throw new IllegalArgumentException("Amount can not be 0 or under");
     }
@@ -157,7 +157,7 @@ public class FoodItem {
    *
    * @return the pricePerUnit of the FoodItem.
    */
-  public Double getPricePerUnit() {
+  public double getPricePerUnit() {
     return pricePerUnit;
   }
 
@@ -167,7 +167,7 @@ public class FoodItem {
    * @param pricePerUnit the FoodItem's price.
    * @throws IllegalArgumentException if price is 0 or a negative number.
    */
-  public void setPricePerUnit(Double pricePerUnit) throws IllegalArgumentException {
+  public void setPricePerUnit(double pricePerUnit) throws IllegalArgumentException {
     if (pricePerUnit <= 0) {
       throw new IllegalArgumentException("Price can not be a 0 or lower.");
     }
