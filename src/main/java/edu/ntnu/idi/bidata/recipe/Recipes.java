@@ -22,7 +22,7 @@ public class Recipes {
   private String nameOfRecipe;
   private String description;
   private String steps;
-  private Integer portion;
+  private int portion;
   private final List<FoodItem> ingredients;
 
   /**
