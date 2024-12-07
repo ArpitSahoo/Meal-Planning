@@ -332,7 +332,7 @@ public class UserInterface {
     try { //Tries to add recipe to book map.
       Recipes newRecipes = getRecipeInformation();
       print.howManyIngredientsOutput();
-      int amountOfIngredient = input.amountOfIngredients(); //How many loops?
+      int amountOfIngredient = input.getValidInt(); //How many loops?
       for (int indexOfAmount = 0; indexOfAmount < amountOfIngredient; indexOfAmount++) { //Loops.
         print.nameOfFoodOutput();
         String name = input.scannerString();
@@ -369,7 +369,10 @@ public class UserInterface {
 
     print.stepsOutput();
     String steps = input.scannerString();
-    return new Recipes(nameOfRecipe, description, steps);
+
+    print.howManyPortion();
+    int portions = input.getValidInt();
+    return new Recipes(nameOfRecipe, description, steps, portions);
   }
 
   /*
@@ -472,16 +475,16 @@ public class UserInterface {
    */
   private void initRecipe() {
     Recipes butterChicken = new Recipes("butter chicken",
-        "Good indian dish", "First make chicken, then make butter");
+        "Good indian dish", "First make chicken, then make butter", 2);
     butterChicken.addIngredient("Butter", 2f, "Kg");
     butterChicken.addIngredient("Chicken", 2f, "Kg");
     butterChicken.addIngredient("milk", 1f, "liters");
     Recipes tomatoSauce = new Recipes("tomato sauce",
-        "Good italian dish", "Add Tomato to the sauce");
+        "Good italian dish", "Add Tomato to the sauce", 2);
     tomatoSauce.addIngredient("Tomato", 2f, "pieces");
     tomatoSauce.addIngredient("Kiwi finished sauce", 1f, "Liters");
     Recipes kebabInPita = new Recipes("kebab in pita","Delicacy from Turkey",
-        "Cook the meat, add the sauce and add it to the pita bread.");
+        "Cook the meat, add the sauce and add it to the pita bread.", 2);
     kebabInPita.addIngredient("Pita", 2f, "pieces");
     kebabInPita.addIngredient("Meat", 200f, "Kg");
     kebabInPita.addIngredient("Sauce", 0.5f, "liters");
