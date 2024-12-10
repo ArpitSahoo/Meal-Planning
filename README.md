@@ -2,17 +2,13 @@
 # Portfolio project IDATA1003
 This file uses Mark Down syntax. For more information see [here](https://www.markdownguide.org/basic-syntax/).
 
-[//]: # (TODO: Fill inn your name and student ID)
-
 STUDENT NAME = "ARPIT SAHOO"  
 STUDENT ID = "131809"
 
 ## Project description
-
-[//]: # (TODO: Write a short description of your project/product here.)
 The purpose of this application is to help the user to have a better overview of food in their fridge
-and have the meals they can prepare. This application also supports user to add recipes they want
-to make. The goal of the application is to reduce food waste. 
+and have the meals they can prepare. This application also supports user to add, remove and find recipes. 
+The goal of the application is to reduce food waste. 
 ## Project structure
 ```
 .
@@ -39,30 +35,34 @@ to make. The goal of the application is to reduce food waste.
 └── recipebook/
 └── RecipeStorageTest.java
 ```
-[//]: # (TODO: Describe the structure of your project here. How have you used packages in your structure. Where are all sourcefiles stored. Where are all JUnit-test classes stored. etc.)
+
+The project is structured in a simple manner. 
+Under the main package, you will find various sub-packages. 
+Every class are in their respective packages, 
+and all the user interaction classes are in the **userinterface** package.
+
+All the test classes are under the package called **test**.
 
 ## Link to repository
-
-[//]: # (TODO: Include a link to your GitHub repository here.)
 This is the link to the git repository:
 https://github.com/NTNU-BIDATA-IDATG1003-2024/meal-planning-ArpitSahoo.git
+
 ## How to run the project
-The FridgeApp is the main class and it there you have to run the application.
-It initializes UserInterface class which initializes the other classes and so on. 
+The FridgeApp serves as the main entry point for the application. 
+It initializes the UserInterface, which is placed within a try-block 
+to ensure robust error handling. A catch-block is also included to handle any 
+exceptions that may occur.
 
-Once you have started the application you will be welcomed with a choice screen.
-Here you can choose different commands to execute. 
+Once the application starts, you will be greeted with a choice screen where '
+you can select different commands to execute.
 
-The application will only exit when commanded to exit. 
-
-[//]: # (TODO: Describe how to run your project here. What is the main class? What is the main method?
-What is the input and output of the program? What is the expected behaviour of the program?)
-
+The application will only exit when explicitly commanded to do so.
 ## How to run the tests
 
 [//]: # (TODO: Describe how to run the tests here.)
-It is highly recommended to clean and compile before running test. Click on the Maven 
-button on top left and click on the test. It will be prompted that the test has passed.
+It is highly recommended to clean and compile before running tests. 
+Click on the Maven button on the top left and select 'test'. 
+It will prompt that the tests have passed.
 ## References
 Codes that have been used from websites or ChatGPT, have been referenced as 
 a comment in the code. 
