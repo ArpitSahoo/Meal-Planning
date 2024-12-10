@@ -29,7 +29,6 @@ import java.util.Map;
  * @since 0.0.1
  * @author Arpit Sahoo
  * @version 0.0.9
- *
  */
 public class UserInterface {
   private final FridgeStorage fridgeRegister;
@@ -363,7 +362,8 @@ public class UserInterface {
    */
   private Recipes getRecipeInformation() {
     print.recipeNameOutput();
-    String nameOfRecipe = input.scannerString();
+    String nameOfRecipe;
+    nameOfRecipe = input.scannerString();
 
     print.descriptionOutput();
     String description = input.scannerString();
@@ -418,7 +418,8 @@ public class UserInterface {
    */
   private void removeRecipeByName() {
     print.recipeNameOutput();
-    String nameOfRecipe = input.scannerString();
+    String nameOfRecipe;
+    nameOfRecipe = input.scannerString();
     boolean removed = recipeStorage.removeRecipe(nameOfRecipe);
     if (removed) {
       print.recipeWasRemoved();
@@ -438,13 +439,13 @@ public class UserInterface {
    */
   private void init() {
     FoodItem apple = new FoodItem("apple", 20f, "kg",
-            5.0, LocalDate.of(2025, 12, 12));
+        5.0, LocalDate.of(2025, 12, 12));
     FoodItem banana = new FoodItem("banana", 10f, "kg",
-            5.0, LocalDate.of(2025, 12, 12));
+        5.0, LocalDate.of(2025, 12, 12));
     FoodItem milk = new FoodItem("milk", 1f, "liter",
-            20.0, LocalDate.of(2025, 1, 20));
+        20.0, LocalDate.of(2025, 1, 20));
     FoodItem chicken = new FoodItem("chicken", 1f, "kg",
-            140.0, LocalDate.of(2025, 1, 20));
+        140.0, LocalDate.of(2025, 1, 20));
     fridgeRegister.addFoodItem(apple);
     fridgeRegister.addFoodItem(banana);
     fridgeRegister.addFoodItem(milk);
@@ -484,7 +485,7 @@ public class UserInterface {
         "Good italian dish", "Add Tomato to the sauce", 2);
     tomatoSauce.addIngredient("Tomato", 2f, "pieces");
     tomatoSauce.addIngredient("Kiwi finished sauce", 1f, "Liters");
-    Recipes kebabInPita = new Recipes("kebab in pita","Delicacy from Turkey",
+    Recipes kebabInPita = new Recipes("kebab in pita", "Delicacy from Turkey",
         "Cook the meat, add the sauce and add it to the pita bread.", 2);
     kebabInPita.addIngredient("Pita", 2f, "pieces");
     kebabInPita.addIngredient("Meat", 200f, "Kg");
