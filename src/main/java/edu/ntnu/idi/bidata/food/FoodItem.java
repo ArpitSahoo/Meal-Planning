@@ -1,7 +1,6 @@
 package edu.ntnu.idi.bidata.food;
 
 import edu.ntnu.idi.bidata.fridge.FridgeStorage; //imported for documentation.
-
 import java.time.LocalDate;
 
 /**
@@ -57,7 +56,8 @@ public class FoodItem {
    * @param expirationDate of FoodItem.
    */
   public FoodItem(String nameOfFood, float amount, String units,
-                  double pricePerUnit, LocalDate expirationDate){ // Makes it possible to create a FoodItem object.
+                  double pricePerUnit,
+                  LocalDate expirationDate) { // Makes it possible to create a FoodItem object.
     setNameOfFood(nameOfFood);
     setAmount(amount);
     setUnits(units);
