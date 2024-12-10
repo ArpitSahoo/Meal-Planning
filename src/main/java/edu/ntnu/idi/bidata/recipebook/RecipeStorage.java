@@ -10,7 +10,8 @@ import java.util.Map;
  *
  * <p>{@code RecipeStorage} is a class used to store alle the recipes.
  * The class interacts with {@link Recipes} objects and stores them.
- * This class allows the user add, remove and get the name of the recipe.</p>
+ * This class allows the user to add, remove and get the name of the recipe.
+ * </p>
  *
  * @since 0.0.1
  * @author Arpit Sahoo
@@ -37,16 +38,18 @@ public class RecipeStorage {
    * If the food item is not found in the recipe book,
    * the recipe will be added as a new entry.</p>
    *
-   * @param newRecipe the {@link Recipes} to be added or updated in the fridge
-   * @return wasAdded, if {@code true} the recipe was added. If {@code false}
-   * food was not added.
+   * @param newRecipe the {@link Recipes} to be added.
+   * @return wasAdded, if {@code true} the recipe was added. If {@code false} food was not added.
    */
   public boolean addRecipe(Recipes newRecipe) {
     boolean waAdded = false;
     if (!recipesMap.containsKey(newRecipe.getNameOfRecipe())) {
+      //If not found in the HashMap, it will be added.
       recipesMap.put(newRecipe.getNameOfRecipe(), newRecipe);
+      //Adds the recipe to the HashMap.
       waAdded = true;
     }
+    //Else false.
     return waAdded;
   }
 
@@ -56,15 +59,18 @@ public class RecipeStorage {
    * <p>Removes recipe from recipe book if it exists in the recipe book.
    * Compares the name prompted and checks for a similar recipe.
    * </p>
+   *
    * @param recipeName is the name of the recipe.
    * @return wasRemoved is {@code false} till removed, then {@code true}.
    */
   public boolean removeRecipe(String recipeName) {
     boolean wasRemoved = false;
     if (recipesMap.containsKey(recipeName)) {
+      //If found, removes the recipe from the HashMap.
       recipesMap.remove(recipeName);
       wasRemoved = true;
     }
+    //Else false.
     return wasRemoved;
   }
 
@@ -86,8 +92,11 @@ public class RecipeStorage {
   public Iterator<String> getRecipeNamesAlphabeticalOrder() {
     return recipesMap.keySet()
         .stream()
+        //Streams all the recipes.
         .sorted(String::compareToIgnoreCase)
+        //Sorts them and ignores the casing.
         .iterator();
+    //Converts to iterator,
   }
 
 }
