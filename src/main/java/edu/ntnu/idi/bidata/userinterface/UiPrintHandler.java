@@ -22,7 +22,7 @@ import java.util.Map;
  *
  * @since 0.0.1
  * @author Arpit Sahoo
- * @version 0.0.13
+ * @version 0.0.14
  */
 
 
@@ -41,11 +41,11 @@ public class UiPrintHandler {
     System.out.println("3. Take out a fixed amount of a food");
     System.out.println("4. Find food by name");
     System.out.println("5. Display all expired food");
-    System.out.println("6. Display foods with a certain expiry date");
+    System.out.println("6. Find foods with a certain expiry date");
     System.out.println("7. Display fridge contents");
     System.out.println("8. Display fridge contents in an alphabetical order");
     System.out.println("9. Add a recipe to recipe book");
-    System.out.println("10. Display all the recipes in an alphabetical order");
+    System.out.println("10. Display all the recipes");
     System.out.println("11. Find a recipe by name");
     System.out.println("12. Remove a recipe from recipe book");
     System.out.println("13. Exit");
@@ -347,6 +347,9 @@ public class UiPrintHandler {
     System.out.println("How many ingredients are needed to make the recipe?: ");
   }
 
+  /**
+   * Asks the user how many portions is the recipe for.
+   */
   public void howManyPortion() {
     System.out.println("How many portion is this dish made for?: ");
   }
