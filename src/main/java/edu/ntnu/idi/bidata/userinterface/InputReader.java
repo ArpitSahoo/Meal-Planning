@@ -41,8 +41,7 @@ public class InputReader {
    */
   public String scannerString() {
     String stringInput = scanner.nextLine();
-    return stringInput.toLowerCase();
-
+    return stringInput.toLowerCase(); // Turn the prompt to lower case.
   }
 
   /**
@@ -100,7 +99,7 @@ public class InputReader {
   /**
    * Allows the user to input the amount.
    *
-   *<p>User prompts the amount of food item. Checks if the price is valid.
+   *<p>User prompts the amount of food item. Checks if the amount is valid.
    *If amount is not a valid {@code false}, the user is informed
    *to re-enter the information.</p>
    *
