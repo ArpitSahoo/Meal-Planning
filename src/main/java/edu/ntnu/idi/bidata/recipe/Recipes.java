@@ -10,7 +10,7 @@ import java.util.List;
  * Represents a recipe.
  *
  * <p>{@code Recipes}class is used to store relevant information about a specific Recipes.
- *  Allows the user to set and retrieve information about the recipe.
+ *  Allows the user to mutate and retrieve information about the recipe.
  *  It also communicates with the {@link RecipeStorage}
  *  and {@link FoodItem}.</p>
  *
@@ -26,13 +26,13 @@ public class Recipes {
   private final List<FoodItem> ingredients;
 
   /**
-   *A constructor for the class {@code Recipes}.
+   * A constructor for the class {@code Recipes}.
    *
-   * <p>ingredients is initialized the ingredients as a {@link ArrayList}</p>
+   * <p>ingredients is initialized the ingredients as an {@link ArrayList}</p>
    *
    * @param nameOfRecipe of the recipe.
-   * @param description of the recipe.
-   * @param steps to make the recipe.
+   * @param description  of the recipe.
+   * @param steps        to make the recipe.
    */
   public Recipes(String nameOfRecipe, String description, String steps, int portion) {
     setNameOfRecipe(nameOfRecipe);
@@ -101,7 +101,7 @@ public class Recipes {
    * @param steps the steps to make the recipe.
    * @throws IllegalArgumentException if steps is null, empty or blank.
    */
-  public void setSteps(String steps) {
+  public void setSteps(String steps) throws IllegalArgumentException {
     if (steps == null || steps.isEmpty() || steps.isBlank()) {
       throw new IllegalArgumentException("Recipe steps cannot be blank");
     }
@@ -110,7 +110,8 @@ public class Recipes {
 
   /**
    * Access the portion of the recipe.
-   * @return portion.
+   *
+   * @return portion of the recipe.
    */
   public int getPortion() {
     return portion;
@@ -121,10 +122,10 @@ public class Recipes {
    *
    * @param portion the portion for the recipe.
    * @throws IllegalArgumentException if the portion is lower than 0
-   * or bigger than 100.
+   *                                  or bigger than 100.
    */
-  public void setPortion(int portion) {
-    if (portion <= 0  || portion > 100) {
+  public void setPortion(int portion) throws IllegalArgumentException {
+    if (portion <= 0 || portion > 100) {
       throw new IllegalArgumentException("Portion must be between 0 and 100");
     }
     this.portion = portion;
@@ -142,12 +143,9 @@ public class Recipes {
   /**
    * Adds ingredients to the recipe.
    *
-   * @param name of the {@code FoodItem}.
+   * @param name   of the {@code FoodItem}.
    * @param amount of the {@code FoodItem}.
-   * @param unit of the {@code FoodItem}.
-   * @throws IllegalArgumentException if name is null, blank or empty.
-   * @throws IllegalArgumentException if amount is 0 or lower.
-   * @throws IllegalArgumentException if unit is null, blank or empty.
+   * @param unit   of the {@code FoodItem}.
    */
   public void addIngredient(String name, Float amount, String unit) {
     ingredients.add(new FoodItem(name, amount, unit));
