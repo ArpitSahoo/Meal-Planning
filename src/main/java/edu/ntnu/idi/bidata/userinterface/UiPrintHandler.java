@@ -262,6 +262,7 @@ public class UiPrintHandler {
    * @param foodIterator an iterator over the sorted names of food items
    */
   public void printFoodAlphabetical(Iterator<String> foodIterator) {
+    System.out.println("---Recipes to make---");
     while (foodIterator.hasNext()) {
       System.out.println(foodIterator.next());
     }
