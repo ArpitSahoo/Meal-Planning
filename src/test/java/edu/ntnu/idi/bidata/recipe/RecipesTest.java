@@ -65,8 +65,8 @@ class RecipesTest {
    * {@code IllegalArgumentException} when provided with invalid input.
    *
    * <p>Expected:
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is empty</li></ul>
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is null</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the input is null</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the input is empty</li></ul>
    * </p>
    */
   @Test
@@ -92,8 +92,8 @@ class RecipesTest {
    * {@code IllegalArgumentException} when provided with invalid input.
    *
    * <p>Expected:
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is empty</li></ul>
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is null</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the input is null</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the input is empty</li></ul>
    * </p>
    */
   @Test
@@ -119,8 +119,8 @@ class RecipesTest {
    * {@code IllegalArgumentException} when provided with invalid input.
    *
    * <p>Expected:
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is null</li></ul>
-   *    <ul><li>{@code IllegalArgumentException} is thrown is if the input is empty</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the input is null</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the input is empty</li></ul>
    * </p>
    */
   @Test
@@ -144,6 +144,11 @@ class RecipesTest {
    *
    * <p>This test ensures that the {@code setPortion} method correctly throws an
    * {@code IllegalArgumentException} when provided with invalid input.
+   *
+   * <p>Expected:
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the portion is lower than 0</li></ul>
+   *    <ul><li>{@code IllegalArgumentException} is thrown if the portion is over 100</li></ul>
+   * </p>
    */
   @Test
   void setPortionsNegativeTest() {
