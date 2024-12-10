@@ -88,9 +88,8 @@ class RecipeStorageTest {
   /**
    * A negative test for the method {@code addRecipe}.
    *
-   * <p>This method ensures that the recipe will not be added to
-   * the recipe book. Since the {@code recipe1} already exists
-   * in the recipe book.</p>
+   * <p>This method ensures that a existing recipe will not be added to
+   * the recipe book.</p>
    *
    * <p>Expected behavior:
    * <ul>
@@ -129,7 +128,8 @@ class RecipeStorageTest {
    * A negative test for the {@code removeRecipe} method.
    *
    * <p>This method ensures that the {@code recipes1} is not
-   * removed, since the recipe does not exist. This test will assert {@code false}.</p>
+   * removed, since the recipe does not exist in the recipe book.
+   * This test will assert {@code false}.</p>
    *
    * <p>Expected behavior:
    * <ul>
@@ -226,8 +226,7 @@ class RecipeStorageTest {
    * <ul>
    *   <li>{@code hasNext()} returns {@code true} for each item in the iterator
    *       until the last item is reached.</li>
-   *   <li>{@code next()} does not return recipe names in the expected alphabetical order
-   *       in this negative test case.</li>
+   *   <li>Notices that the recipes are not in the correct alphabetical order.</li>
    *   <li>{@code hasNext()} returns {@code false} after the last recipe is retrieved.</li>
    * </ul>
    * </p>
