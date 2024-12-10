@@ -82,14 +82,9 @@ class FridgeStorageTest {
   /**
    *A negative test for the {@code addFoodItem} method of the {@code FridgeRegister} class.
    *
-   * <p>This test verifies that a food item is not added to the fridge.
+   * <p>This test verifies that a the existing food is not added to the fridge.
    * It asserts that the method returns {@code false}, since {@code foodItem1}
    * already exists. But amount is expected to be updated.</p>
-   * <p>Expected behavior:
-   * <ul>
-   *   <li>{@code addFoodItem(foodItem1)} returns {@code false}.</li>
-   *   <li>The {@code foodItem1} amount is updated.</li>
-   * </ul>
    *</p>
    */
   @Test
@@ -166,7 +161,7 @@ class FridgeStorageTest {
    *Negative test for the {@code foodToTake} method
    * of the {@code FridgeRegister} class.
    *
-   * <p>This test the {@code FridgeRegister} does not take
+   * <p>This ensures the {@code FridgeRegister} does not take
    * out a non-existing {@code FoodItem}.
    * A new {@code FoodItem} is initialized to take out from the fridge.
    * It asserts that the method returns {@code false} when using {@code foodToTaken}.
@@ -204,10 +199,10 @@ class FridgeStorageTest {
 
   /**
    * A negative test that tests if the {@code searchFoodByName} method
-   * of the {@code FridgeRegister} class. '
+   * of the {@code FridgeRegister} class.
    *
-   * <p>This test if a non-existing {@code FoodItem} is in the {@code FridgeRegister}
-   * exits in the fridge.
+   * <p>This test ensures that it the {@code FridgeRegister},
+   * does not find a non-existing food.
    * A new {@code FoodItem} is initialized to find in the fridge.
    * It asserts that the method returns {@code false},
    * when searching {@code foodNotExisting}.</p>
@@ -385,18 +380,13 @@ class FridgeStorageTest {
   }
 
   /**
-   * A negative test that test the {@code getIteratorAlphabetical} method of the {@code FridgeRegister} class.
+   * A negative test that test the {@code getIteratorAlphabetical}
+   * method of the {@code FridgeRegister} class.
    *
    * <p>This test ensures that the {@code getIteratorAlphabetical}
    * method does not incorrectly return the foods name in the wrong alphabetical order.
    * </p>
    *
-   * <p>Expected behavior:
-   * <ul>
-   *   <li>{@code getIteratorTest().hasNext()} is {@code true} initially and until the last item.</li>
-   *   <li>{@code getIteratorTest().next()} does not return names in the expected alphabetical order.</li>
-   *   <li>{@code getIteratorTest().hasNext()} is {@code false} after the last item.</li>
-   * </ul>
    */
   @Test
   void getIteratorAlphabeticalNegativeTest() {
