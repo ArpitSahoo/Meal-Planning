@@ -19,8 +19,6 @@ import java.util.Map;
  * It also handles the validation and organization of food items, ensuring they are managed
  * efficiently.</p>
  *
- *
- *
  * @since 0.0.1
  * @author Arpit Sahoo
  * @version 0.0.5
@@ -45,7 +43,7 @@ public class FridgeStorage {
    *
    * <p>If the food item is already present in the fridge (based on its name), this method updates
    * the amount by adding the new quantity to the existing amount. If the food item is not found, it
-   * is added as a new entry in the fridge.</p>
+   * is adds as a new entry in the fridge.</p>
    *
    * @param foodToBeAdded the {@link FoodItem} to be added or updated in the fridge
    * @return  {@code true} if the food item was added.
@@ -53,12 +51,12 @@ public class FridgeStorage {
    */
   public boolean addFoodItem(FoodItem foodToBeAdded) {
     boolean wasFoodAdded = false;
-    if (fridgeRegister.containsKey(foodToBeAdded.getNameOfFood())) {
+    if (fridgeRegister.containsKey(foodToBeAdded.getNameOfFood())) { //if a similar food exists.
       float oldAmount = fridgeRegister.get(foodToBeAdded.getNameOfFood()).getAmount();
       float newAmount = oldAmount + foodToBeAdded.getAmount();
-      fridgeRegister.get(foodToBeAdded.getNameOfFood()).setAmount(newAmount);
-    } else {
-      fridgeRegister.put(foodToBeAdded.getNameOfFood(), foodToBeAdded);
+      fridgeRegister.get(foodToBeAdded.getNameOfFood()).setAmount(newAmount); // Updates the amount.
+    } else { // If not a similar food exits.
+      fridgeRegister.put(foodToBeAdded.getNameOfFood(), foodToBeAdded); // Adds the bew food.
       wasFoodAdded = true;
     }
     return wasFoodAdded;
@@ -89,19 +87,19 @@ public class FridgeStorage {
   /**
    * Removes a specified amount of a food item from the fridge.
    *
-   * <p>This method checks if the specified {@code FoodItem}
-   * exists in the fridge (based on its name and amount).
-   * If the food item is found and the specified amount is smaller than or equal to the amount in
-   * fridge, it reduces the quantity. If the remaining amount is 0 or less, the item is removed
-   * entirely. If the item is not found or the amount exceeds the available quantity, the method
-   * returns {@code false}.</p>
+   *<p>This method checks if the specified {@code FoodItem}
+   *exists in the fridge (based on its name and amount).
+   *If the food item is found and the specified amount is smaller than or equal to the amount in
+   *fridge, it reduces the quantity. If the remaining amount is 0 or less, the item is removed
+   *entirely. If the item is not found or the amount exceeds the available quantity, the method
+   *returns {@code false}.</p>
    *
-   * <p>If the prompted amount to remove is bigger than amount in the fridge.
-   * the food will not be touched.</p>
+   *<p>If the prompted amount to remove is bigger than amount in the fridge.
+   *the food will not be touched.</p>
    *
-   * @param foodToBeTaken the {@code FoodItem} to be removed from the fridge.
-   * @return {@code true} if the food item was found and the amount was successfully removed,
-   * {@code false} otherwise.
+   *@param foodToBeTaken the {@code FoodItem} to be removed from the fridge.
+   *@return {@code true} if the food item was found and the amount was successfully removed,
+   *{@code false} otherwise.
    */
   public boolean foodToTake(FoodItem foodToBeTaken) {
     boolean wasFoodFound = false;
@@ -136,7 +134,7 @@ public class FridgeStorage {
   /**
    * Searches food item by expiration date.
    *
-   * <p>Goes trough the fridge and checks if there are any food items
+   * <p>Goes trough the fridge and checks if there are any food items in the
    * specific expiration date. If found, the food gets added to the {@code foodList}.</p>
    *
    * @param expirationDate of the food item.
